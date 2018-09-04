@@ -22,7 +22,7 @@ export function getPostList(parentCode) {
 
 // 列表查询角色
 export function getRoleList(params) {
-    return fetch(630006, params);
+    return fetch(630007, params);
 }
 
 // 列表查询角色

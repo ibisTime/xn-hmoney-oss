@@ -24,9 +24,9 @@ class Home extends React.Component {
     }
     componentDidMount() {
         Promise.all([
-            getRoleList(),
-            getPageMyNotice(),
-            getPageMyCompanysystem()
+            getRoleList()
+            // getPageMyNotice(),
+            // getPageMyCompanysystem()
         ]).then(([roleData, noticeData, companysystemData]) => {
             this.getUserRole(roleData);
             this.setState({ roleData: roleData, noticeData: noticeData.list, companysystemData: companysystemData.list });
@@ -58,7 +58,7 @@ class Home extends React.Component {
                             <div className="user-role">{this.state.role}</div>
                         </div>
                     </div>
-                    <div className="card top-right notice-wrap">
+                    {/* <div className="card top-right notice-wrap">
                         <div className="card-top">
                             <div className="title">公司公告</div>
                         </div>
@@ -73,9 +73,9 @@ class Home extends React.Component {
                                 </div>
                             )) : <div className="noData"><img src={noData}/><p>暂无公司公告</p></div>}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="below-wrap">
+                {/* <div className="below-wrap">
                     <div className="card companysystem-wrap">
                         <div className="card-top">
                             <div className="title">公司制度</div>
@@ -92,7 +92,7 @@ class Home extends React.Component {
                             )) : <div className="noData"><img src={noData}/><p>暂无公司制度</p></div>}
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

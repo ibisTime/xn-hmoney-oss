@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Card, Row, Col, Button, Spin} from 'antd';
-import {initData} from '@redux/analysis/insuranceAmount';
+import { initData } from '@redux/analysis/insuranceAmount';
 import {moneyFormat} from 'common/js/util';
 
 const {Meta} = Card;

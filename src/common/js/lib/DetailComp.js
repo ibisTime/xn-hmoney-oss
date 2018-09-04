@@ -1159,7 +1159,7 @@ export default class DetailComponent extends React.Component {
             let city = [];
             p.children.map(c => {
                 let area = [];
-                if (!item.isCity){
+                if (!item.isCity) {
 
                 }
                 c.children && c.children.map(a => {

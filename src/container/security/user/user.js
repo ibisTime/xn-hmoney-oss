@@ -44,7 +44,7 @@ class User extends React.Component {
       title: '角色',
       field: 'roleCode',
       type: 'select',
-      listCode: '630006',
+      listCode: '630007',
       keyName: 'code',
       valueName: 'name',
       search: true

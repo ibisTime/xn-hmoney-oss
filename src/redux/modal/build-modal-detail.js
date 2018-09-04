@@ -1,6 +1,6 @@
 import { commDetailState } from '../common';
 
-const PREFIX = 'ERWEIMA_ERWEIMA_';
+const PREFIX = 'MODAL_DETAIL_';
 const SET_SELECT_DATA = PREFIX + 'SET_SELECT_DATA';
 const LOADING = PREFIX + 'LOADING';
 const CANCEL_LOADING = PREFIX + 'CANCEL_LOADING';
@@ -10,7 +10,7 @@ const RESTORE = PREFIX + 'RESTORE';
 
 const initState = { ...commDetailState };
 
-export function erweimaErweima(state = initState, action) {
+export function modalDetail(state = initState, action) {
   switch(action.type) {
     case INIT_STATE:
       return {...state, ...action.payload};

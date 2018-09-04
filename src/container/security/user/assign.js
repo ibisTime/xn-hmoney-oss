@@ -34,7 +34,7 @@ class Assign extends React.Component {
       field: 'roleCode',
       type: 'select',
       required: true,
-      listCode: 630006,
+      listCode: 630007,
       keyName: 'code',
       valueName: 'name'
     }, {

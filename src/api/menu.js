@@ -8,7 +8,7 @@ import { ROOT_MENU_CODE } from 'common/js/config';
  */
 export function getOwnerBtns(parentCode) {
   // 805026
-  return fetch(630025, {
+  return fetch(630020, {
     parentCode,
     roleCode: getRoleCode(),
     type: 2
@@ -34,7 +34,7 @@ export function getNodeList() {
  */
 export function getRoleMenuList() {
   // 805026
-  return fetch(630025, {
+  return fetch(630020, {
     type: 1,
     roleCode: getRoleCode()
   });
@@ -45,7 +45,7 @@ export function getRoleMenuList() {
  */
 export function getRoleMenuBtnList(roleCode) {
   roleCode = roleCode || getRoleCode();
-  return fetch(630025, { roleCode });
+  return fetch(630020, { roleCode });
 }
 
 /**

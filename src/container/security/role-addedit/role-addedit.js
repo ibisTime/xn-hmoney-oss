@@ -46,7 +46,7 @@ class MenuAddEdit extends React.Component {
       fields,
       code: this.code,
       view: this.view,
-      detailCode: 630007,
+      detailCode: 630006,
       addCode: 630000,
       editCode: 630002
     });
