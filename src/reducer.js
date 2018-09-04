@@ -14,8 +14,6 @@ import { securityPwdReset } from './redux/security/pwdReset';
 import { securityUserAddEdit } from './redux/security/user-addedit';
 import { securityDataDict } from './redux/security/dataDict';
 import { securityDataDictAddEdit } from './redux/security/dataDict-addedit';
-import { securityCompConstruct } from './redux/security/compConstruct';
-import { securityPost } from './redux/security/post';
 import { securityNode } from './redux/security/node';
 import { securityNodeAddEdit } from './redux/security/node-addedit';
 import { securityNodeSetMateriallist } from './redux/security/node-setMateriallist';
@@ -48,8 +46,6 @@ export default combineReducers({
   securityUserAddEdit,
   securityDataDict,
   securityDataDictAddEdit,
-  securityCompConstruct,
-  securityPost,
   securityNode,
   securityNodeAddEdit,
   securityNodeSetMateriallist,

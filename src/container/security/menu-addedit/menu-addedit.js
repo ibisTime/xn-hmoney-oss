@@ -26,7 +26,7 @@ class MenuAddEdit extends React.Component {
       field: 'parentCode',
       required: true,
       type: 'select',
-      listCode: '630016',
+      listCode: '630017',
       params: { type: 1 },
       keyName: 'code',
       valueName: '{{code.DATA}} {{name.DATA}}'

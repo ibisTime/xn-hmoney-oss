@@ -36,20 +36,9 @@ export function getUserById(userId) {
   return fetch(630067, { userId });
 }
 
-// 为用户设置岗位
-export function setUserPost(params) {
-  return fetch(630058, {
-    ...params,
-    updater: getUserId()
-  });
-}
 // 列表查询平台用户
 export function getSysUsers() {
   return fetch(630066, { status: '0' });
-}
-// 列表获取
-export function getListUserArchive(params) {
-    return fetch(632805, params);
 }
 
 // 读取身份证正面信息

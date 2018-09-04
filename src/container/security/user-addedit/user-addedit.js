@@ -3,7 +3,7 @@ import { TreeSelect, Form, Spin, Input, Button, Select } from 'antd';
 import { getQueryString, showSucMsg, tempString } from 'common/js/util';
 import { formItemLayout, tailFormItemLayout } from 'common/js/config';
 import { getPostList, getRoleList, addUser } from 'api/company';
-import { getUserById, setUserPost, getListUserArchive } from 'api/user';
+import { getUserById } from 'api/user';
 
 const { TreeNode } = TreeSelect;
 const { Item } = Form;
@@ -33,12 +33,6 @@ class Post extends React.Component {
                     field: 'roleCode',
                     keyName: 'code',
                     valueName: 'name'
-                },
-                'archiveCode': {
-                    title: '档案',
-                    field: 'archiveCode',
-                    keyName: 'code',
-                    valueName: '{{realName.DATA}}-{{entranceNo.DATA}}'
                 }
             },
             archiveData: []
@@ -46,30 +40,10 @@ class Post extends React.Component {
     }
     componentDidMount() {
         Promise.all([
-            getRoleList(),
-            getPostList(),
-            getListUserArchive({
-                start: 1,
-                limit: 1000,
-                workStatusList: ['1', '2']
-            })
-        ]).then(([roleData, postData, archiveData]) => {
-            this.getTree(postData);
-            this.setState({ roleData: roleData, archiveData: this.getArchiveData(archiveData.list), fetching: false });
+            getRoleList()
+        ]).then(([roleData]) => {
+            this.setState({ roleData: roleData, fetching: false });
         }).catch(() => this.setState({ fetching: false }));
-    }
-    getArchiveData = (d) => {
-        let data = [];
-        let genderData = {
-            '1': '男',
-            '0': '女'
-        };
-
-        d.map(v => {
-            v.gender = genderData[v.gender];
-            data.push(v);
-        });
-        return data;
     }
     getTree(data) {
         let result = {};
@@ -159,12 +133,6 @@ class Post extends React.Component {
         return (
             <Spin spinning={this.state.fetching}>
                 <Form className="detail-form-wrapper" onSubmit={this.handleSubmit}>
-                    <Item className="hidden" key='type' {...formItemLayout} label='类型'>
-                        {getFieldDecorator('type', {
-                            rules,
-                            initialValue: 'P'
-                        })(<Input type="hidden"/>)}
-                    </Item>
                     <Item key='loginName' {...formItemLayout} label='登录名'>
                         {getFieldDecorator('loginName', {
                             rules,
@@ -198,33 +166,6 @@ class Post extends React.Component {
                                 <Option key={d['code']}
                                         value={d['code']}>{d['name']}</Option>))}
                         </Select>)}
-                    </Item>
-                    {/* <Item key='archiveCode' {...formItemLayout} label='档案'>
-                        {getFieldDecorator('archiveCode', {
-                            rules: [],
-                            initialValue: ''
-                        })(<Select {...this.getSelectProps(this.state.fields['archiveCode'])}>
-                            {this.state.archiveData.map(d => (
-                                <Option key={d['code']}
-                                        value={d['code']}>{d['entranceNo']}-{d['realName']}-{d['gender']}</Option>))}
-                        </Select>)}
-                    </Item> */}
-                    <Item key='treeMenu' {...formItemLayout} label='岗位名称'>
-                        {getFieldDecorator('postCode', {
-                            rules,
-                            initialValue: this.state.postCode
-                        })(
-                            <TreeSelect
-                                showSearch
-                                style={{ width: 300 }}
-                                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                placeholder="选择岗位"
-                                allowClear
-                                treeDefaultExpandAll
-                            >
-                                {this.renderTreeNodes(this.state.treeData)}
-                            </TreeSelect>
-                        )}
                     </Item>
                     <Item key='btns' {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">保存</Button>

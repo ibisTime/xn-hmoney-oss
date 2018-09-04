@@ -19,7 +19,7 @@ export function getOwnerBtns(parentCode) {
  * 列表获取菜单和按钮
  */
 export function getMenuBtnList() {
-  return fetch(630016);
+  return fetch(630017);
 }
 
 /**

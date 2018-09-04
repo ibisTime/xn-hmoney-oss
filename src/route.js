@@ -33,14 +33,6 @@ const ROUTES = [
     path: '/system/user/role',
     component: asyncComponent(() => import('container/security/user/assign'))
   },
-  {
-    path: '/system/user/pwd_reset',
-    component: asyncComponent(() => import('container/security/user/pwdReset'))
-  },
-  {
-    path: '/system/user/post',
-    component: asyncComponent(() => import('container/security/user/post'))
-  },
 
   //  系统参数
   {
@@ -75,14 +67,6 @@ const ROUTES = [
   {
       path: '/system/node/setMateriallist',
       component: asyncComponent(() => import('container/security/node-setMateriallist/node-setMateriallist'))
-  },
-  {
-    path: '/system/compConstruct',
-    component: asyncComponent(() => import('container/security/compConstruct/compConstruct'))
-  },
-  {
-    path: '/system/post',
-    component: asyncComponent(() => import('container/security/post/post'))
   },
   {
     path: '/public/aboutus_addedit',
