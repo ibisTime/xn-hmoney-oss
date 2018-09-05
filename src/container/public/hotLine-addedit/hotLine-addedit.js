@@ -32,7 +32,7 @@ class HotLineAddEdit extends React.Component {
     }];
     return this.props.buildDetail({
       fields,
-      key: 'key',
+      key: 'ckey',
       code: 'telephone',
       detailCode: 630047,
       editCode: 630042,

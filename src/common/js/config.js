@@ -14,39 +14,39 @@ export const SYS_USER_TG = 'SYS_USER_ZXZX_TG';
 export const ROOT_MENU_CODE = 'COINSM201700000000000000';
 
 export const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 }
-  }
+    labelCol: {
+        xs: {span: 24},
+        sm: {span: 8}
+    },
+    wrapperCol: {
+        xs: {span: 24},
+        sm: {span: 16}
+    }
 };
 export const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 16,
-      offset: 8
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 16,
+            offset: 8
+        }
     }
-  }
 };
 
 export const tailFormItemLayout1 = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 19,
-      offset: 5
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0
+        },
+        sm: {
+            span: 19,
+            offset: 5
+        }
     }
-  }
 };
 
 // 定义 validateFieldsAndScroll 的滚动行为

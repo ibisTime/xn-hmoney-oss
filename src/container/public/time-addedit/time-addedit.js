@@ -31,7 +31,7 @@ class TimeAddEdit extends React.Component {
     }];
     return this.props.buildDetail({
       fields,
-      key: 'key',
+      key: 'ckey',
       code: 'service_time',
       view: false,
       detailCode: 630047,

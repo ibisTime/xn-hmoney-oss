@@ -32,7 +32,7 @@ class AboutusAddEdit extends React.Component {
     }];
     return this.props.buildDetail({
       fields,
-      key: 'key',
+      key: 'ckey',
       code: 'about_us',
       detailCode: 630047,
       buttons: [{

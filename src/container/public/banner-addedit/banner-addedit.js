@@ -90,9 +90,9 @@ class BannerAddEdit extends React.Component {
       fields,
       code: this.code,
       view: this.view,
-      addCode: '805800',
-      editCode: '805802',
-      detailCode: '805807',
+      addCode: '630500',
+      editCode: '630502',
+      detailCode: '630506',
       beforeSumit: (params) => {
         params.systemCode = SYSTEM_CODE;
         params.companyCode = SYSTEM_CODE;
