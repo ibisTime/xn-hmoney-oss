@@ -9,7 +9,7 @@ import {
     cancelFetching,
     setSearchData
 } from '@redux/notice/notice';
-import {showWarnMsg, getUserId} from 'common/js/util';
+import {showWarnMsg, getUserName} from 'common/js/util';
 import {listWrapper} from 'common/js/build-list';
 import { Modal } from 'antd';
 import fetch from 'common/js/fetch';
@@ -34,7 +34,8 @@ class Notice extends React.Component {
             title: '类型',
             type: 'select',
             key: 'notice_type',
-            search: true
+            search: true,
+
         }, {
             field: 'urgentStatus',
             title: '紧急程度',
@@ -90,7 +91,7 @@ class Notice extends React.Component {
                                 return fetch(632723, {
                                     code: selectedRowKeys[0],
                                     remark: selectedRows[0].remark,
-                                    updater: getUserId()
+                                    updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
                                     showWarnMsg('操作成功');
@@ -121,7 +122,7 @@ class Notice extends React.Component {
                                 return fetch(632724, {
                                     code: selectedRowKeys[0],
                                     remark: selectedRows[0].remark,
-                                    updater: getUserId()
+                                    updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
                                     showWarnMsg('操作成功');

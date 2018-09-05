@@ -12,7 +12,7 @@ import { getDictList } from 'api/dict';
 import { getQiniuToken } from 'api/general';
 import {
     formatFile, formatImg, isUndefined, dateTimeFormat, dateFormat, monthFormat,
-    tempString, moneyFormat, moneyParse, showSucMsg, showErrMsg, showWarnMsg, getUserId
+    tempString, moneyFormat, moneyParse, showSucMsg, showErrMsg, showWarnMsg, getUserName
 } from 'common/js/util';
 import {
     UPLOAD_URL, PIC_PREFIX, PIC_BASEURL_M, PIC_BASEURL_L, formItemLayout,
@@ -253,7 +253,7 @@ export default class DetailComponent extends React.Component {
                 values[v.field] = values[v.field] ? values[v.field].join(',') : '';
             }
         });
-        values.updater = values.updater || getUserId();
+        values.updater = values.updater || getUserName();
         return values;
     }
 

@@ -17,7 +17,6 @@ import {
     showSucMsg,
     getRoleCode,
     dateTimeFormat,
-    getUserId,
     moneyFormat,
     dateFormat,
     getQueryString
@@ -27,10 +26,6 @@ import {
     Upload,
     Modal
 } from 'antd';
-import {
-    lowerFrame,
-    onShelf
-} from 'api/biz';
 
 @listWrapper(
     state => ({

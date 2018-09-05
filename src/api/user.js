@@ -3,10 +3,10 @@ import { getUserName, getUserId } from 'common/js/util';
 import { PIC_PREFIX } from 'common/js/config';
 
 export function setRoleMenus(menuCodeList, roleCode) {
-  return fetch(630020, {
+  return fetch(630027, {
     menuCodeList,
     roleCode,
-    updater: getUserId()
+    updater: getUserName()
   });
 }
 //  保存节点
@@ -14,16 +14,16 @@ export function setNodeMenus(nodeList, roleCode) {
   return fetch(630160, {
     nodeList,
     roleCode,
-    updater: getUserId()
+    updater: getUserName()
   });
 }
 // 注销激活平台用户
 export function activateSysUser(userId) {
-  return fetch(630056, { userId, updater: getUserId() });
+  return fetch(630056, { userId, updater: getUserName() });
 }
 // 注销激活c端用户
 export function activateUser(userId) {
-  return fetch(805091, { userId, updater: getUserId() });
+  return fetch(805091, { userId, updater: getUserName() });
 }
 
 // 获取用户详情

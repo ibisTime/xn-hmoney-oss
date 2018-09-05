@@ -12,16 +12,11 @@ import {
 import {
     showWarnMsg,
     showSucMsg,
-    getUserId
+    getUserName
 } from 'common/js/util';
 import {
     listWrapper
 } from 'common/js/build-list';
-import {
-    lowerFrame,
-    onShelf,
-    sendMsg
-} from 'api/biz';
 import { Modal } from 'antd';
 import fetch from 'common/js/fetch';
 
@@ -59,7 +54,7 @@ class companysystem extends React.Component {
             key: 'notice_status'
         }, {
             title: '更新人',
-            field: 'updaterName'
+            field: 'updater'
         }, {
             title: '更新时间',
             field: 'updateDatetime',
@@ -100,7 +95,7 @@ class companysystem extends React.Component {
                                 return fetch(632732, {
                                     code: selectedRowKeys[0],
                                     remark: selectedRows[0].remark,
-                                    updater: getUserId()
+                                    updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
                                     showWarnMsg('操作成功');
@@ -131,7 +126,7 @@ class companysystem extends React.Component {
                                 return fetch(632733, {
                                     code: selectedRowKeys[0],
                                     remark: selectedRows[0].remark,
-                                    updater: getUserId()
+                                    updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
                                     showWarnMsg('操作成功');

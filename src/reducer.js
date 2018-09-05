@@ -2,21 +2,21 @@ import { combineReducers } from 'redux';
 import { user } from './redux/user';
 import { menu } from './redux/menu';
 import { modalDetail } from './redux/modal/build-modal-detail';
-import { securityRole } from './redux/security/role';
-import { securityRoleAddEdit } from './redux/security/role-addedit';
-import { securityMenu } from './redux/security/menu';
-import { securityMenuAddEdit } from './redux/security/menu-addedit';
-import { securitySysParam } from './redux/security/sysParam';
-import { securitySysParamAddEdit } from './redux/security/sysParam-addedit';
-import { securityUser } from './redux/security/user';
-import { securityAssign } from './redux/security/assign';
-import { securityPwdReset } from './redux/security/pwdReset';
-import { securityUserAddEdit } from './redux/security/user-addedit';
-import { securityDataDict } from './redux/security/dataDict';
-import { securityDataDictAddEdit } from './redux/security/dataDict-addedit';
-import { securityNode } from './redux/security/node';
-import { securityNodeAddEdit } from './redux/security/node-addedit';
-import { securityNodeSetMateriallist } from './redux/security/node-setMateriallist';
+import { systemRole } from './redux/system/role';
+import { systemRoleAddEdit } from './redux/system/role-addedit';
+import { systemMenu } from './redux/system/menu';
+import { systemMenuAddEdit } from './redux/system/menu-addedit';
+import { systemSysParam } from './redux/system/sysParam';
+import { systemSysParamAddEdit } from './redux/system/sysParam-addedit';
+import { systemUser } from './redux/system/user';
+import { systemAssign } from './redux/system/assign';
+import { systemPwdReset } from './redux/system/pwdReset';
+import { systemUserAddEdit } from './redux/system/user-addedit';
+import { systemDataDict } from './redux/system/dataDict';
+import { systemDataDictAddEdit } from './redux/system/dataDict-addedit';
+import { systemNode } from './redux/system/node';
+import { systemNodeAddEdit } from './redux/system/node-addedit';
+import { systemNodeSetMateriallist } from './redux/system/node-setMateriallist';
 import { publicBanner } from './redux/public/banner';
 import { publicBannerAddEdit } from './redux/public/banner-addedit';
 import { publicAboutusAddEdit } from './redux/public/aboutus-addedit';
@@ -34,21 +34,21 @@ export default combineReducers({
   user,
   menu,
   modalDetail,
-  securityRole,
-  securityRoleAddEdit,
-  securityMenu,
-  securityMenuAddEdit,
-  securityUser,
-  securityAssign,
-  securityPwdReset,
-  securitySysParam,
-  securitySysParamAddEdit,
-  securityUserAddEdit,
-  securityDataDict,
-  securityDataDictAddEdit,
-  securityNode,
-  securityNodeAddEdit,
-  securityNodeSetMateriallist,
+  systemRole,
+  systemRoleAddEdit,
+  systemMenu,
+  systemMenuAddEdit,
+  systemUser,
+  systemAssign,
+  systemPwdReset,
+  systemSysParam,
+  systemSysParamAddEdit,
+  systemUserAddEdit,
+  systemDataDict,
+  systemDataDictAddEdit,
+  systemNode,
+  systemNodeAddEdit,
+  systemNodeSetMateriallist,
   publicHotLineAddEdit,
   publicBanner,
   publicBannerAddEdit,

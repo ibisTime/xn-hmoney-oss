@@ -3,7 +3,7 @@ import { Form, Button, Spin, Modal, Carousel, Tooltip, Icon } from 'antd';
 import { getDictList } from 'api/dict';
 import { getQiniuToken } from 'api/general';
 import {
-  isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserId,
+  isUndefined, showSucMsg, showErrMsg, showWarnMsg, getUserName,
   moneyParse, getRules, getRealValue } from 'common/js/util';
 import fetch from 'common/js/fetch';
 import { UPLOAD_URL, PIC_PREFIX, PIC_BASEURL_L, tailFormItemLayout, tailFormItemLayout1,
@@ -484,7 +484,7 @@ export default class DetailUtil extends React.Component {
         values[v.field] = values[v.field] ? values[v.field].join(',') : '';
       }
     });
-    values.updater = values.updater || getUserId();
+    values.updater = values.updater || getUserName();
     console.log(values);
     return values;
   }

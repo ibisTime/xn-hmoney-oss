@@ -7,7 +7,7 @@ import {
     setPageData,
     restore
 } from '@redux/notice/companysystem-addedit';
-import {getQueryString, getUserId, showSucMsg} from 'common/js/util';
+import {getQueryString, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 

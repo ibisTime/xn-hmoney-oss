@@ -5,7 +5,7 @@ import {
   Alert
 } from 'antd';
 import fetch from 'common/js/fetch';
-import './erweima.css';
+import './erweima.scss';
 var QRCode = require('qrcode.react');
 
 const Option = Select.Option;
