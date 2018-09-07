@@ -37,7 +37,7 @@ class nodeSetMateriallist extends React.Component {
 
     componentDidMount() {
         getNodeList().then(nodeDict => {
-            this.setState({ nodeDict });
+            this.setState({nodeDict});
         });
     }
 

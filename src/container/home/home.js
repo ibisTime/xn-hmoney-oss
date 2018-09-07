@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
     getUserName,
     getRoleCode,
     dateFormat
 } from 'common/js/util';
-import { getRoleList } from 'api/company';
-import { getPageMyNotice, getPageMyCompanysystem } from 'api/home';
+import {getRoleList} from 'api/company';
+import {getPageMyNotice, getPageMyCompanysystem} from 'api/home';
 import './home.css';
 import userPhoto from '../../images/home-userPhoto.png';
 import iconMore from '../../images/home-icon-more.png';
@@ -22,6 +22,7 @@ class Home extends React.Component {
             companysystemData: []
         };
     }
+
     componentDidMount() {
         Promise.all([
             getRoleList()
@@ -29,8 +30,8 @@ class Home extends React.Component {
             // getPageMyCompanysystem()
         ]).then(([roleData, noticeData, companysystemData]) => {
             this.getUserRole(roleData);
-            this.setState({ roleData: roleData, noticeData: noticeData.list, companysystemData: companysystemData.list });
-        }).catch(() => this.setState({ fetching: false }));
+            this.setState({roleData: roleData, noticeData: noticeData.list, companysystemData: companysystemData.list});
+        }).catch(() => this.setState({fetching: false}));
     }
 
     getUserRole = (roleData) => {

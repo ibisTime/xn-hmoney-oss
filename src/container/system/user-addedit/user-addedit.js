@@ -1,13 +1,13 @@
 import React from 'react';
-import { TreeSelect, Form, Spin, Input, Button, Select } from 'antd';
-import { getQueryString, showSucMsg, tempString } from 'common/js/util';
-import { formItemLayout, tailFormItemLayout } from 'common/js/config';
-import { getPostList, getRoleList, addUser } from 'api/company';
-import { getUserById } from 'api/user';
+import {TreeSelect, Form, Spin, Input, Button, Select} from 'antd';
+import {getQueryString, showSucMsg, tempString} from 'common/js/util';
+import {formItemLayout, tailFormItemLayout} from 'common/js/config';
+import {getPostList, getRoleList, addUser} from 'api/company';
+import {getUserById} from 'api/user';
 
-const { TreeNode } = TreeSelect;
-const { Item } = Form;
-const { Option } = Select;
+const {TreeNode} = TreeSelect;
+const {Item} = Form;
+const {Option} = Select;
 const rules = [{
     required: true,
     message: '必填字段'
@@ -37,13 +37,15 @@ class Post extends React.Component {
             }
         };
     }
+
     componentDidMount() {
         Promise.all([
             getRoleList()
         ]).then(([roleData]) => {
-            this.setState({ roleData: roleData, fetching: false });
-        }).catch(() => this.setState({ fetching: false }));
+            this.setState({roleData: roleData, fetching: false});
+        }).catch(() => this.setState({fetching: false}));
     }
+
     getTree(data) {
         let result = {};
         data.forEach(v => {
@@ -60,8 +62,9 @@ class Post extends React.Component {
         this.result = result;
         let tree = [];
         data.length && this.getTreeNode(result['ROOT'], tree);
-        this.setState({ treeData: tree });
+        this.setState({treeData: tree});
     }
+
     getTreeNode(arr, children) {
         arr.forEach(a => {
             if (this.result[a.key]) {
@@ -73,6 +76,7 @@ class Post extends React.Component {
             }
         });
     }
+
     renderTreeNodes = (data) => {
         return data.map((item) => {
             if (item.children) {
@@ -89,15 +93,15 @@ class Post extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.setState({ fetching: true });
+                this.setState({fetching: true});
                 addUser(values).then(() => {
-                    this.setState({ fetching: false });
+                    this.setState({fetching: false});
                     showSucMsg('操作成功');
                     setTimeout(() => {
                         this.props.history.go(-1);
                     }, 1000);
                 }).catch(() => {
-                    this.setState({ fetching: false });
+                    this.setState({fetching: false});
                 });
             }
         });
@@ -119,8 +123,9 @@ class Post extends React.Component {
         }
         return props;
     }
+
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         const props = {
             showSearch: true,
             allowClear: true,

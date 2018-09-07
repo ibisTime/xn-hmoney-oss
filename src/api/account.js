@@ -6,13 +6,14 @@ import fetch from 'common/js/fetch';
  * @param limit
  * @param type
  */
-export function getPageAccount({ start, limit, type }) {
-  return fetch(802500, {
-    start,
-    limit,
-    type
-  });
+export function getPageAccount({start, limit, type}) {
+    return fetch(802500, {
+        start,
+        limit,
+        type
+    });
 }
+
 export function gettotalAcount() {
-  return fetch(630900);
+    return fetch(630900);
 }

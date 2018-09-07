@@ -7,9 +7,9 @@ import {
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import E from 'wangeditor';
-import { getWorkbook } from 'common/js/xlsx-util';
-import { getDictList } from 'api/dict';
-import { getQiniuToken } from 'api/general';
+import {getWorkbook} from 'common/js/xlsx-util';
+import {getDictList} from 'api/dict';
+import {getQiniuToken} from 'api/general';
 import {
     formatFile, formatImg, isUndefined, dateTimeFormat, dateFormat, monthFormat,
     tempString, moneyFormat, moneyParse, showSucMsg, showErrMsg, showWarnMsg, getUserName
@@ -18,6 +18,7 @@ import {
     UPLOAD_URL, PIC_PREFIX, PIC_BASEURL_M, PIC_BASEURL_L, formItemLayout,
     tailFormItemLayout, tailFormItemLayout1
 } from '../config';
+import {getCoinList} from 'api/coin';
 import fetch from 'common/js/fetch';
 import cityData from './city';
 import ModalDetail from 'common/js/build-modal-detail';
@@ -28,7 +29,7 @@ const {Item: FormItem} = Form;
 const {Option} = Select;
 const {TextArea} = Input;
 const {RangePicker, MonthPicker} = DatePicker;
-const { TreeNode } = TreeSelect;
+const {TreeNode} = TreeSelect;
 const CheckboxGroup = Checkbox.Group;
 const DATE_FORMAT = 'YYYY-MM-DD';
 const MONTH_FORMAT = 'YYYY-MM';
@@ -91,9 +92,11 @@ export default class DetailComponent extends React.Component {
         // 辅助存储页面里的富文本框
         this.textareas = {};
     }
+
     // 页面第一次渲染完后，初始化字段
     componentDidMount() {
         let _this = this;
+        this.setCoinDate();
         // 对页面的富文本进行处理，添加config
         Object.keys(this.textareas).forEach(v => {
             let elem = document.getElementById(v);
@@ -139,10 +142,12 @@ export default class DetailComponent extends React.Component {
             _this.textareas[v].editor.create();
         });
     }
+
     // 页面卸载时调用的方法
     componentWillUnmount() {
         this.props.restore();
     }
+
     // 构建详情页的方法
     buildDetail = (options) => {
         this.options = {
@@ -196,6 +201,31 @@ export default class DetailComponent extends React.Component {
         this.first = false;
         return this.getPageComponent(children);
     }
+
+    // 获取已有币种， 保存币种列表
+    setCoinDate = () => {
+        getCoinList().then(data => {
+            let coinList = [];
+            let coinData = {};
+            data.map(d => {
+                coinData[d.symbol] = {
+                    'coin': d.symbol,
+                    'unit': '1e' + d.unit,
+                    'name': d.cname,
+                    'type': d.type,
+                    'status': d.status
+                };
+                coinList.push({
+                    key: d.symbol,
+                    value: d.cname
+                });
+            });
+
+            this.props.setCoinData && this.props.setCoinData(coinData);
+            this.props.setCoinListData && this.props.setCoinListData(coinList);
+        });
+    }
+
     getO2MDatas(item) {
         item.params = item.params || {};
         fetch(item.listCode, item.params).then((data) => {
@@ -205,9 +235,10 @@ export default class DetailComponent extends React.Component {
             });
         });
     }
+
     getBuildDetail = (code) => {
         this.first = true;
-        this.buildDetail({ code });
+        this.buildDetail({code});
     }
 
     beforeSubmit(err, values) {
@@ -223,7 +254,7 @@ export default class DetailComponent extends React.Component {
         values[key] = isUndefined(values[key]) ? this.props.code || '' : values[key];
         this.options.fields.forEach(v => {
             if (v.amount) {
-                values[v.field] = moneyParse(values[v.field], v.amountRate);
+                values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin ? v.coin : '', this.props.coinList);
             } else if (v.type === 'citySelect') {
                 let mid = values[v.field].map(a => a === '全部' ? '' : a);
                 v.cFields.forEach((f, i) => {
@@ -342,11 +373,11 @@ export default class DetailComponent extends React.Component {
             let imgIndex = 0;
             for (let i in ImageData) {
                 if (file.key) {
-                    if(ImageData[i] === file.key) {
+                    if (ImageData[i] === file.key) {
                         imgIndex = i;
                     }
                 } else {
-                    if(ImageData[i] === file.response.key) {
+                    if (ImageData[i] === file.response.key) {
                         imgIndex = i;
                     }
                 }
@@ -482,62 +513,67 @@ export default class DetailComponent extends React.Component {
             this.getTree(data, item);
         });
     }
+
     // 生成tree
     getTree(data, item) {
-      let result = {};
-      data.forEach(v => {
-        v.parentCode = v.parentCode === '0' ? 'ROOT' : v.parentCode;
-        if (!result[v.parentCode]) {
-          result[v.parentCode] = [];
+        let result = {};
+        data.forEach(v => {
+            v.parentCode = v.parentCode === '0' ? 'ROOT' : v.parentCode;
+            if (!result[v.parentCode]) {
+                result[v.parentCode] = [];
+            }
+            let obj = {
+                title: v[item.valueName],
+                key: v[item.keyName]
+            };
+            if (item.bParams) {
+                item.bParams.forEach(p => {
+                    obj[p] = v[p];
+                });
+            }
+            result[v.parentCode].push(obj);
+        });
+        this.getTree[item.field] = result;
+        let tree = [];
+        if (result['ROOT']) {
+            this.getTreeNode(result['ROOT'], tree, item);
         }
-        let obj = {
-            title: v[item.valueName],
-            key: v[item.keyName]
-        };
-        if (item.bParams) {
-            item.bParams.forEach(p => {
-              obj[p] = v[p];
-            });
-        }
-        result[v.parentCode].push(obj);
-      });
-      this.getTree[item.field] = result;
-      let tree = [];
-      if (result['ROOT']) {
-          this.getTreeNode(result['ROOT'], tree, item);
-      }
-      this.setState({
-        treeData: {
-          ...this.state.treeData,
-          [item.field]: tree
-        }
-      });
+        this.setState({
+            treeData: {
+                ...this.state.treeData,
+                [item.field]: tree
+            }
+        });
     }
+
     // 生成treeNode
     getTreeNode(arr, children, item) {
-      arr.forEach(a => {
-        if (this.getTree[item.field][a.key]) {
-          a.children = [];
-          children.push(a);
-          this.getTreeNode(this.getTree[item.field][a.key], a.children, item);
-        } else {
-          children.push(a);
-        }
-      });
+        arr.forEach(a => {
+            if (this.getTree[item.field][a.key]) {
+                a.children = [];
+                children.push(a);
+                this.getTreeNode(this.getTree[item.field][a.key], a.children, item);
+            } else {
+                children.push(a);
+            }
+        });
     }
+
     // 生成treeSelect结构
     renderTreeNodes = (data, field) => {
-      if (!data) return null;
-      return data.map((item) => {
-        if (item.children) {
-          return (
-            <TreeNode title={item.title} key={item.key} value={item.key} disabled={field.disabled ? field.disabled(item) : false}>
-              {this.renderTreeNodes(item.children, field)}
-            </TreeNode>
-          );
-        }
-        return <TreeNode title={item.title} key={item.key} value={item.key} disabled={field.disabled ? field.disabled(item) : false}/>;
-      });
+        if (!data) return null;
+        return data.map((item) => {
+            if (item.children) {
+                return (
+                    <TreeNode title={item.title} key={item.key} value={item.key}
+                              disabled={field.disabled ? field.disabled(item) : false}>
+                        {this.renderTreeNodes(item.children, field)}
+                    </TreeNode>
+                );
+            }
+            return <TreeNode title={item.title} key={item.key} value={item.key}
+                             disabled={field.disabled ? field.disabled(item) : false}/>;
+        });
     }
 
     getPageComponent = (children) => {
@@ -562,7 +598,8 @@ export default class DetailComponent extends React.Component {
                             {
                                 previewImageField && this.props.form.getFieldValue(previewImageField).split('||').map(v => {
                                     let url = PIC_PREFIX + '/' + v + PIC_BASEURL_L;
-                                    return (<div className='img-wrap' key={v}><img alt="图片" style={{width: '100%'}} src={url}/></div>);
+                                    return (<div className='img-wrap' key={v}><img alt="图片" style={{width: '100%'}}
+                                                                                   src={url}/></div>);
                                 })
                             }
                         </Carousel>
@@ -570,7 +607,9 @@ export default class DetailComponent extends React.Component {
                     <div className="down-wrap">
                         <Button icon="left" onClick={() => this.carousel.prev()}></Button>
                         <Button style={{marginLeft: 20}} icon="right" onClick={() => this.carousel.next()}></Button>
-                        <Button style={{marginLeft: 20}} onClick={() => { location.href = imgUrl; }} icon="download">下载</Button>
+                        <Button style={{marginLeft: 20}} onClick={() => {
+                            location.href = imgUrl;
+                        }} icon="download">下载</Button>
                     </div>
                 </Modal>
             </Spin>
@@ -646,7 +685,8 @@ export default class DetailComponent extends React.Component {
         item.options.key = item.options.rowKey || item.options.key || 'code';
         const hasSelected = selectedRowKeys.length > 0;
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {this.getTableBtn(item, hasSelected)}
                 <Table {...this.getTableProps(rowSelection, columns, item, dataSource)} />
             </FormItem>
@@ -770,7 +810,7 @@ export default class DetailComponent extends React.Component {
                             o2mSKeys: {...prevState.o2mSKeys, [item.field]: []}
                         }));
                         setTimeout(() => {
-                          item.afterDelete && item.afterDelete(key, deleteItem);
+                            item.afterDelete && item.afterDelete(key, deleteItem);
                         }, 100);
                     }}
                 >删除</Button> : null}
@@ -924,15 +964,16 @@ export default class DetailComponent extends React.Component {
                     };
                 }
             } else if (f.type === 'img') {
-                if(f.single) {
+                if (f.single) {
                     obj.render = (value) => value ? <img style={{maxWidth: 25, maxHeight: 25}} src={PIC_PREFIX + value}/> : '';
                 } else {
                     obj.render = (value) => {
                         if (value) {
                             let imgStr = value.split('||');
                             return (<div>
-                                { imgStr.map(pic => (
-                                    <img key={pic} style={{maxWidth: 25, maxHeight: 25, marginRight: 10}} src={PIC_PREFIX + pic}/>
+                                {imgStr.map(pic => (
+                                    <img key={pic} style={{maxWidth: 25, maxHeight: 25, marginRight: 10}}
+                                         src={PIC_PREFIX + pic}/>
                                 ))}
                             </div>);
                         }
@@ -999,16 +1040,16 @@ export default class DetailComponent extends React.Component {
                             rules,
                             initialValue: initVal
                         })(
-                            <TreeSelect
-                              showSearch
-                              style={{ width: '100%' }}
-                              dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                              placeholder="请选择"
-                              allowClear
-                              treeDefaultExpandAll
-                            >
-                                {this.renderTreeNodes(this.state.treeData[item.field], item)}
-                            </TreeSelect>
+                        <TreeSelect
+                            showSearch
+                            style={{width: '100%'}}
+                            dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
+                            placeholder="请选择"
+                            allowClear
+                            treeDefaultExpandAll
+                        >
+                            {this.renderTreeNodes(this.state.treeData[item.field], item)}
+                        </TreeSelect>
                         )
                 }
             </FormItem>
@@ -1019,7 +1060,8 @@ export default class DetailComponent extends React.Component {
         let format = isTime ? DATETIME_FORMAT : DATE_FORMAT;
         let places = isTime ? '选择时间' : '选择日期';
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {
                     item.readonly ? <div className="readonly-text">{initVal}</div>
                         : getFieldDecorator(item.field, {
@@ -1042,7 +1084,8 @@ export default class DetailComponent extends React.Component {
         let format = MONTH_FORMAT;
         let places = '选择日期';
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {
                     item.readonly ? <div className="readonly-text">{initVal}</div>
                         : getFieldDecorator(item.field, {
@@ -1078,7 +1121,8 @@ export default class DetailComponent extends React.Component {
             };
         }
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {
                     item.readonly ? <div className="readonly-text">{initVal}</div>
                         : getFieldDecorator(item.field, {
@@ -1098,14 +1142,14 @@ export default class DetailComponent extends React.Component {
         if (item.readonly && item.data) {
             if (item.multiple) {
                 value = initVal.map(i => {
-                  let obj = item.data.find(v => v[item.keyName] === i);
-                  return obj[item.valueName] || tempString(item.valueName, obj) || '';
+                    let obj = item.data.find(v => v[item.keyName] === i);
+                    return obj[item.valueName] || tempString(item.valueName, obj) || '';
                 }).join('、');
             } else {
                 value = item.data.filter(v => v[item.keyName] === initVal);
                 value = value && value.length
-                  ? value[0][item.valueName] || tempString(item.valueName, value[0])
-                  : initVal;
+                    ? value[0][item.valueName] || tempString(item.valueName, value[0])
+                    : initVal;
             }
         }
         // let data;
@@ -1182,7 +1226,8 @@ export default class DetailComponent extends React.Component {
             });
         });
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {
                     item.readonly ? <div className="readonly-text">{initVal}</div>
                         : getFieldDecorator(item.field, {
@@ -1197,25 +1242,25 @@ export default class DetailComponent extends React.Component {
     getCheckboxComp(item, initVal, rules, getFieldDecorator) {
         // 初始化checkAll的值
         if (item.checkAll) {
-          if (!this.state.checkAll[item.field]) {
-            this.setState({
-              checkAll: {
-                  ...this.state.checkAll,
-                  [item.field]: { indeterminate: false, checkAll: false }
-              }
-            });
-          } else if (item.data && item.data.length && initVal && initVal.length) {
-            let checkAll = this.state.checkAll[item.field].checkAll;
-            if (initVal.length === item.data.length && !this.getCheckboxComp[item.field] && !checkAll) {
-              this.getCheckboxComp[item.field] = true;
-              this.setState({
-                checkAll: {
-                    ...this.state.checkAll,
-                    [item.field]: { indeterminate: false, checkAll: true }
+            if (!this.state.checkAll[item.field]) {
+                this.setState({
+                    checkAll: {
+                        ...this.state.checkAll,
+                        [item.field]: {indeterminate: false, checkAll: false}
+                    }
+                });
+            } else if (item.data && item.data.length && initVal && initVal.length) {
+                let checkAll = this.state.checkAll[item.field].checkAll;
+                if (initVal.length === item.data.length && !this.getCheckboxComp[item.field] && !checkAll) {
+                    this.getCheckboxComp[item.field] = true;
+                    this.setState({
+                        checkAll: {
+                            ...this.state.checkAll,
+                            [item.field]: {indeterminate: false, checkAll: true}
+                        }
+                    });
                 }
-              });
             }
-          }
         }
         let indeterminate = this.state.checkAll[item.field] ? this.state.checkAll[item.field].indeterminate : false;
         let checkAll = this.state.checkAll[item.field] ? this.state.checkAll[item.field].checkAll : false;
@@ -1225,37 +1270,41 @@ export default class DetailComponent extends React.Component {
             val = initVal.map(v => item.data.find(d => d[item.keyName] === v)[item.valueName]).join('、');
         }
         return (
-            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
+            <FormItem className={item.hidden ? 'hidden' : ''} key={item.field} {...this.getInputItemProps()}
+                      label={this.getLabel(item)}>
                 {
                     item.readonly ? <div className='readonly-text'>{val}</div>
                         : (
-                          <div>
-                            <div style={{ borderBottom: '1px solid #E9E9E9' }}>
-                                <Checkbox
-                                    indeterminate={indeterminate}
-                                    onChange={(e) => this.onCheckAllChange(e, item)}
-                                    checked={checkAll}
-                                >全选</Checkbox>
-                            </div>
-                            <br/>
-                            {
-                                getFieldDecorator(item.field, {
-                                    rules,
-                                    initialValue: initVal
-                                })(
-                                  <CheckboxGroup onChange={(list) => this.checkboxChange(list, item)} disabled={item.readonly}>
-                                      {item.data && item.data.length
-                                          ? <Row>{item.data.map(d => <Col key={d[item.keyName]} span={6}><Checkbox value={d[item.keyName]}>{d[item.valueName]}</Checkbox></Col>)}</Row>
-                                          : null}
-                                  </CheckboxGroup>
-                                )
-                            }
+                            <div>
+                                <div style={{borderBottom: '1px solid #E9E9E9'}}>
+                                    <Checkbox
+                                        indeterminate={indeterminate}
+                                        onChange={(e) => this.onCheckAllChange(e, item)}
+                                        checked={checkAll}
+                                    >全选</Checkbox>
+                                </div>
+                                <br/>
+                                {
+                                    getFieldDecorator(item.field, {
+                                        rules,
+                                        initialValue: initVal
+                                    })(
+                                        <CheckboxGroup onChange={(list) => this.checkboxChange(list, item)}
+                                                       disabled={item.readonly}>
+                                            {item.data && item.data.length
+                                                ? <Row>{item.data.map(d => <Col key={d[item.keyName]} span={6}><Checkbox
+                                                    value={d[item.keyName]}>{d[item.valueName]}</Checkbox></Col>)}</Row>
+                                                : null}
+                                        </CheckboxGroup>
+                                    )
+                                }
                             </div>
                         )
                 }
             </FormItem>
         );
     }
+
     checkboxChange = (checkedList, item) => {
         let allList = this.props.selectData[item.field].map(v => v[item.keyName]);
         this.setState({
@@ -1268,20 +1317,21 @@ export default class DetailComponent extends React.Component {
             }
         });
     }
+
     getSelectComp(item, initVal, rules, getFieldDecorator) {
         let data;
         let value;
         if (item.readonly && item.data) {
             if (item.multiple) {
                 value = initVal.map(i => {
-                  let obj = item.data.find(v => v[item.keyName] === i);
-                  return obj[item.valueName] || tempString(item.valueName, obj) || '';
+                    let obj = item.data.find(v => v[item.keyName] === i);
+                    return obj[item.valueName] || tempString(item.valueName, obj) || '';
                 }).join('、');
             } else {
                 value = item.data.filter(v => v[item.keyName] === initVal);
                 value = value && value.length
-                  ? value[0][item.valueName] || tempString(item.valueName, value[0])
-                  : initVal;
+                    ? value[0][item.valueName] || tempString(item.valueName, value[0])
+                    : initVal;
             }
         }
         // if (item.initValue && item.data && item.data.length && isUndefined(initVal)) {
@@ -1323,9 +1373,9 @@ export default class DetailComponent extends React.Component {
         }
         return (
             <FormItem className={item.hidden ? 'hidden' : ''}
-                key={item.field}
-                {...this.getInputItemProps()}
-                label={item.title ? this.getLabel(item) : ''}>
+                      key={item.field}
+                      {...this.getInputItemProps()}
+                      label={item.title ? this.getLabel(item) : ''}>
                 {item.title ? '' : <samp>&nbsp;</samp>}
                 {
                     item.readonly ? <div className="readonly-text">{initVal}</div>
@@ -1417,7 +1467,7 @@ export default class DetailComponent extends React.Component {
                 if (!isUndefined(initVal)) {
                     this.getSelectProps[item.field] = true;
                     setTimeout(() => {
-                      props.onChange(initVal);
+                        props.onChange(initVal);
                     }, 100);
                 }
             }
@@ -1601,12 +1651,12 @@ export default class DetailComponent extends React.Component {
     getLabel(item) {
         return (
             <span
-            className={item.required && ((item.type === 'textarea' && !item.normalArea) || (item.type === 'o2m')) ? 'ant-form-item-required' : ''}>
+                className={item.required && ((item.type === 'textarea' && !item.normalArea) || (item.type === 'o2m')) ? 'ant-form-item-required' : ''}>
         {item.title + (item.single ? '(单)' : '')}
-            {item.help
-                ? <Tooltip title={item.help}>
-                    <Icon type="question-circle-o"/>
-                </Tooltip> : null}
+                {item.help
+                    ? <Tooltip title={item.help}>
+                        <Icon type="question-circle-o"/>
+                    </Tooltip> : null}
             </span>
         );
     }
@@ -1746,6 +1796,7 @@ export default class DetailComponent extends React.Component {
         }
         return rules;
     }
+
     // 全选按钮的change事件
     onCheckAllChange(e, item) {
         let allList = this.props.selectData[item.field].map(v => v[item.keyName]);
@@ -1759,7 +1810,7 @@ export default class DetailComponent extends React.Component {
             }
         });
         this.props.form.setFieldsValue({
-          [item.field]: e.target.checked ? allList : []
+            [item.field]: e.target.checked ? allList : []
         });
     }
 }

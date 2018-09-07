@@ -27,19 +27,22 @@
     background-size: 100% 100%;
     position: relative;
 }
-.card-top .title{
+
+.card-top .title {
     text-align: center;
     color: #fff;
     font-size: 22px;
 }
-.card-top .more{
+
+.card-top .more {
     color: #fff;
     font-size: 10px;
     letter-spacing: 1px;
     position: absolute;
     bottom: 22px;
 }
-.card-top .more img{
+
+.card-top .more img {
     margin-left: 6px;
 }
 
@@ -47,20 +50,24 @@
     width: 100%;
     background-color: #fff;
 }
-.content-item{
+
+.content-item {
     width: 100%;
     height: 48px;
     overflow: hidden;
 }
-.content-item a{
+
+.content-item a {
     color: #595959;
 }
-.content-item .icon{
+
+.content-item .icon {
     float: left;
     height: 5px;
     margin-top: 21px;
 }
-.content-item .txt{
+
+.content-item .txt {
     margin: 0;
     width: calc(100% - 120px);
     float: left;
@@ -72,7 +79,8 @@
     line-height: 48px;
     color: #595959;
 }
-.content-item .date{
+
+.content-item .date {
     font-size: 14px;
     color: #999;
     line-height: 48px;
@@ -105,7 +113,8 @@
     background-color: #fff;
     padding: 6px;
 }
-.user-wrap .card-top .photo img{
+
+.user-wrap .card-top .photo img {
     width: 100%;
     height: 100%;
     vertical-align: bottom;
@@ -115,12 +124,14 @@
     height: 140px;
     padding-top: 46px;
 }
-.user-wrap .card-content .user-name{
+
+.user-wrap .card-content .user-name {
     text-align: center;
     font-size: 20px;
     color: #333;
 }
-.user-wrap .card-content .user-role{
+
+.user-wrap .card-content .user-role {
     text-align: center;
     font-size: 14px;
     color: #999;
@@ -139,10 +150,12 @@
     float: left;
     background-image: url('../../images/home-backlogBg.png');
 }
-.top-right .card-top .title{
+
+.top-right .card-top .title {
     line-height: 240px;
 }
-.top-right .card-top .more{
+
+.top-right .card-top .more {
     width: 100%;
     right: 0;
     text-align: center;
@@ -153,10 +166,12 @@
     height: 100%;
     float: right;
 }
-.top-right .card-content .content-item{
+
+.top-right .card-content .content-item {
     padding: 0 20px;
 }
-.top-right .card-content .content-item:nth-of-type(even){
+
+.top-right .card-content .content-item:nth-of-type(even) {
     background-color: #f7f8fa;
 }
 
@@ -173,47 +188,58 @@
     background-position: left;
 }
 
-.companysystem-wrap .card-top .title{
+.companysystem-wrap .card-top .title {
     line-height: 100px;
 }
-.companysystem-wrap .card-top .more{
+
+.companysystem-wrap .card-top .more {
     right: 22px;
 }
+
 .companysystem-wrap .card-content {
     height: 288px;
     padding: 0 20px;
 }
-.companysystem-wrap .card-content .content-item{
+
+.companysystem-wrap .card-content .content-item {
     border-top: 1px solid #eee;
 }
-.companysystem-wrap .card-content .content-item:first-child{
+
+.companysystem-wrap .card-content .content-item:first-child {
     border: 0px;
 }
-.noData{
+
+.noData {
     width: 100%;
     padding-top: 60px;
     text-align: center;
 }
-.noData img{
+
+.noData img {
     width: 110px;
 }
-.noData p{
+
+.noData p {
     font-size: 14px;
     color: #999;
     margin-top: 20px;
 }
-.detail-wrap{
+
+.detail-wrap {
     width: 100%;
 }
-.detail-wrap .title{
+
+.detail-wrap .title {
     text-align: center;
     font-size: 18px;
 }
-.detail-wrap .content{
+
+.detail-wrap .content {
     margin: 30px 0 70px;
     font-size: 14px;
     line-height: 1.5;
 }
-.detail-wrap .button{
+
+.detail-wrap .button {
     text-align: center;
 }

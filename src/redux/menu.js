@@ -1,6 +1,6 @@
-import { getRoleMenuList } from 'api/menu';
-import { getRealUrl } from 'common/js/util';
-import { ROOT_MENU_CODE } from 'common/js/config';
+import {getRoleMenuList} from 'api/menu';
+import {getRealUrl} from 'common/js/util';
+import {ROOT_MENU_CODE} from 'common/js/config';
 
 const SET_TOP_MENU_CODE = 'SET_TOP_MENU_CODE';
 const SET_SUB_MENU_CODE = 'SET_SUB_MENU_CODE';
@@ -24,7 +24,7 @@ const initState = {
 };
 
 export function menu(state = initState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case SET_TOP_MENU_CODE:
             return {...state, topMenuCode: action.payload, ...getSubCode(action.payload, state)};
         case SET_SUB_MENU_CODE:
@@ -43,53 +43,55 @@ export function menu(state = initState, action) {
 }
 
 export function setTopCode(code) {
-    return { type: SET_TOP_MENU_CODE, payload: code };
+    return {type: SET_TOP_MENU_CODE, payload: code};
 }
 
 export function setSubMenuCode(code) {
-    return { type: SET_SUB_MENU_CODE, payload: code };
+    return {type: SET_SUB_MENU_CODE, payload: code};
 }
 
 export function setSubOpenCode(code) {
-    return { type: SET_SUB_OPEN_CODE, payload: code };
+    return {type: SET_SUB_OPEN_CODE, payload: code};
 }
 
 export function clearSubOpenCode() {
     return (dispatch, getState) => {
         preSubOpenCode = getState().menu.subOpenCode;
-        dispatch({ type: CLEAR_SUB_OPEN_CODE, payload: [] });
+        dispatch({type: CLEAR_SUB_OPEN_CODE, payload: []});
     };
 }
 
 export function clearTopCode() {
     return (dispatch, getState) => {
-        dispatch({ type: SET_TOP_MENU_CODE, payload: [] });
+        dispatch({type: SET_TOP_MENU_CODE, payload: []});
     };
 }
 
 export function clearSubMenuCode() {
     return (dispatch, getState) => {
-        dispatch({ type: SET_SUB_MENU_CODE, payload: [] });
+        dispatch({type: SET_SUB_MENU_CODE, payload: []});
     };
 }
+
 export function restoreSubOpenCode() {
-    return { type: RESTORE_SUB_OPEN_CODE, payload: preSubOpenCode };
+    return {type: RESTORE_SUB_OPEN_CODE, payload: preSubOpenCode};
 }
 
 function setMenuList(data) {
-    return { type: SET_MENU_LIST, payload: data };
+    return {type: SET_MENU_LIST, payload: data};
 }
 
 // 获取菜单列表
 export function getMenuList(pathname) {
     return dispatch => {
         getRoleMenuList().then(data => {
-            dispatch(setMenuList({ data, pathname }));
-        }).catch(() => {});
+            dispatch(setMenuList({data, pathname}));
+        }).catch(() => {
+        });
     };
 }
 
-function _getMenuState({ data, pathname }) {
+function _getMenuState({data, pathname}) {
     let result = {
         topMenuList: [],
         topMenuCode: '',

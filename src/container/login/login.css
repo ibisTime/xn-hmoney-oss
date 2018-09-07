@@ -5,7 +5,8 @@ body {
     top: 0;
     left: 0;
 }
-.login-body{
+
+.login-body {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -18,24 +19,28 @@ body {
     background-position: center left;
     background-size: 50% 100%;
 }
-.logo-wrap{
+
+.logo-wrap {
     width: 50%;
     height: 100%;
     float: left;
     padding: 50px 70px;
 }
-.logo-wrap img{
+
+.logo-wrap img {
     width: 132px;
     margin-bottom: 20px;
     opacity: .94;
 }
-.logo-wrap p{
+
+.logo-wrap p {
     width: 132px;
     text-align: center;
     color: #fff;
     font-size: 18px;
     opacity: .94;
 }
+
 .login-wrap {
     width: 50%;
     float: right;
@@ -77,14 +82,15 @@ body {
     position: relative;
     margin-bottom: 30px;
 }
-.form-item .ant-form-item-children{
+
+.form-item .ant-form-item-children {
     width: 100%;
     height: 56px;
     display: block;
     padding-left: 106px;
 }
 
-.form-item .ant-form-item-control .ant-input{
+.form-item .ant-form-item-control .ant-input {
     width: 374px;
     height: 54px;
     border: 0;
@@ -94,13 +100,15 @@ body {
     font-size: 14px;
     margin-top: 1px;
 }
-.form-item .ant-form-explain{
+
+.form-item .ant-form-explain {
     position: absolute;
     right: 10px;
     top: 20px;
     text-align: right;
 }
-.form-item .icon{
+
+.form-item .icon {
     width: 106px;
     height: 56px;
     position: absolute;
@@ -111,12 +119,15 @@ body {
     background-size: 100% 100%;
     box-shadow: 0 2px 5px rgba(2, 142, 255, 0.2);
 }
-.form-item .icon.icon-user{
+
+.form-item .icon.icon-user {
     background-image: url('../../images/login-user.png');
 }
-.form-item .icon.icon-pwd{
+
+.form-item .icon.icon-pwd {
     background-image: url('../../images/login-pwd.png');
 }
-.button-wrap{
+
+.button-wrap {
     margin-top: 70px;
 }

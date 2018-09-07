@@ -2,14 +2,14 @@ import React from 'react';
 import {
     Spin, Button
 } from 'antd';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
     getQueryString,
     getUserName,
     getRoleCode,
     dateFormat
 } from 'common/js/util';
-import { getRoleList } from 'api/company';
+import {getRoleList} from 'api/company';
 import fetch from 'common/js/fetch';
 import './home.css';
 
@@ -22,11 +22,12 @@ class Home extends React.Component {
         };
         this.code = getQueryString('code', this.props.location.search);
     }
+
     componentDidMount() {
-        this.setState({ fetching: true });
+        this.setState({fetching: true});
         fetch(632726, {code: this.code}).then((data) => {
-            this.setState({ noticeData: data, fetching: false });
-        }).catch(this.setState({ fetching: false }));
+            this.setState({noticeData: data, fetching: false});
+        }).catch(this.setState({fetching: false}));
     }
 
     render() {

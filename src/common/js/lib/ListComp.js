@@ -11,6 +11,7 @@ import {
 import {PIC_PREFIX} from 'common/js/config';
 import {getOwnerBtns} from 'api/menu';
 import {getDictList} from 'api/dict';
+import {getCoinList} from 'api/coin';
 import fetch from 'common/js/fetch';
 import locale from './date-locale';
 import cityData from './city';
@@ -38,13 +39,17 @@ export default class ListComponent extends React.Component {
             searchParams: {}
         };
     }
-
+    componentDidMount() {
+        let _this = this;
+        this.setCoinDate();
+    }
     buildList = (options) => {
         this.options = {
             ...this.options,
             ...options
         };
         if (this.first) {
+            this.setCoinDate();
             this.options.pageCode && this.getPageData();
             if (this.options.buttons) {
                 this.addOwnerBtns();
@@ -151,6 +156,30 @@ export default class ListComponent extends React.Component {
         }
 
         callback && callback(obj);
+    }
+
+    // 获取已有币种， 保存币种列表
+    setCoinDate = () => {
+        getCoinList().then(data => {
+            let coinList = [];
+            let coinData = {};
+            data.map(d => {
+                coinData[d.symbol] = {
+                    coin: d.symbol,
+                    unit: '1e' + d.unit,
+                    name: d.cname,
+                    type: d.type,
+                    status: d.status
+                };
+                coinList.push({
+                    key: d.symbol,
+                    value: d.cname
+                });
+            });
+
+            this.props.setCoinData && this.props.setCoinData(coinData);
+            this.props.setCoinListData && this.props.setCoinListData(coinList);
+        });
     }
 
     renderSelect(value, f) {

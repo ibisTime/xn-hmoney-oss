@@ -1,12 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Form, Collapse, Row, Col, Spin, Modal, Carousel, Button } from 'antd';
-import { isUndefined, moneyParse, getUserName } from 'common/js/util';
+import {connect} from 'react-redux';
+import {Form, Collapse, Row, Col, Spin, Modal, Carousel, Button} from 'antd';
+import {isUndefined, moneyParse, getUserName} from 'common/js/util';
 import DetailComp from 'common/js/lib/DetailComp';
 import ModalDetail from 'common/js/build-modal-detail';
 import {PIC_PREFIX} from 'common/js/config';
 import fetch from 'common/js/fetch';
-const { Panel } = Collapse;
+
+const {Panel} = Collapse;
 const col1Props = {xs: 32, sm: 24, md: 24, lg: 24};
 const col2Props = {xs: 32, sm: 24, md: 12, lg: 12};
 const col3Props = {xs: 32, sm: 24, md: 12, lg: 8};
@@ -167,7 +168,7 @@ class CollapseDetail extends DetailComp {
     }
 
     getPageComponent = (children, children1) => {
-        const { previewImage, previewVisible, previewImageField } = this.state;
+        const {previewImage, previewVisible, previewImageField} = this.state;
         let imgUrl = '';
         if (previewImageField && this.props.form.getFieldValue(previewImageField).split('||')) {
             let url = this.props.form.getFieldValue(previewImageField).split('||')[0];
@@ -195,7 +196,8 @@ class CollapseDetail extends DetailComp {
                             {
                                 previewImageField && this.props.form.getFieldValue(previewImageField).split('||').map(v => {
                                     let url = PIC_PREFIX + '/' + v;
-                                    return (<div className='img-wrap' key={v}><img alt="图片" style={{width: '100%'}} src={url}/></div>);
+                                    return (<div className='img-wrap' key={v}><img alt="图片" style={{width: '100%'}}
+                                                                                   src={url}/></div>);
                                 })
                             }
                         </Carousel>
@@ -203,7 +205,9 @@ class CollapseDetail extends DetailComp {
                     <div className="down-wrap">
                         <Button icon="left" onClick={() => this.carousel.prev()}></Button>
                         <Button style={{marginLeft: 20}} icon="right" onClick={() => this.carousel.next()}></Button>
-                        <Button style={{marginLeft: 20}} onClick={() => { location.href = imgUrl; }} icon="download">下载</Button>
+                        <Button style={{marginLeft: 20}} onClick={() => {
+                            location.href = imgUrl;
+                        }} icon="download">下载</Button>
                     </div>
                 </Modal>
             </Spin>
