@@ -8,8 +8,6 @@ const SET_TABLE_DATA = PREFIX + 'SET_TABLE_DATA';
 const SET_SEARCH_DATA = PREFIX + 'SET_SEARCH_DATA';
 const SET_PAGINATION = PREFIX + 'SET_PAGINATION';
 const SET_SEARCH_PARAM = PREFIX + 'SET_SEARCH_PARAM';
-const SET_COIN_DATA = PREFIX + 'SET_COIN_DATA';
-const SET_COINLIST_DATA = PREFIX + 'SET_COINLIST_DATA';
 
 const initState = {...commListState};
 
@@ -25,10 +23,6 @@ export function userCustomerAccount(state = initState, action) {
             return {...state, pagination: action.payload};
         case SET_SEARCH_PARAM:
             return {...state, searchParam: action.payload};
-        case SET_COIN_DATA:
-            return {...state, coinData: action.payload};
-        case SET_COINLIST_DATA:
-            return {...state, coinListData: action.payload};
         case LOADING:
             return {...state, fetching: true};
         case CANCEL_LOADING:
@@ -76,14 +70,4 @@ export function setSearchParam(data) {
 // 清空搜索框的值
 export function clearSearchParam() {
     return setSearchParam({});
-}
-
-// 设置币种的数据
-export function setCoinData(data) {
-    return {type: SET_COIN_DATA, payload: data};
-}
-
-// 设置币种列表的数据
-export function setCoinListData(data) {
-    return {type: SET_COINLIST_DATA, payload: data};
 }

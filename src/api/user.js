@@ -26,7 +26,7 @@ export function activateSysUser(userId) {
 
 // 注销激活c端用户
 export function activateUser(userId) {
-    return fetch(805091, {userId, updater: getUserName()});
+    return fetch(805084, {userId, updater: getUserName()});
 }
 
 // 获取用户详情

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -7,13 +8,11 @@ import {
     clearSearchParam,
     doFetching,
     cancelFetching,
-    setSearchData,
-    setCoinData,
-    setCoinListData
+    setSearchData
 } from '@redux/user/customer/customer';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
-import {SYSTEM_CODE} from 'common/js/config';
+import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {activateUser} from 'api/user';
 
 @listWrapper(
     state => ({
@@ -22,8 +21,7 @@ import {SYSTEM_CODE} from 'common/js/config';
     }),
     {
         setTableData, clearSearchParam, doFetching, setBtnList,
-        cancelFetching, setPagination, setSearchParam, setSearchData,
-        setCoinData, setCoinListData
+        cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
 class Customer extends React.Component {
@@ -91,7 +89,57 @@ class Customer extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'userId',
-            pageCode: '805120'
+            pageCode: '805120',
+            btnEvent: {
+                active: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status === '0') {
+                        showWarnMsg('用户状态正常');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定允许此用户登录？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return activateUser(selectedRowKeys[0]).then(() => {
+                                    this.props.getPageData();
+                                    showWarnMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                },
+                rock: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status === '2') {
+                        showWarnMsg('用户已禁止登陆');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定禁止此用户登录？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return activateUser(selectedRowKeys[0]).then(() => {
+                                    this.props.getPageData();
+                                    showWarnMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
+                    }
+                }
+            }
         });
     }
 }

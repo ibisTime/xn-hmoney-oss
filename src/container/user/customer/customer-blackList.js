@@ -7,9 +7,7 @@ import {
     clearSearchParam,
     doFetching,
     cancelFetching,
-    setSearchData,
-    setCoinData,
-    setCoinListData
+    setSearchData
 } from '@redux/user/customer/customer-blackList';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat} from 'common/js/util';
@@ -22,8 +20,7 @@ import {SYSTEM_CODE} from 'common/js/config';
     }),
     {
         setTableData, clearSearchParam, doFetching, setBtnList,
-        cancelFetching, setPagination, setSearchParam, setSearchData,
-        setCoinData, setCoinListData
+        cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
 class CustomerBlackList extends React.Component {
@@ -71,7 +68,7 @@ class CustomerBlackList extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '805205',
+            pageCode: '805245',
             searchParams: {
                 status: '1'
             }

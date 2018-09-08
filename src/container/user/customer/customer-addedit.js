@@ -5,9 +5,7 @@ import {
     cancelFetching,
     setSelectData,
     setPageData,
-    restore,
-    setCoinData,
-    setCoinListData
+    restore
 } from '@redux/user/customer/customer-addedit';
 import {getQueryString} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
@@ -15,7 +13,7 @@ import {SYSTEM_CODE} from 'common/js/config';
 
 @DetailWrapper(
     state => state.userCustomerAddEdit,
-    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore, setCoinData, setCoinListData}
+    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
 class CustomerAddedit extends React.Component {
     constructor(props) {

@@ -253,8 +253,8 @@ export default class DetailComponent extends React.Component {
         let key = this.options.key || 'code';
         values[key] = isUndefined(values[key]) ? this.props.code || '' : values[key];
         this.options.fields.forEach(v => {
-            if (v.amount) {
-                values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin ? v.coin : '', this.props.coinList);
+            if (v.amount || v.coinAmount) {
+                values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin ? v.coin : '');
             } else if (v.type === 'citySelect') {
                 let mid = values[v.field].map(a => a === '全部' ? '' : a);
                 v.cFields.forEach((f, i) => {
@@ -857,7 +857,7 @@ export default class DetailComponent extends React.Component {
                                 let value = '';
                                 if (f.render) {
                                     value = f.render(d[f.field], d);
-                                } else if (f.amount) {
+                                } else if (f.amount || f.coinAmount) {
                                     value = moneyFormat(d[f.field]);
                                 } else if (f.type === 'date' || f.type === 'datetime') {
                                     value = f.type === 'date' ? dateFormat(d[f.field]) : dateTimeFormat(d[f.field]);
@@ -981,7 +981,7 @@ export default class DetailComponent extends React.Component {
                     };
                 }
             }
-            if (f.amount && !f.render) {
+            if ((f.amount || f.coinAmount) && !f.render) {
                 obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d)}</span>;
             }
             if (!obj.render) {
@@ -1570,7 +1570,7 @@ export default class DetailComponent extends React.Component {
             }
             if (item.formatter) {
                 result = item.formatter(result, this.props.pageData);
-            } else if (item.amount) {
+            } else if (item.amount || item.coinAmount) {
                 result = isUndefined(result) ? '' : moneyFormat(result, item.amountRate);
             }
         } catch (e) {
@@ -1756,6 +1756,13 @@ export default class DetailComponent extends React.Component {
             rules.push({
                 pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,2})?$)|([0])/,
                 message: '金额必须>=0，且小数点后最多2位'
+            });
+        }
+
+        if (item.coinAmount) {
+            rules.push({
+                pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,8})?$)|([0])/,
+                message: '金额必须>=0，且小数点后最多8位'
             });
         }
 

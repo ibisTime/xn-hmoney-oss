@@ -7,9 +7,7 @@ import {
     clearSearchParam,
     doFetching,
     cancelFetching,
-    setSearchData,
-    setCoinData,
-    setCoinListData
+    setSearchData
 } from '@redux/user/customer/customer-account';
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList} from 'common/js/util';
@@ -22,8 +20,7 @@ import {SYSTEM_CODE} from 'common/js/config';
     }),
     {
         setTableData, clearSearchParam, doFetching, setBtnList,
-        cancelFetching, setPagination, setSearchParam, setSearchData,
-        setCoinData, setCoinListData
+        cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
 class CustomerAccount extends React.Component {
@@ -83,6 +80,7 @@ class CustomerAccount extends React.Component {
             pageCode: '802300',
             searchParams: {
                 kind: '0',
+                type: 'C',
                 userId: this.userId
             }
         });

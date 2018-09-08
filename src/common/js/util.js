@@ -171,6 +171,9 @@ export function moneyFormat(money, format, coin, isRe = false) {
     if (isUndefined(format) || typeof format === 'object') {
         format = 2;
     }
+    if (coin) {
+        format = 8;
+    }
     // 金额格式化 金额除以unit并保留format位小数
     money = new BigDecimal(money.toString());
     money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
@@ -682,7 +685,7 @@ export function getCoinList() {
 // 获取币种unit
 export function getCoinUnit(coin) {
     if (!coin) {
-        console.log('error', 'getCoinUnit(coin)coin不能为空');
+        console.log('coin不能为空');
         return;
     }
     var unit = getCoinData()[coin].unit;
