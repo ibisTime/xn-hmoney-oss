@@ -16,7 +16,7 @@ coinData: {
     }
 }
 // 币种下拉列表
-coinListData: [{
-    key: d.symbol,
-     value: d.cname
+coinList: [{
+    key: 'BTC',
+    value: '比特币'
 }]

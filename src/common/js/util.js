@@ -155,11 +155,10 @@ export function dateTimeFormat(date) {
  * @param money
  * @param format
  * @param coin 币种
- * @param coinList 币种列表
  * @param isRe 是否千分位转化
  */
-export function moneyFormat(money, format, coin, coinList, isRe = false) {
-    let unit = coin && coinList[coin] ? getCoinUnit(coin, coinList) : '1000';
+export function moneyFormat(money, format, coin, isRe = false) {
+    let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
     let flag = false;// 是否是负数
     if (isNaN(money)) {
         return '-';
@@ -192,12 +191,11 @@ export function moneyFormat(money, format, coin, coinList, isRe = false) {
  * @param money
  * @param format
  * @param coin 币种
- * @param coinList 币种列表
  */
-export function moneyParse(money, rate, coin, coinList) {
-    let unit = coin && coinList[coin] ? getCoinUnit(coin, coinList) : '1000';
+export function moneyParse(money, rate, coin) {
+    let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
 
-    if(isUndefined(money)) {
+    if (isUndefined(money)) {
         return '-';
     }
     rate = rate || new BigDecimal(unit);
@@ -222,7 +220,7 @@ export function moneyReplaceComma(money) {
  * @param coinList 币种列表
  */
 export function moneyFormatSubtract(s1, s2, format, coin, coinList) {
-    if(!isNumeric(s1) || !isNumeric(s2)) {
+    if (!isNumeric(s1) || !isNumeric(s2)) {
         return '-';
     }
     let num1 = new BigDecimal(s1.toString());
@@ -611,7 +609,7 @@ function getValFromKeys(keys, pageData, type) {
 }
 
 // 获取城市的真实值
-function getCityVal(keys, cFields, result, pageData) {
+export function getCityVal(keys, cFields, result, pageData) {
     let cData = keys && result ? result : pageData;
     let prov = cData[cFields[0]];
     if (prov) {
@@ -625,7 +623,7 @@ function getCityVal(keys, cFields, result, pageData) {
 }
 
 // 获取日期真实值
-function getRealDateVal(pageData, type, result, keys, readonly, rangedate) {
+export function getRealDateVal(pageData, type, result, keys, readonly, rangedate) {
     let format = type === 'date' ? DATE_FORMAT : type === 'month' ? MONTH_FORMAT : DATETIME_FORMAT;
     let fn = type === 'date' ? dateFormat : type === 'month' ? monthFormat : dateTimeFormat;
     if (readonly) {
@@ -639,7 +637,7 @@ function getRealDateVal(pageData, type, result, keys, readonly, rangedate) {
 }
 
 // 获取范围日期真实值
-function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly) {
+export function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly) {
     let dates = keys && result ? result : pageData;
     let start = dates[rangedate[0]];
     let end = dates[rangedate[1]];
@@ -650,20 +648,43 @@ function getRangeDateVal(rangedate, keys, result, format, fn, pageData, readonly
 }
 
 // 获取checkbox的真实值
-function getRealCheckboxVal(result) {
+export function getRealCheckboxVal(result) {
     return result ? result.split(',') : [];
 }
 
+/**
+ * 获取币种Data
+ * return {
+ *  'BTC': {
+ *      'coin': 'BTC',
+ *      'unit': '1e8',
+ *      'name': '比特币',
+ *      'type': '0',
+ *      'status': '0'
+ *  }
+ *}
+ */
+export function getCoinData() {
+    return JSON.parse(sessionStorage.getItem('coinData'));
+}
+
+/**
+ * 获取币种列表
+ * return [{
+ *      key: 'BTC',
+ *      value: '比特币'
+ *}]
+ */
+export function getCoinList() {
+    return JSON.parse(sessionStorage.getItem('coinList'));
+}
+
 // 获取币种unit
-function getCoinUnit(coin, data) {
+export function getCoinUnit(coin) {
     if (!coin) {
-        console.log('error', 'getCoinUnit(coin, data)coin不能为空');
+        console.log('error', 'getCoinUnit(coin)coin不能为空');
         return;
     }
-    if (!data) {
-        console.log('error', 'getCoinUnit(coin, data)data不能为空');
-        return;
-    }
-    var unit = data[coin].unit;
+    var unit = getCoinData()[coin].unit;
     return unit;
 }

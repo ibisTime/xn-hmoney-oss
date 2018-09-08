@@ -12,7 +12,7 @@ import {
     setCoinListData
 } from '@redux/user/customer/customer-account';
 import {listWrapper} from 'common/js/build-list';
-import {getQueryString, moneyFormat, moneyFormatSubtract} from 'common/js/util';
+import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList} from 'common/js/util';
 import {SYSTEM_CODE} from 'common/js/config';
 
 @listWrapper(
@@ -40,7 +40,7 @@ class CustomerAccount extends React.Component {
             field: 'currency',
             title: '币种',
             type: 'select',
-            data: this.props.coinListData,
+            data: getCoinList(),
             keyName: 'key',
             valueName: 'value'
         }, {
@@ -50,13 +50,13 @@ class CustomerAccount extends React.Component {
             field: 'amount',
             title: '余额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency, this.props.coinData);
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'frozenAmount',
             title: '冻结金额',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency, this.props.coinData);
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'availableAmount',
@@ -65,7 +65,7 @@ class CustomerAccount extends React.Component {
                 var amount = data.amount;
                 var frozenAmount = data.frozenAmount;
 
-                return moneyFormatSubtract(amount, frozenAmount, '', data.currency, this.props.coinData);
+                return moneyFormatSubtract(amount, frozenAmount, '', data.currency);
             }
         }, {
             field: 'status',

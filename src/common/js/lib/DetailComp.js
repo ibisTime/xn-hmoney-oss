@@ -221,8 +221,8 @@ export default class DetailComponent extends React.Component {
                 });
             });
 
-            this.props.setCoinData && this.props.setCoinData(coinData);
-            this.props.setCoinListData && this.props.setCoinListData(coinList);
+            window.sessionStorage.setItem('coinData', JSON.stringify(coinData));
+            window.sessionStorage.setItem('coinList', JSON.stringify(coinList));
         });
     }
 
