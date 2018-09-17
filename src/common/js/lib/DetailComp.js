@@ -1177,13 +1177,18 @@ export default class DetailComponent extends React.Component {
                             onSearch={v => this.searchSelectChange({item, keyword: v})}
                             optionLabelProp="children"
                             notFoundContent={this.state.fetching[item.field] ? <Spin size="small"/> : '暂无数据'}
-                            placeholder="请输入关键字搜索"
+                            placeholder={item.placeholder ? item.placeholder : '请输入关键字搜索'}
+                            onFocus={() => {
+                                if (!this.props.setSelectData[item.field]) {
+                                    this.searchSelectChange({item});
+                                }
+                            }}
                             onChange={v => {
                                 if (item.onChange && this.state.selectFetch[item.field]) {
                                     item.onChange(v, this.props.selectData[item.field] ? this.props.selectData[item.field].find(v1 => v1.code === v) : {}, this.props);
                                 }
-                            }}
-                            {...this.getSelectProps(item, initVal)}>
+                            }}>
+                            {/* {...this.getSelectProps(item, initVal)} */}
                             {item.data ? item.data.map(d => (
                                 <Option key={d[item.keyName]} value={d[item.keyName]}>
                                     {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}

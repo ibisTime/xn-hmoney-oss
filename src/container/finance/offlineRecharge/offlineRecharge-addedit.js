@@ -9,6 +9,7 @@ import {
 } from '@redux/finance/offlineRecharge/offlineRecharge-addedit';
 import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
+import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
 
 @DetailWrapper(
@@ -25,19 +26,26 @@ class OfflineRechargeAddedit extends React.Component {
 
     render() {
         let fields = [{
-            field: 'accountNumber',
-            title: '充值账户',
+            field: 'userId',
+            title: '充值用户',
             required: true,
             type: 'select',
-            pageCode: '802300',
-            params: {
-                currency: 'ETH',
-                type: 'C'
-            },
-            keyName: 'accountNumber',
-            valueName: '{{realName.DATA}}-{{mobile.DATA}}',
-            searchName: 'accountNumber',
-            help: '支持户名查询'
+            pageCode: '805120',
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
+            searchName: 'mobile',
+            placeholder: '请输入手机号搜索',
+            onChange: (v, data) => {
+                if (v) {
+                    getListUserAccount({userId: v, currency: 'ETH'}).then((d) => {
+                        this.props.setPageData({'accountNumber': d[0].accountNumber});
+                    });
+                }
+            }
+        }, {
+            field: 'accountNumber',
+            title: '充值账户',
+            hidden: true
         }, {
             title: '充值数量',
             field: 'amount',

@@ -13,7 +13,14 @@ export function getPageAccount({start, limit, type}) {
         type
     });
 }
-
+/**
+ * 列表查询用户账号
+ * @param userId
+ * @param currency
+ */
+export function getListUserAccount(params) {
+    return fetch(802301, params);
+}
 export function gettotalAcount() {
     return fetch(630900);
 }
