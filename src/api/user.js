@@ -43,13 +43,3 @@ export function getUserById(userId) {
 export function getSysUsers() {
     return fetch(630066, {status: '0'});
 }
-
-// 读取身份证正面信息
-export function getIdNoFront(pic) {
-    return fetch(630092, {picUrl: PIC_PREFIX + pic});
-}
-
-// 读取身份证反面信息
-export function getIdNoReverse(pic) {
-    return fetch(630093, {picUrl: PIC_PREFIX + pic});
-}

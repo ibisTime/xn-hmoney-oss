@@ -9,7 +9,6 @@ import {
 } from '@redux/public/banner-addedit';
 import {getQueryString} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @DetailWrapper(
     state => state.publicBannerAddEdit,
@@ -28,27 +27,11 @@ class BannerAddEdit extends React.Component {
             value: 1,
             hidden: true
         }, {
-            field: 'companyCode',
-            hidden: true
-            // value: COMPANY_CODE
-        }, {
             field: 'type',
             value: 2,
             hidden: true
         }, {
-            field: 'belong',
-            value: 1,
-            hidden: true
-        }, {
             field: 'parentCode',
-            value: 0,
-            hidden: true
-        }, {
-            field: 'contentType',
-            value: 1,
-            hidden: true
-        }, {
-            field: 'isCompanyEdit',
             value: 0,
             hidden: true
         }, {
@@ -61,12 +44,12 @@ class BannerAddEdit extends React.Component {
             type: 'select',
             // key: 'banner_location',
             data: [{
-                dkey: 'index_banner',
-                dvalue: '首页'
+                key: 'web_banner',
+                value: 'WEB首页'
             }],
-            keyName: 'dkey',
-            valueName: 'dvalue',
-            value: 'index_banner',
+            keyName: 'key',
+            valueName: 'value',
+            value: 'web_banner',
             required: true
         }, {
             title: '顺序',
@@ -84,8 +67,7 @@ class BannerAddEdit extends React.Component {
             field: 'url'
         }, {
             title: '备注',
-            field: 'remark',
-            maxlength: 250
+            field: 'remark'
         }];
         return this.props.buildDetail({
             fields,
@@ -93,11 +75,7 @@ class BannerAddEdit extends React.Component {
             view: this.view,
             addCode: '630500',
             editCode: '630502',
-            detailCode: '630506',
-            beforeSumit: (params) => {
-                params.companyCode = SYSTEM_CODE;
-                return params;
-            }
+            detailCode: '630507'
         });
     }
 }

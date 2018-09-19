@@ -9,7 +9,6 @@ import {
 } from '@redux/user/customer/customer-addedit';
 import {getQueryString} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @DetailWrapper(
     state => state.userCustomerAddEdit,
@@ -65,6 +64,15 @@ class CustomerAddedit extends React.Component {
             },
             required: true
         }, {
+            field: 'isRealname',
+            title: '是否实名',
+            render: (v, data) => {
+                return data.realName ? '是' : '否';
+            }
+        }, {
+            field: 'tradeRate',
+            title: '广告费率'
+        }, {
             field: 'status',
             title: '状态',
             type: 'select',
@@ -81,7 +89,6 @@ class CustomerAddedit extends React.Component {
             field: 'remark',
             title: '备注'
         }];
-        console.log(this.props.coinList);
         return this.props.buildDetail({
             fields,
             key: 'userId',

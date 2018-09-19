@@ -9,7 +9,6 @@ import {
 } from '@redux/trade/arbitrationNotifier/arbitrationNotifier-addedit';
 import {getQueryString} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @DetailWrapper(
     state => state.tradeArbitrationNotifierAddEdit,

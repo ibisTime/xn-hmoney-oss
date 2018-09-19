@@ -11,7 +11,6 @@ import {
 } from '@redux/public/notice';
 import {showSucMsg, showWarnMsg} from 'common/js/util';
 import {listWrapper} from 'common/js/build-list';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -52,7 +51,6 @@ class Notice extends React.Component {
             pageCode: 630015,
             searchParams: {
                 channelType: '4'
-                // fromSystemCode: SYSTEM_CODE
             },
             btnEvent: {
                 edit2: (selectedRowKeys, selectedRows) => {

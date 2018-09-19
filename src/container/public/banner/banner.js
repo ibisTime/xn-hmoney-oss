@@ -10,7 +10,6 @@ import {
     setSearchData
 } from '@redux/public/banner';
 import {listWrapper} from 'common/js/build-list';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -32,11 +31,12 @@ class Banner extends React.Component {
             title: '位置',
             field: 'location',
             type: 'select',
-            key: 'banner_location',
             data: [{
-                dkey: 'index_banner',
-                dvalue: '首页'
+                key: 'web_banner',
+                value: 'WEB首页'
             }],
+            keyName: 'key',
+            valueName: 'value',
             search: true
         }, {
             title: '顺序',
@@ -50,7 +50,6 @@ class Banner extends React.Component {
             pageCode: '630505',
             deleteCode: '630501',
             searchParams: {
-                companyCode: SYSTEM_CODE,
                 type: 2
             }
         });

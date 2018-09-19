@@ -858,7 +858,7 @@ export default class DetailComponent extends React.Component {
                                 if (f.render) {
                                     value = f.render(d[f.field], d);
                                 } else if (f.amount || f.coinAmount) {
-                                    value = moneyFormat(d[f.field]);
+                                    value = moneyFormat(d[f.field], '', f.coin ? f.coin : '');
                                 } else if (f.type === 'date' || f.type === 'datetime') {
                                     value = f.type === 'date' ? dateFormat(d[f.field]) : dateTimeFormat(d[f.field]);
                                 } else {
@@ -1760,14 +1760,14 @@ export default class DetailComponent extends React.Component {
         if (item.amount) {
             rules.push({
                 pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,2})?$)|([0])/,
-                message: '金额必须>=0，且小数点后最多2位'
+                message: '必须>=0，且小数点后最多2位'
             });
         }
 
         if (item.coinAmount) {
             rules.push({
                 pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,8})?$)|([0])/,
-                message: '金额必须>=0，且小数点后最多8位'
+                message: '必须>=0，且小数点后最多8位'
             });
         }
 
@@ -1804,6 +1804,13 @@ export default class DetailComponent extends React.Component {
                 min: 1,
                 max: item.maxlength,
                 message: `请输入一个长度最多是${item.maxlength}的字符串`
+            });
+        }
+
+        if (item.rate) {
+            rules.push({
+                pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,2})?$)/,
+                message: '必须>0，且小数点后最多2位'
             });
         }
         return rules;

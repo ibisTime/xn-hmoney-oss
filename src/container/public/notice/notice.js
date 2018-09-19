@@ -58,7 +58,6 @@ class Notice extends React.Component {
             rowKey: 'id',
             searchParams: {
                 channelType: '4',
-                systemCode: SYSTEM_CODE,
                 companyCode: SYSTEM_CODE,
                 fromSystemCode: SYSTEM_CODE
             },

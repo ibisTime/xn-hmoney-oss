@@ -11,7 +11,6 @@ import {
 } from '@redux/trade/handsFee/handsFee';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat} from 'common/js/util';
-import {SYSTEM_CODE} from 'common/js/config';
 
 @listWrapper(
     state => ({

@@ -90,6 +90,9 @@ class Customer extends React.Component {
             fields,
             rowKey: 'userId',
             pageCode: '805120',
+            searchParams: {
+                kind: 'C'
+            },
             btnEvent: {
                 active: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -137,6 +140,36 @@ class Customer extends React.Component {
                                 });
                             }
                         });
+                    }
+                },
+                // 修改广告费率
+                editAdvertisementFee: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/customer/editAdvertisementFee?code=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 账户查询
+                accountQuery: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/customer/accountQuery?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 委托单查询
+                entrustQuery: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/customer/entrustQuery?userId=${selectedRowKeys[0]}`);
                     }
                 }
             }

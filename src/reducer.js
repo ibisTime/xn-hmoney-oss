@@ -29,10 +29,32 @@ import {generalTextParamAddEdit} from './redux/general/text-param-addedit';
 
 /* 业务管理 */
 // 客户管理
+// 会员查询
 import {userCustomer} from './redux/user/customer/customer';
 import {userCustomerAddEdit} from './redux/user/customer/customer-addedit';
 import {userCustomerAccount} from './redux/user/customer/customer-account';
+import {userCustomerEditAdvertisementFee} from './redux/user/customer/customer-editAdvertisementFee';
+import {userCustomerEntrustQuery} from './redux/user/customer/customer-entrustQuery';
+
+// 历史分红名单
+import {userHistoryDivideList} from './redux/user/historyDivideList/historyDivideList';
+import {userHistoryDivideListDivideList} from './redux/user/historyDivideList/historyDivideList-divideList';
+import {userHistoryDivideListDivide} from './redux/user/historyDivideList/historyDivideList-divide';
+
+// 佣金结算历史
+import {userCommissionsHistoryList} from './redux/user/commissionsHistoryList/commissionsHistoryList';
+import {userCommissionsHistoryListCommissions} from './redux/user/commissionsHistoryList/commissionsHistoryList-commissions';
+
+// 黑名单管理
 import {userCustomerBlackList} from './redux/user/customer/customer-blackList';
+
+// kyc审核
+import {userKycCheck} from './redux/user/kycCheck/kycCheck';
+import {userKycCheckAddEdit} from './redux/user/kycCheck/kycCheck-addedit';
+
+// 资料审核
+import {userDataCheck} from './redux/user/dataCheck/dataCheck';
+import {userDataCheckAddEdit} from './redux/user/dataCheck/dataCheck-addedit';
 
 // OTC交易管理
 // 购买交易
@@ -66,6 +88,23 @@ import {tradeArbitrationOrderResolve} from './redux/trade/arbitrationOrder/arbit
 import {tradeArbitrationNotifier} from './redux/trade/arbitrationNotifier/arbitrationNotifier';
 import {tradeArbitrationNotifierAddEdit} from './redux/trade/arbitrationNotifier/arbitrationNotifier-addedit';
 
+// 承兑商管理
+// 收款方式
+import {acceptPayment} from './redux/accept/payment/payment';
+import {acceptPaymentAddEdit} from './redux/accept/payment/payment-addedit';
+
+// 购买订单
+import {acceptBuyOrder} from './redux/accept/buyOrder/buyOrder';
+import {acceptBuyOrderAddEdit} from './redux/accept/buyOrder/buyOrder-addedit';
+
+// 出售订单
+import {acceptSaleOrder} from './redux/accept/saleOrder/saleOrder';
+import {acceptSaleOrderAddEdit} from './redux/accept/saleOrder/saleOrder-addedit';
+
+// 已完成订单
+import {acceptFinishOrder} from './redux/accept/finishOrder/finishOrder';
+import {acceptFinishOrderAddEdit} from './redux/accept/finishOrder/finishOrder-addedit';
+
 // 币种管理
 // 币种管理
 import {bizCoin} from './redux/biz/coin/coin';
@@ -87,7 +126,22 @@ import {quotationQuotationX} from './redux/biz/quotation/quotationX';
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
 
-import {analysisInsuranceAmount} from './redux/analysis/insuranceAmount';
+// 业务规则
+// 广告费规则
+import {rulesAdvertisingFee} from './redux/rules/advertisingFee/advertisingFee';
+import {rulesAdvertisingFeeAddEdit} from './redux/rules/advertisingFee/advertisingFee-addedit';
+
+// 币币交易手续费规则
+import {rulesSimuOrderRule} from './redux/rules/simuOrderRule/simuOrderRule';
+import {rulesSimuOrderRuleAddEdit} from './redux/rules/simuOrderRule/simuOrderRule-addedit';
+
+// 提币手续费规则
+import {rulesWithdrawUserFee} from './redux/rules/withdrawUserFee/withdrawUserFee';
+import {rulesWithdrawUserFeeAddEdit} from './redux/rules/withdrawUserFee/withdrawUserFee-addedit';
+
+// 承兑商手续费规则
+import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
+import {rulesAcceptRuleAddEdit} from './redux/rules/acceptRule/acceptRule-addedit';
 
 /* ETH财务管理 */
 // 充币管理
@@ -142,6 +196,7 @@ export default combineReducers({
     systemNode,
     systemNodeAddEdit,
     systemNodeSetMateriallist,
+    // public
     publicHotLineAddEdit,
     publicBanner,
     publicBannerAddEdit,
@@ -151,11 +206,28 @@ export default combineReducers({
     publicNoticeAddEdit,
     generalTextParam,
     generalTextParamAddEdit,
-    analysisInsuranceAmount,
+    // 会员查询
     userCustomer,
     userCustomerAddEdit,
     userCustomerAccount,
+    userCustomerEditAdvertisementFee,
+    userCustomerEntrustQuery,
+    // 黑名单管理
     userCustomerBlackList,
+    // kyc审核
+    userKycCheck,
+    userKycCheckAddEdit,
+    // 资料审核
+    userDataCheck,
+    userDataCheckAddEdit,
+    // 历史分红名单
+    userHistoryDivideList,
+    userHistoryDivideListDivideList,
+    userHistoryDivideListDivide,
+    // 佣金结算历史
+    userCommissionsHistoryList,
+    userCommissionsHistoryListCommissions,
+    // OTC交易
     tradeBuyTrade,
     tradeBuyTradeAddEdit,
     tradeSaleTrade,
@@ -171,13 +243,41 @@ export default combineReducers({
     tradeArbitrationOrderResolve,
     tradeArbitrationNotifier,
     tradeArbitrationNotifierAddEdit,
+    // 承兑商管理
+    // 收款方式
+    acceptPayment,
+    acceptPaymentAddEdit,
+    // 购买订单
+    acceptBuyOrder,
+    acceptBuyOrderAddEdit,
+    // 出售订单
+    acceptSaleOrder,
+    acceptSaleOrderAddEdit,
+    // 已完成订单
+    acceptFinishOrder,
+    acceptFinishOrderAddEdit,
+    // 币种管理
     bizCoin,
     bizCoinAddEdit,
+    // 行情管理
     quotationTradePair,
     quotationQuotationBTC,
     quotationQuotationETH,
     quotationQuotationX,
     quotationExchangeRate,
+    // 业务规则
+    // 广告费规则
+    rulesAdvertisingFee,
+    rulesAdvertisingFeeAddEdit,
+    // 币币交易手续费规则
+    rulesSimuOrderRule,
+    rulesSimuOrderRuleAddEdit,
+    // 提币手续费规则
+    rulesWithdrawUserFee,
+    rulesWithdrawUserFeeAddEdit,
+    // 承兑商手续费规则
+    rulesAcceptRule,
+    rulesAcceptRuleAddEdit,
     // ETH 财务管理
     financeOfflineRecharge,
     financeOfflineRechargeAddEdit,

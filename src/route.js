@@ -117,13 +117,56 @@ const ROUTES = [
         component: asyncComponent(() => import('container/user/customer/customer-addedit'))
     },
     {
-        path: '/user/customer/account',
+        path: '/user/customer/editAdvertisementFee',
+        component: asyncComponent(() => import('container/user/customer/customer-editAdvertisementFee'))
+    },
+    {
+        path: '/user/customer/accountQuery',
         component: asyncComponent(() => import('container/user/customer/customer-account'))
     },
-    // 本地账户
     {
-        path: '/user/customerAccount',
-        component: asyncComponent(() => import('container/user/customer/customer-account'))
+        path: '/user/customer/entrustQuery',
+        component: asyncComponent(() => import('container/user/customer/customer-entrustQuery'))
+    },
+    // kyc审核
+    {
+        path: '/user/kycCheck',
+        component: asyncComponent(() => import('container/user/kycCheck/kycCheck'))
+    },
+    {
+        path: '/user/kycCheck/addedit',
+        component: asyncComponent(() => import('container/user/kycCheck/kycCheck-addedit'))
+    },
+    // 资料审核
+    {
+        path: '/user/dataCheck',
+        component: asyncComponent(() => import('container/user/dataCheck/dataCheck'))
+    },
+    {
+        path: '/user/dataCheck/addedit',
+        component: asyncComponent(() => import('container/user/dataCheck/dataCheck-addedit'))
+    },
+    // 历史分红名单
+    {
+        path: '/user/historyDivideList',
+        component: asyncComponent(() => import('container/user/historyDivideList/historyDivideList'))
+    },
+    {
+        path: '/user/historyDivideList/divideList',
+        component: asyncComponent(() => import('container/user/historyDivideList/historyDivideList-divideList'))
+    },
+    {
+        path: '/user/historyDivideList/divide',
+        component: asyncComponent(() => import('container/user/historyDivideList/historyDivideList-divide'))
+    },
+    // 佣金结算历史
+    {
+        path: '/user/commissionsHistoryList',
+        component: asyncComponent(() => import('container/user/commissionsHistoryList/commissionsHistoryList'))
+    },
+    {
+        path: '/user/commissionsHistoryList/commissions',
+        component: asyncComponent(() => import('container/user/commissionsHistoryList/commissionsHistoryList-commissions'))
     },
     // 黑名单管理
     {
@@ -203,6 +246,44 @@ const ROUTES = [
         component: asyncComponent(() => import('container/trade/arbitrationNotifier/arbitrationNotifier-addedit'))
     },
 
+    // 承兑商管理
+    // 收款方式
+    {
+        path: '/accept/payment',
+        component: asyncComponent(() => import('container/biz/accept/payment/payment'))
+    },
+    {
+        path: '/accept/payment/addedit',
+        component: asyncComponent(() => import('container/biz/accept/payment/payment-addedit'))
+    },
+    // 购买订单
+    {
+        path: '/accept/buyOrder',
+        component: asyncComponent(() => import('container/biz/accept/buyOrder/buyOrder'))
+    },
+    {
+        path: '/accept/buyOrder/addedit',
+        component: asyncComponent(() => import('container/biz/accept/buyOrder/buyOrder-addedit'))
+    },
+    // 出售订单
+    {
+        path: '/accept/saleOrder',
+        component: asyncComponent(() => import('container/biz/accept/saleOrder/saleOrder'))
+    },
+    {
+        path: '/accept/saleOrder/addedit',
+        component: asyncComponent(() => import('container/biz/accept/saleOrder/saleOrder-addedit'))
+    },
+    // 已完成订单
+    {
+        path: '/accept/finishOrder',
+        component: asyncComponent(() => import('container/biz/accept/finishOrder/finishOrder'))
+    },
+    {
+        path: '/accept/finishOrder/addedit',
+        component: asyncComponent(() => import('container/biz/accept/finishOrder/finishOrder-addedit'))
+    },
+
     // 币种管理
     // 币种管理
     {
@@ -239,6 +320,44 @@ const ROUTES = [
     {
         path: '/quotation/exchangeRate',
         component: asyncComponent(() => import('container/biz/quotation/exchangeRate'))
+    },
+
+    // 业务规则
+    // 广告费规则
+    {
+        path: '/rules/advertisingFee',
+        component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee'))
+    },
+    {
+        path: '/rules/advertisingFee/addedit',
+        component: asyncComponent(() => import('container/rules/advertisingFee/advertisingFee-addedit'))
+    },
+    // 币币交易手续费规则
+    {
+        path: '/rules/simuOrderRule',
+        component: asyncComponent(() => import('container/rules/simuOrderRule/simuOrderRule'))
+    },
+    {
+        path: '/rules/simuOrderRule/addedit',
+        component: asyncComponent(() => import('container/rules/simuOrderRule/simuOrderRule-addedit'))
+    },
+    // 提币手续费规则
+    {
+        path: '/rules/withdrawUserFee',
+        component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee'))
+    },
+    {
+        path: '/rules/withdrawUserFee/addedit',
+        component: asyncComponent(() => import('container/rules/withdrawUserFee/withdrawUserFee-addedit'))
+    },
+    // 承兑商手续费规则
+    {
+        path: '/rules/acceptRule',
+        component: asyncComponent(() => import('container/rules/acceptRule/acceptRule'))
+    },
+    {
+        path: '/rules/acceptRule/addedit',
+        component: asyncComponent(() => import('container/rules/acceptRule/acceptRule-addedit'))
     },
 
     // ETH财务管理

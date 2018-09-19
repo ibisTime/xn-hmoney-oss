@@ -142,9 +142,14 @@ export default class ListComponent extends React.Component {
         } else if (f.type === 'img') {
             obj.render = (value) => <img src={PIC_PREFIX + value}/>;
         }
-        if (f.amount) {
-            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d)}</span>;
+        if (f.amount || f.coinAmount) {
+            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, '', f.coin ? f.coin : '')}</span>;
             this.addRender(f, moneyFormat);
+            if (!f.render) {
+                f.render = (v, d) => {
+                    moneyFormat(v, '', f.coin ? f.coin : '');
+                };
+            }
         }
         if (!obj.render) {
             if (f.render) {
@@ -410,6 +415,13 @@ export default class ListComponent extends React.Component {
 
     getOwnerBtns() {
         getOwnerBtns(this.props.parentCode).then(data => {
+            /*
+            * @hss, 2018/09/18
+            * happyMoney 修改菜单排序
+            * */
+            data.sort((x, y) => {
+                return x['orderNo'].localeCompare(y['orderNo']);
+            });
             this.props.setBtnList(data);
         }).catch(() => {
         });

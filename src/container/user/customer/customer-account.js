@@ -10,8 +10,7 @@ import {
     setSearchData
 } from '@redux/user/customer/customer-account';
 import {listWrapper} from 'common/js/build-list';
-import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList} from 'common/js/util';
-import {SYSTEM_CODE} from 'common/js/config';
+import {getQueryString, moneyFormat, moneyFormatSubtract, getCoinList, showWarnMsg} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -27,6 +26,32 @@ class CustomerAccount extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search) || '';
+        this.buttons = null;
+        this.buttons = [{
+            code: 'ledgerQuery',
+            name: '流水查询',
+            handler: (selectedRowKeys, selectedRows) => {
+                this.ledgerQuery(selectedRowKeys, selectedRows);
+            }
+        }, {
+            code: 'goBack',
+            name: '返回',
+            check: false,
+            handler: () => {
+                this.props.history.push(`/user/customer`);
+            }
+        }];
+    }
+
+    // 流水查询
+    ledgerQuery = (selectedRowKeys, selectedRows) => {
+        if (!selectedRowKeys.length) {
+            showWarnMsg('请选择记录');
+        } else if (selectedRowKeys.length > 1) {
+            showWarnMsg('请选择一条记录');
+        } else {
+            this.props.history.push(`/biz/repayments-addedit?code=${selectedRowKeys[0]}`);
+        }
     }
 
     render() {
@@ -82,7 +107,8 @@ class CustomerAccount extends React.Component {
                 kind: '0',
                 type: 'C',
                 userId: this.userId
-            }
+            },
+            buttons: this.buttons
         });
     }
 }
