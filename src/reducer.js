@@ -177,6 +177,23 @@ import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
 import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
 
+/* TOKEN财务管理 */
+// 充币管理
+// 线下充值
+import {TOKENFinanceOfflineRecharge} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge';
+import {TOKENFinanceOfflineRechargeAddEdit} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge-addedit';
+// 充值查询
+import {TOKENFinanceOfflineRechargeQuery} from './redux/TOKEN-finance/offlineRecharge/offlineRechargeQuery';
+
+// 提币管理
+// 提币地址
+import {TOKENFinanceTBAddress} from './redux/TOKEN-finance/TBAddress/TBAddress';
+
+// 线下提币
+import {TOKENFinanceTBunderline} from './redux/TOKEN-finance/TBunderline/TBunderline';
+import {TOKENFinanceTBunderlineAddEdit} from './redux/TOKEN-finance/TBunderline/TBunderline-addedit';
+import {TOKENFinanceTBunderlineMultiCheck} from './redux/TOKEN-finance/TBunderline/TBunderline-multiCheck';
+
 export default combineReducers({
     user,
     menu,
@@ -293,5 +310,13 @@ export default combineReducers({
     BTCFinanceTBAddress,
     BTCFinanceTBunderline,
     BTCFinanceTBunderlineAddEdit,
-    BTCFinanceTBunderlineMultiCheck
+    BTCFinanceTBunderlineMultiCheck,
+    // TOKEN 财务管理
+    TOKENFinanceOfflineRecharge,
+    TOKENFinanceOfflineRechargeAddEdit,
+    TOKENFinanceOfflineRechargeQuery,
+    TOKENFinanceTBAddress,
+    TOKENFinanceTBunderline,
+    TOKENFinanceTBunderlineAddEdit,
+    TOKENFinanceTBunderlineMultiCheck
 });

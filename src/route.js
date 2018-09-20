@@ -432,6 +432,43 @@ const ROUTES = [
     {
         path: '/BTC-finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
+    },
+
+    // TOKEN财务管理
+    // 充币管理
+    // 线下充值
+    {
+        path: '/TOKEN-finance/offlineRecharge',
+        component: asyncComponent(() => import('container/TOKEN-finance/offlineRecharge/offlineRecharge'))
+    },
+    {
+        path: '/TOKEN-finance/offlineRecharge/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/offlineRecharge/offlineRecharge-addedit'))
+    },
+    // 充值查询
+    {
+        path: '/TOKEN-finance/offlineRechargeQuery',
+        component: asyncComponent(() => import('container/TOKEN-finance/offlineRecharge/offlineRechargeQuery'))
+    },
+
+    // 提币管理
+    // 提币地址
+    {
+        path: '/TOKEN-finance/TBAddress',
+        component: asyncComponent(() => import('container/TOKEN-finance/TBAddress/TBAddress'))
+    },
+    // 线下提币
+    {
+        path: '/TOKEN-finance/TBunderline',
+        component: asyncComponent(() => import('container/TOKEN-finance/TBunderline/TBunderline'))
+    },
+    {
+        path: '/TOKEN-finance/TBunderline/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/TBunderline/TBunderline-addedit'))
+    },
+    {
+        path: '/TOKEN-finance/TBunderline/multiCheck',
+        component: asyncComponent(() => import('container/TOKEN-finance/TBunderline/TBunderline-multiCheck'))
     }
 ];
 

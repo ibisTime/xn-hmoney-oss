@@ -25,7 +25,7 @@ class PaymentAddedit extends React.Component {
         const fields = [{
             field: 'type',
             title: '收款类型',
-            value: '',
+            value: '1',
             hidden: true
         }, {
             field: 'currency',
