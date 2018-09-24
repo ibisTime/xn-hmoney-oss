@@ -35,6 +35,22 @@ import {userCustomerAddEdit} from './redux/user/customer/customer-addedit';
 import {userCustomerAccount} from './redux/user/customer/customer-account';
 import {userCustomerEditAdvertisementFee} from './redux/user/customer/customer-editAdvertisementFee';
 import {userCustomerEntrustQuery} from './redux/user/customer/customer-entrustQuery';
+import {userCustomerLedgerQuery} from './redux/user/customer/customer-ledgerQuery';
+import {userCustomerAccountSummary} from './redux/user/customer/customer-accountSummary';
+
+// 渠道商管理
+// 渠道商管理
+import {userChannelDealer} from './redux/user/channelDealer/channelDealer';
+import {userChannelDealerAddEdit} from './redux/user/channelDealer/channelDealer-addedit';
+
+// 待结算佣金名单
+import {userChannelDealerCommissions} from './redux/user/channelDealerCommissions/channelDealerCommissions';
+import {userChannelDealerCommissionsChecklist} from './redux/user/channelDealerCommissions/channelDealerCommissions-checklist';
+import {userChannelDealerCommissionsSettlement} from './redux/user/channelDealerCommissions/channelDealerCommissions-settlement';
+
+// 待结算佣金名单
+import {userChannelDealerSettleHistory} from './redux/user/channelDealerCommissions/channelDealerSettleHistory';
+import {userChannelDealerSettleHistoryCommissions} from './redux/user/channelDealerCommissions/channelDealerSettleHistory-commissions';
 
 // 历史分红名单
 import {userHistoryDivideList} from './redux/user/historyDivideList/historyDivideList';
@@ -47,6 +63,7 @@ import {userCommissionsHistoryListCommissions} from './redux/user/commissionsHis
 
 // 黑名单管理
 import {userCustomerBlackList} from './redux/user/customer/customer-blackList';
+import {userCustomerBlackListAddEdit} from './redux/user/customer/customer-blackListAddedit';
 
 // kyc审核
 import {userKycCheck} from './redux/user/kycCheck/kycCheck';
@@ -144,6 +161,13 @@ import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
 import {rulesAcceptRuleAddEdit} from './redux/rules/acceptRule/acceptRule-addedit';
 
 /* ETH财务管理 */
+// 平台账户
+import {financePlatformAccount} from './redux/finance/platformAccount/platformAccount';
+
+// 分发地址
+import {financeDiviAddress} from './redux/finance/diviAddress/diviAddress';
+import {financeDiviAddressLedger} from './redux/finance/diviAddress/diviAddress-ledger';
+
 // 充币管理
 // 线下充值
 import {financeOfflineRecharge} from './redux/finance/offlineRecharge/offlineRecharge';
@@ -160,11 +184,23 @@ import {financeTBunderline} from './redux/finance/TBunderline/TBunderline';
 import {financeTBunderlineAddEdit} from './redux/finance/TBunderline/TBunderline-addedit';
 import {financeTBunderlineMultiCheck} from './redux/finance/TBunderline/TBunderline-multiCheck';
 
+// 归集管理
+import {financeGJAddress} from './redux/finance/GJAddress/GJAddress';
+import {financeGJAddressQuery} from './redux/finance/GJAddress/GJAddressQuery';
+
 /* BTC财务管理 */
+// 平台账户
+import {BTCFinancePlatformAccount} from './redux/BTC-finance/platformAccount/platformAccount';
+
+// 分发地址
+import {BTCFinanceDiviAddress} from './redux/BTC-finance/diviAddress/diviAddress';
+import {BTCFinanceDiviAddressLedger} from './redux/BTC-finance/diviAddress/diviAddress-ledger';
+
 // 充币管理
 // 线下充值
 import {BTCFinanceOfflineRecharge} from './redux/BTC-finance/offlineRecharge/offlineRecharge';
 import {BTCFinanceOfflineRechargeAddEdit} from './redux/BTC-finance/offlineRecharge/offlineRecharge-addedit';
+
 // 充值查询
 import {BTCFinanceOfflineRechargeQuery} from './redux/BTC-finance/offlineRecharge/offlineRechargeQuery';
 
@@ -177,11 +213,23 @@ import {BTCFinanceTBunderline} from './redux/BTC-finance/TBunderline/TBunderline
 import {BTCFinanceTBunderlineAddEdit} from './redux/BTC-finance/TBunderline/TBunderline-addedit';
 import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/TBunderline-multiCheck';
 
+// 归集管理
+import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
+import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddress/GJAddressQuery';
+
 /* TOKEN财务管理 */
+// 平台账户
+import {TOKENFinancePlatformAccount} from './redux/TOKEN-finance/platformAccount/platformAccount';
+
+// 分发地址
+import {TOKENFinanceDiviAddress} from './redux/TOKEN-finance/diviAddress/diviAddress';
+import {TOKENFinanceDiviAddressLedger} from './redux/TOKEN-finance/diviAddress/diviAddress-ledger';
+
 // 充币管理
 // 线下充值
 import {TOKENFinanceOfflineRecharge} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge';
 import {TOKENFinanceOfflineRechargeAddEdit} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge-addedit';
+
 // 充值查询
 import {TOKENFinanceOfflineRechargeQuery} from './redux/TOKEN-finance/offlineRecharge/offlineRechargeQuery';
 
@@ -193,6 +241,10 @@ import {TOKENFinanceTBAddress} from './redux/TOKEN-finance/TBAddress/TBAddress';
 import {TOKENFinanceTBunderline} from './redux/TOKEN-finance/TBunderline/TBunderline';
 import {TOKENFinanceTBunderlineAddEdit} from './redux/TOKEN-finance/TBunderline/TBunderline-addedit';
 import {TOKENFinanceTBunderlineMultiCheck} from './redux/TOKEN-finance/TBunderline/TBunderline-multiCheck';
+
+// 归集管理
+import {TOKENFinanceGJAddress} from './redux/TOKEN-finance/GJAddress/GJAddress';
+import {TOKENFinanceGJAddressQuery} from './redux/TOKEN-finance/GJAddress/GJAddressQuery';
 
 export default combineReducers({
     user,
@@ -229,8 +281,11 @@ export default combineReducers({
     userCustomerAccount,
     userCustomerEditAdvertisementFee,
     userCustomerEntrustQuery,
+    userCustomerLedgerQuery,
+    userCustomerAccountSummary,
     // 黑名单管理
     userCustomerBlackList,
+    userCustomerBlackListAddEdit,
     // kyc审核
     userKycCheck,
     userKycCheckAddEdit,
@@ -244,6 +299,17 @@ export default combineReducers({
     // 佣金结算历史
     userCommissionsHistoryList,
     userCommissionsHistoryListCommissions,
+    // 渠道商管理
+    // 渠道商管理
+    userChannelDealer,
+    userChannelDealerAddEdit,
+    // 待结算佣金名单
+    userChannelDealerCommissions,
+    userChannelDealerCommissionsChecklist,
+    userChannelDealerCommissionsSettlement,
+    // 待结算佣金名单
+    userChannelDealerSettleHistory,
+    userChannelDealerSettleHistoryCommissions,
     // OTC交易
     tradeBuyTrade,
     tradeBuyTradeAddEdit,
@@ -295,28 +361,59 @@ export default combineReducers({
     // 承兑商手续费规则
     rulesAcceptRule,
     rulesAcceptRuleAddEdit,
-    // ETH 财务管理
+    /* ETH 财务管理 */
+    // 平台账户
+    financePlatformAccount,
+    // 分发地址
+    financeDiviAddress,
+    financeDiviAddressLedger,
+    // 充币管理
     financeOfflineRecharge,
     financeOfflineRechargeAddEdit,
     financeOfflineRechargeQuery,
+    // 提币管理
     financeTBAddress,
     financeTBunderline,
     financeTBunderlineAddEdit,
     financeTBunderlineMultiCheck,
-    // BTC 财务管理
+    // 归集管理
+    financeGJAddress,
+    financeGJAddressQuery,
+
+    /* BTC 财务管理 */
+    // 平台账户
+    BTCFinancePlatformAccount,
+    // 分发地址
+    BTCFinanceDiviAddress,
+    BTCFinanceDiviAddressLedger,
+    // 充币管理
     BTCFinanceOfflineRecharge,
     BTCFinanceOfflineRechargeAddEdit,
     BTCFinanceOfflineRechargeQuery,
+    // 提币管理
     BTCFinanceTBAddress,
     BTCFinanceTBunderline,
     BTCFinanceTBunderlineAddEdit,
     BTCFinanceTBunderlineMultiCheck,
-    // TOKEN 财务管理
+    // 归集管理
+    BTCFinanceGJAddress,
+    BTCFinanceGJAddressQuery,
+    /* TOKEN 财务管理 */
+    // 平台账户
+    TOKENFinancePlatformAccount,
+    // 分发地址
+    TOKENFinanceDiviAddress,
+    TOKENFinanceDiviAddressLedger,
+    // 充币管理
     TOKENFinanceOfflineRecharge,
     TOKENFinanceOfflineRechargeAddEdit,
     TOKENFinanceOfflineRechargeQuery,
+    // 提币管理
     TOKENFinanceTBAddress,
     TOKENFinanceTBunderline,
     TOKENFinanceTBunderlineAddEdit,
-    TOKENFinanceTBunderlineMultiCheck
+    TOKENFinanceTBunderlineMultiCheck,
+    // 归集管理
+    TOKENFinanceGJAddress,
+    TOKENFinanceGJAddressQuery
 });

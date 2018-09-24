@@ -1,0 +1,69 @@
+import React from 'react';
+import {
+    initStates,
+    doFetching,
+    cancelFetching,
+    setSelectData,
+    setPageData,
+    restore
+} from '@redux/user/channelDealer/channelDealer-addedit';
+import {getQueryString} from 'common/js/util';
+import {DetailWrapper} from 'common/js/build-detail';
+
+@DetailWrapper(
+    state => state.userChannelDealerAddEdit,
+    {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
+)
+class ChannelDealerAddedit extends React.Component {
+    constructor(props) {
+        super(props);
+        this.code = getQueryString('code', this.props.location.search);
+        this.view = !!getQueryString('v', this.props.location.search);
+    }
+
+    render() {
+        const fields = [{
+            field: 'mobile',
+            title: '手机号',
+            required: true,
+            readonly: !!this.code
+        }, {
+            field: 'realName',
+            title: '真实姓名',
+            required: true,
+            readonly: !!this.code
+        }, {
+            field: 'respArea',
+            title: '负责区域',
+            required: true
+        }, {
+            field: 'idKind',
+            title: '证件类型',
+            type: 'select',
+            data: [{
+                key: '1',
+                value: '身份证'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            value: '1',
+            hidden: !!this.code && !this.view
+        }, {
+            field: 'idNo',
+            title: '证件号码',
+            idCard: true,
+            hidden: !!this.code && !this.view
+        }];
+        return this.props.buildDetail({
+            fields,
+            key: 'userId',
+            code: this.code,
+            view: this.view,
+            addCode: '805044',
+            editCode: '805091',
+            detailCode: '805121'
+        });
+    }
+}
+
+export default ChannelDealerAddedit;

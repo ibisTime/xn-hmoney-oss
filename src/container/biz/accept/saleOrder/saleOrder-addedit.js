@@ -7,7 +7,7 @@ import {
     setPageData,
     restore
 } from '@redux/accept/saleOrder/saleOrder-addedit';
-import {getQueryString, moneyFormat} from 'common/js/util';
+import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 
 @DetailWrapper(
@@ -19,106 +19,120 @@ class SaleOrderAddedit extends React.Component {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        this.isBuy = !!getQueryString('isBuy', this.props.location.search);
+        this.buttons = [];
+        if(this.isBuy) {
+            this.buttons = [{
+                title: '已付款',
+                handler: (param) => {
+                    param.result = '1';
+                    param.code = this.code;
+                    param.userId = getUserId();
+                    this.props.doFetching();
+                    fetch(625275, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true,
+                type: 'primary'
+            }, {
+                title: '不付款',
+                handler: (param) => {
+                    param.result = '0';
+                    param.code = this.code;
+                    param.userId = getUserId();
+                    this.props.doFetching();
+                    fetch(625275, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true
+            }, {
+                title: '返回',
+                handler: (param) => {
+                    this.props.history.go(-1);
+                }
+            }];
+        }
     }
 
     render() {
         const fields = [{
             field: 'code',
-            title: '编号'
-        }, {
-            title: '买家',
-            field: 'buyUser',
-            formatter: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.mobile + '(' + data.buyUserInfo.nickname + ')';
-                }
-            },
+            title: '编号',
             search: true
         }, {
-            title: '卖家',
-            field: 'sellUser',
+
+            title: '下单人',
+            field: 'nickname',
             formatter: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.mobile + '(' + data.sellUserInfo.nickname + ')';
-                }
-            },
-            search: true
-        }, {
-            title: '广告编号',
-            field: 'adsCode'
-        }, {
-            title: '交易价格',
-            field: 'tradePrice'
-        }, {
-            title: '交易数量',
-            field: 'countString',
-            formatter: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return data.user ? data.user.nickname : '';
             }
         }, {
-            title: '交易金额',
+            title: '手机号',
+            field: 'userMobile',
+            formatter: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
+        }, {
+            field: 'tradeCoin',
+            title: '币种'
+        }, {
+            title: '单价',
+            field: 'tradePrice'
+        }, {
+            title: '数量',
+            field: 'count',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.tradeCoin);
+            }
+        }, {
+            title: '总金额',
             field: 'tradeAmount'
         }, {
             title: '手续费',
-            field: 'feeString',
+            field: 'fee',
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin);
             }
-        }, {
-            title: '交易虚拟币币种',
-            field: 'tradeCoin',
-            type: 'select',
-            search: true
-        }, {
-            title: '交易法币币种',
-            field: 'tradeCurrency',
-            type: 'select',
-            key: 'currency'
-        }, {
-            title: '支付方式',
-            field: 'payType',
-            type: 'select',
-            key: 'pay_type'
-        }, {
-            title: '下单时间',
-            field: 'createDatetime',
-            type: 'datetime'
-        }, {
-            title: '支付失效时间',
-            field: 'invalidDatetime',
-            type: 'datetime'
-        }, {
-            title: '买家标记时间',
-            field: 'markDatetime',
-            type: 'datetime'
-        }, {
-            title: '卖家释放时间',
-            field: 'releaseDatetime',
-            type: 'datetime'
         }, {
             title: '状态',
             field: 'status',
             type: 'select',
-            key: 'trade_order_status'
+            data: [{
+                'key': '0',
+                'value': '待支付'
+            }, {
+                'key': '1',
+                'value': '已支付'
+            }, {
+                'key': '2',
+                'value': '已释放'
+            }, {
+                'key': '3',
+                'value': '已取消'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            title: '买家对卖家的评价',
-            field: 'bsComment',
-            type: 'select',
-            key: 'comment_result'
-        }, {
-            title: '卖家对买家的评价',
-            field: 'sbComment',
-            type: 'select',
-            key: 'comment_result'
-        }, {
-            title: '备注',
-            field: 'remark'
+            field: 'createDatetime',
+            title: '下单时间',
+            type: 'datetime'
         }];
         return this.props.buildDetail({
             fields,
             code: this.code,
             view: this.view,
-            detailCode: '625251'
+            detailCode: '625286',
+            buttons: this.buttons
         });
     }
 }

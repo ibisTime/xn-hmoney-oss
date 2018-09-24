@@ -26,7 +26,7 @@ class CustomerEntrustQuery extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search) || '';
-        this.buttons = null;
+        this.buttons = [];
         this.buttons = [{
             code: 'goBack',
             name: '返回',

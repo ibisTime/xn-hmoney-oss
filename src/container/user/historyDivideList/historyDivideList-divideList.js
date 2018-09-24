@@ -26,7 +26,7 @@ class HistoryDivideListDivideList extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('code', this.props.location.search);
-        this.buttons = null;
+        this.buttons = [];
         this.buttons = [{
             code: 'export',
             name: '导出'
@@ -47,7 +47,7 @@ class HistoryDivideListDivideList extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                userKind: 'C'
+                kind: 'C'
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',

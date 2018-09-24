@@ -128,6 +128,14 @@ const ROUTES = [
         path: '/user/customer/entrustQuery',
         component: asyncComponent(() => import('container/user/customer/customer-entrustQuery'))
     },
+    {
+        path: '/user/customer/ledgerQuery',
+        component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
+    },
+    {
+        path: '/user/customer/accountSummary',
+        component: asyncComponent(() => import('container/user/customer/customer-accountSummary'))
+    },
     // kyc审核
     {
         path: '/user/kycCheck',
@@ -172,6 +180,47 @@ const ROUTES = [
     {
         path: '/user/customerBlackList',
         component: asyncComponent(() => import('container/user/customer/customer-blackList'))
+    },
+    {
+        path: '/user/customerBlackList/addedit',
+        component: asyncComponent(() => import('container/user/customer/customer-blackListAddedit'))
+    },
+
+    // 渠道商管理
+    // 渠道商管理
+    {
+        path: '/user/channelDealer',
+        component: asyncComponent(() => import('container/user/channelDealer/channelDealer'))
+    },
+    {
+        path: '/user/channelDealer/addedit',
+        component: asyncComponent(() => import('container/user/channelDealer/channelDealer-addedit'))
+    },
+    {
+        path: '/user/channelDealer/accountQuery',
+        component: asyncComponent(() => import('container/user/customer/customer-account'))
+    },
+    // 待结算佣金名单
+    {
+        path: '/user/channelDealerCommissions',
+        component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions'))
+    },
+    {
+        path: '/user/channelDealerCommissions/checklist',
+        component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions-checklist'))
+    },
+    {
+        path: '/user/channelDealerCommissions/settlement',
+        component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions-settlement'))
+    },
+    // 佣金结算历史
+    {
+        path: '/user/channelDealerSettleHistory',
+        component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory'))
+    },
+    {
+        path: '/user/channelDealerSettleHistory/commissions',
+        component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
 
     // OTC交易管理
@@ -361,6 +410,24 @@ const ROUTES = [
     },
 
     // ETH财务管理
+    // 平台账户
+    {
+        path: '/finance/platformAccount',
+        component: asyncComponent(() => import('container/finance/platformAccount/platformAccount'))
+    },
+    {
+        path: '/finance/platformAccount/ledger',
+        component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
+    },
+    // 分发地址
+    {
+        path: '/finance/diviAddress',
+        component: asyncComponent(() => import('container/finance/diviAddress/diviAddress'))
+    },
+    {
+        path: '/finance/diviAddress/addedit',
+        component: asyncComponent(() => import('container/finance/diviAddress/diviAddress-ledger'))
+    },
     // 充币管理
     // 线下充值
     {
@@ -396,8 +463,35 @@ const ROUTES = [
         path: '/finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/finance/TBunderline/TBunderline-multiCheck'))
     },
+    // 归集地址
+    {
+        path: '/finance/GJAddress',
+        component: asyncComponent(() => import('container/finance/GJAddress/GJAddress'))
+    },
+    {
+        path: '/finance/GJAddressQuery',
+        component: asyncComponent(() => import('container/finance/GJAddress/GJAddressQuery'))
+    },
 
     // BTC财务管理
+    // 平台账户
+    {
+        path: '/BTC-finance/platformAccount',
+        component: asyncComponent(() => import('container/BTC-finance/platformAccount/platformAccount'))
+    },
+    {
+        path: '/BTC-finance/platformAccount/ledger',
+        component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
+    },
+    // 分发地址
+    {
+        path: '/BTC-finance/diviAddress',
+        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress'))
+    },
+    {
+        path: '/BTC-finance/diviAddress/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/diviAddress/diviAddress-ledger'))
+    },
     // 充币管理
     // 线下充值
     {
@@ -434,7 +528,35 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/TBunderline/TBunderline-multiCheck'))
     },
 
+    // 归集地址
+    {
+        path: '/BTC-finance/GJAddress',
+        component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddress'))
+    },
+    {
+        path: '/BTC-finance/GJAddressQuery',
+        component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddressQuery'))
+    },
+
     // TOKEN财务管理
+    // 平台账户
+    {
+        path: '/TOKEN-finance/platformAccount',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformAccount/platformAccount'))
+    },
+    {
+        path: '/TOKEN-finance/platformAccount/ledger',
+        component: asyncComponent(() => import('container/user/customer/customer-ledgerQuery'))
+    },
+    // 分发地址
+    {
+        path: '/TOKEN-finance/diviAddress',
+        component: asyncComponent(() => import('container/TOKEN-finance/diviAddress/diviAddress'))
+    },
+    {
+        path: '/TOKEN-finance/diviAddress/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/diviAddress/diviAddress-ledger'))
+    },
     // 充币管理
     // 线下充值
     {
@@ -469,6 +591,15 @@ const ROUTES = [
     {
         path: '/TOKEN-finance/TBunderline/multiCheck',
         component: asyncComponent(() => import('container/TOKEN-finance/TBunderline/TBunderline-multiCheck'))
+    },
+    // 归集地址
+    {
+        path: '/TOKEN-finance/GJAddress',
+        component: asyncComponent(() => import('container/TOKEN-finance/GJAddress/GJAddress'))
+    },
+    {
+        path: '/TOKEN-finance/GJAddressQuery',
+        component: asyncComponent(() => import('container/TOKEN-finance/GJAddress/GJAddressQuery'))
     }
 ];
 

@@ -32,7 +32,7 @@ class CommissionsHistoryList extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                userKind: 'C'
+                kind: 'C'
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
@@ -69,15 +69,18 @@ class CommissionsHistoryList extends React.Component {
             fields,
             rowKey: 'id',
             pageCode: '802396',
+            searchParams: {
+                userKind: 'C'
+            },
             btnEvent: {
                 commissions: (selectedRowKeys, selectedRows) => {
-                    // if (!selectedRowKeys.length) {
-                    //     showWarnMsg('请选择记录');
-                    // } else if (selectedRowKeys.length > 1) {
-                    //     showWarnMsg('请选择一条记录');
-                    // } else {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
                         this.props.history.push(`/user/commissionsHistoryList/commissions`);
-                    // }
+                    }
                 }
             }
         });

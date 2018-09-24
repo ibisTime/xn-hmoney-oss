@@ -33,7 +33,10 @@ class KycCheck extends React.Component {
         }, {
             field: 'mobile',
             title: '手机号',
-            search: true
+            search: true,
+            render: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
         }, {
             field: 'userReferee',
             title: '推荐人'

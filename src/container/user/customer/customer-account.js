@@ -26,7 +26,8 @@ class CustomerAccount extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search) || '';
-        this.buttons = null;
+        this.isCDealer = !!getQueryString('isCDealer', this.props.location.search);// 是否是渠道商管理点击进入
+        this.buttons = [];
         this.buttons = [{
             code: 'ledgerQuery',
             name: '流水查询',
@@ -38,7 +39,11 @@ class CustomerAccount extends React.Component {
             name: '返回',
             check: false,
             handler: () => {
-                this.props.history.push(`/user/customer`);
+                if (this.isCDealer) {
+                    this.props.history.push(`/user/channelDealer`);
+                } else {
+                    this.props.history.push(`/user/customer`);
+                }
             }
         }];
     }
@@ -50,7 +55,7 @@ class CustomerAccount extends React.Component {
         } else if (selectedRowKeys.length > 1) {
             showWarnMsg('请选择一条记录');
         } else {
-            this.props.history.push(`/biz/repayments-addedit?code=${selectedRowKeys[0]}`);
+            this.props.history.push(`/user/customer/ledgerQuery?code=${selectedRowKeys[0]}`);
         }
     }
 
@@ -89,11 +94,6 @@ class CustomerAccount extends React.Component {
 
                 return moneyFormatSubtract(amount, frozenAmount, '', data.currency);
             }
-        }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'currency_type'
         }, {
             field: 'createDatetime',
             title: '创建时间',

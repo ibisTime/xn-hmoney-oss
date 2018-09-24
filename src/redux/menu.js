@@ -114,13 +114,6 @@ function _getMenuState({data, pathname}) {
             result.subOpenCode = [menu.parentCode];
             result.topMenuCode = result.menus[menu.parentCode].parentCode;
             result.subMenuList = result.top2SubObj[result.topMenuCode];
-            /*
-            * @hss, 2018/09/18
-            * happyMoney v100 修改菜单排序
-            * */
-            // result.subMenuList.sort((x, y) => {
-            //     return x['orderNo'].localeCompare(y['orderNo']);
-            // });
             if (!result.subMenuCode) {
                 result.subMenuCode = result.subMenuList[0].children ? result.subMenuList[0].children[0].code : '';
             }
@@ -147,16 +140,6 @@ function getFilterList(result, data) {
             }
         }
     });
-    /*
-    * @hss, 2018/09/18
-    * happyMoney v100 修改菜单排序
-    * */
-    // result.topMenuList.sort((x, y) => {
-    //     return x['orderNo'].localeCompare(y['orderNo']);
-    // });
-    // newList.sort((x, y) => {
-    //     return x['orderNo'].localeCompare(y['orderNo']);
-    // });
     return newList;
 }
 
@@ -185,7 +168,7 @@ function createMenus(newList, result) {
 
 function sortSubMenus(result) {
     for (let key in result.top2SubObj) {
-        result.top2SubObj[key].sort((a, b) => +a.orderNo > +b.orderNo);
+        result.top2SubObj[key].sort((a, b) => a['orderNo'].localeCompare(b['orderNo']));
     }
 }
 

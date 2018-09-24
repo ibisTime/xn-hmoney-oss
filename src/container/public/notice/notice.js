@@ -13,6 +13,7 @@ import {showWarnMsg, getUserName} from 'common/js/util';
 import {listWrapper} from 'common/js/build-list';
 import {SYSTEM_CODE} from 'common/js/config';
 import {Button, Upload, Modal} from 'antd';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -27,20 +28,14 @@ import {Button, Upload, Modal} from 'antd';
 class Notice extends React.Component {
     render() {
         const fields = [{
-            field: 'smsTitle',
+            field: 'title',
             title: '标题'
-        }, {
-            field: 'toKind',
-            title: '针对人群',
-            type: 'select',
-            key: 'user_kind',
-            search: true
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
             search: true,
-            key: 'notice_status'
+            key: 'sms_status'
         }, {
             field: 'updater',
             title: '最近修改人'
@@ -54,29 +49,25 @@ class Notice extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: 804040,
-            rowKey: 'id',
+            pageCode: 805305,
             searchParams: {
-                channelType: '4',
-                companyCode: SYSTEM_CODE,
-                fromSystemCode: SYSTEM_CODE
+                type: '0'
             },
             btnEvent: {
-                push: (selectedRowKeys, selectedRows) => {
+                pushDown: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRowKeys[0].status === '0') {
+                    } else if (selectedRows[0].status === '0') {
                         Modal.confirm({
                             okText: '确认',
                             cancelText: '取消',
                             content: '确定发布？',
                             onOk: () => {
                                 this.props.doFetching();
-                                return fetch(804036, {
-                                    id: selectedRowKeys[0].id,
-                                    systemCode: SYSTEM_CODE,
+                                return fetch(805301, {
+                                    code: selectedRowKeys[0],
                                     updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
@@ -86,17 +77,15 @@ class Notice extends React.Component {
                                 });
                             }
                         });
-                    } else if (selectedRowKeys[0].status === '1') {
-                        console.log(1);
+                    } else if (selectedRows[0].status === '1') {
                         Modal.confirm({
                             okText: '确认',
                             cancelText: '取消',
                             content: '确定撤下？',
                             onOk: () => {
                                 this.props.doFetching();
-                                return fetch(804036, {
-                                    id: selectedRowKeys[0].id,
-                                    systemCode: SYSTEM_CODE,
+                                return fetch(805302, {
+                                    code: selectedRowKeys[0],
                                     updater: getUserName()
                                 }).then(() => {
                                     this.props.cancelFetching();
@@ -106,6 +95,8 @@ class Notice extends React.Component {
                                 });
                             }
                         });
+                    } else {
+                        showWarnMsg('该记录的状态不可操作');
                     }
                 }
             }

@@ -36,7 +36,10 @@ class KycCheckAddedit extends React.Component {
         }, {
             field: 'mobile',
             title: '手机号',
-            required: true
+            required: true,
+            formatter: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
         }, {
             field: 'idNo',
             title: '证件号',

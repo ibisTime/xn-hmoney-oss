@@ -63,12 +63,6 @@ class Customer extends React.Component {
                 return data.realName ? data.realName : '-';
             }
         }, {
-            field: 'divRate1',
-            title: '普通分成'
-        }, {
-            field: 'divRate2',
-            title: '代理人分成'
-        }, {
             field: 'tradeRate',
             title: '广告费率'
         }, {
@@ -170,6 +164,16 @@ class Customer extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/user/customer/entrustQuery?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 账户概要
+                accountSummary: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/customer/accountSummary?userId=${selectedRowKeys[0]}`);
                     }
                 }
             }

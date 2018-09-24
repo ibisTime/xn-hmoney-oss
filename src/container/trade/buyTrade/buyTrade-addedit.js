@@ -85,8 +85,7 @@ class BuyTradeAddedit extends React.Component {
                 'value': '只有受信任的人可以交易'
             }],
             keyName: 'key',
-            valueName: 'value',
-            search: true
+            valueName: 'value'
         }, {
             field: 'payType',
             title: '支付方式',

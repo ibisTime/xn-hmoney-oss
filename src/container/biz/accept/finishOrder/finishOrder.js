@@ -32,17 +32,14 @@ class FinishOrder extends React.Component {
             title: '编号',
             search: true
         }, {
-            title: '买家',
-            field: 'buyUser',
+            title: '下单人',
+            field: 'nickname',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.mobile + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.user ? data.user.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
             params: {
-                updater: '',
                 kind: 'C'
             },
             keyName: 'userId',
@@ -50,56 +47,36 @@ class FinishOrder extends React.Component {
             searchName: 'mobile',
             search: true
         }, {
-            title: '卖家',
-            field: 'sellUser',
+            title: '手机号',
+            field: 'userMobile',
             render: (v, data) => {
-                if (data.sellUserInfo) {
-                    return data.sellUserInfo.mobile + '(' + data.sellUserInfo.nickname + ')';
-                }
-            },
-            type: 'select',
-            pageCode: '805120',
-            params: {
-                updater: '',
-                kind: 'C'
-            },
-            keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'mobile',
-            search: true
+                return data.user ? data.user.mobile : '';
+            }
         }, {
             field: 'tradeCoin',
             title: '币种',
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value'
-        }, {
-            field: 'coin',
-            title: '币种',
-            type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
             valueName: 'value',
-            search: true,
-            noVisible: true
+            search: true
         }, {
-            title: '交易价格',
+            title: '单价',
             field: 'tradePrice'
         }, {
-            title: '交易数量',
-            field: 'countString',
+            title: '数量',
+            field: 'count',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin);
             }
         }, {
-            title: '交易金额',
+            title: '总金额',
             field: 'tradeAmount'
         }, {
             title: '手续费',
-            field: 'feeString',
+            field: 'fee',
             render: (v, data) => {
-                return moneyFormat(v, '', data.tradeCoin) + data.tradeCoin;
+                return moneyFormat(v, '', data.tradeCoin);
             }
         }, {
             title: '状态',
@@ -112,36 +89,18 @@ class FinishOrder extends React.Component {
                 'key': '1',
                 'value': '已支付'
             }, {
+                'key': '2',
+                'value': '已释放'
+            }, {
                 'key': '3',
-                'value': '仲裁中'
+                'value': '已取消'
             }],
             keyName: 'key',
             valueName: 'value'
         }, {
-            title: '状态',
-            field: 'statusList',
-            type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '3',
-                'value': '仲裁中'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            noVisible: true,
-            search: true
-        }, {
-            field: 'updateDatetime',
-            title: '更新时间',
+            field: 'createDatetime',
+            title: '下单时间',
             type: 'datetime'
-        }, {
-            title: '备注',
-            field: 'remark'
         }];
         return this.props.buildList({
             fields,

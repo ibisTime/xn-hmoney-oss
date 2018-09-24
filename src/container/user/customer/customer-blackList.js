@@ -38,7 +38,6 @@ class CustomerBlackList extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                updater: '',
                 kind: 'C'
             },
             keyName: 'userId',
@@ -67,9 +66,12 @@ class CustomerBlackList extends React.Component {
         }];
         return this.props.buildList({
             fields,
+            rowKey: 'id',
             pageCode: '805245',
+            deleteCode: '805241',
             searchParams: {
-                status: '1'
+                status: '1',
+                updater: ''
             }
         });
     }

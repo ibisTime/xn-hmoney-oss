@@ -38,7 +38,6 @@ class ArbitrationOrder extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                updater: '',
                 kind: 'C'
             },
             keyName: 'userId',
@@ -63,7 +62,6 @@ class ArbitrationOrder extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                updater: '',
                 kind: 'C'
             },
             keyName: 'userId',

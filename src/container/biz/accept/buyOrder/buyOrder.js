@@ -11,6 +11,7 @@ import {
 } from '@redux/accept/buyOrder/buyOrder';
 import {listWrapper} from 'common/js/build-list';
 import {
+    showWarnMsg,
     moneyFormat,
     getCoinList
 } from 'common/js/util';
@@ -33,22 +34,25 @@ class BuyOrder extends React.Component {
             search: true
         }, {
             title: '下单人',
-            field: 'buyUser',
+            field: 'nickname',
             render: (v, data) => {
-                if (data.buyUserInfo) {
-                    return data.buyUserInfo.mobile + '(' + data.buyUserInfo.nickname + ')';
-                }
+                return data.user ? data.user.nickname : '';
             },
             type: 'select',
             pageCode: '805120',
             params: {
-                updater: '',
                 kind: 'C'
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
             searchName: 'mobile',
             search: true
+        }, {
+            title: '手机号',
+            field: 'userMobile',
+            render: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
         }, {
             field: 'tradeCoin',
             title: '币种',
@@ -104,6 +108,18 @@ class BuyOrder extends React.Component {
             pageCode: 625285,
             searchParams: {
                 type: '0'
+            },
+            btnEvent: {
+                // 释放
+                sale: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/accept/buyOrder/addedit?v=1&isSale=1&code=${selectedRowKeys[0]}`);
+                    }
+                }
             }
         });
     }

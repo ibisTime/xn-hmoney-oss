@@ -26,7 +26,7 @@ class CommissionsHistoryListCommissions extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search) || 'U201809132051177878296';
-        this.buttons = null;
+        this.buttons = [];
         this.buttons = [{
             code: 'export',
             name: '导出'
