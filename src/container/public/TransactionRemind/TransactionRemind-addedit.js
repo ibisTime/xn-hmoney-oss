@@ -6,34 +6,35 @@ import {
     setSelectData,
     setPageData,
     restore
-} from '@redux/public/aboutus-addedit';
+} from '@redux/public/TransactionRemind-addedit';
 import {showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
 @DetailWrapper(
-    state => state.publicAboutusAddEdit,
+    state => state.publicTransactionRemindAddEdit,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
-class AboutusAddEdit extends React.Component {
+class TransactionRemindAddedit extends React.Component {
     render() {
         const fields = [{
             field: 'id',
             hidden: true
         }, {
             field: 'remark',
-            value: '关于我们',
+            value: '交易提醒',
             hidden: true
         }, {
             title: '内容',
             field: 'cvalue',
             type: 'textarea',
+            normalArea: true,
             required: true
         }];
         return this.props.buildDetail({
             fields,
             key: 'ckey',
-            code: 'about_us',
+            code: 'trade_remind',
             detailCode: 630047,
             buttons: [{
                 title: '保存',
@@ -50,4 +51,4 @@ class AboutusAddEdit extends React.Component {
     }
 }
 
-export default AboutusAddEdit;
+export default TransactionRemindAddedit;

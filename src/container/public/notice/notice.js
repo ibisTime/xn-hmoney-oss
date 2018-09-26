@@ -60,23 +60,7 @@ class Notice extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else if (selectedRows[0].status === '0') {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: '确定发布？',
-                            onOk: () => {
-                                this.props.doFetching();
-                                return fetch(805301, {
-                                    code: selectedRowKeys[0],
-                                    updater: getUserName()
-                                }).then(() => {
-                                    this.props.cancelFetching();
-                                    showWarnMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
+
                     } else if (selectedRows[0].status === '1') {
                         Modal.confirm({
                             okText: '确认',

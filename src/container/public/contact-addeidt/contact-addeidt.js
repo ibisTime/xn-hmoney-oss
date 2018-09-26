@@ -6,34 +6,33 @@ import {
     setSelectData,
     setPageData,
     restore
-} from '@redux/public/time-addedit';
+} from '@redux/public/contact-addedit';
 import {showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
 @DetailWrapper(
-    state => state.publicTimeAddEdit,
+    state => state.publicContactAddEdit,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
-class TimeAddEdit extends React.Component {
+class ContactAddeidt extends React.Component {
     render() {
         const fields = [{
             field: 'id',
             hidden: true
         }, {
-            field: 'remark',
-            value: '服务时间',
-            hidden: true
-        }, {
-            title: '内容',
+            title: '联系客服',
             field: 'cvalue',
             required: true
+        }, {
+            field: 'remark',
+            hidden: true,
+            value: '联系客服'
         }];
         return this.props.buildDetail({
             fields,
             key: 'ckey',
-            code: 'service_time',
-            view: false,
+            code: 'service',
             detailCode: 630047,
             editCode: 630042,
             buttons: [{
@@ -51,4 +50,4 @@ class TimeAddEdit extends React.Component {
     }
 }
 
-export default TimeAddEdit;
+export default ContactAddeidt;

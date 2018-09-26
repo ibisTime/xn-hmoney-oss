@@ -20,8 +20,14 @@ import {systemNodeSetMateriallist} from './redux/system/node-setMateriallist';
 import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
 import {publicAboutusAddEdit} from './redux/public/aboutus-addedit';
-import {publicHotLineAddEdit} from './redux/public/hotLine-addedit';
-import {publicTimeAddEdit} from './redux/public/time-addedit';
+import {publicContactAddEdit} from './redux/public/contact-addedit';
+import {publicPrivacyAddEdit} from './redux/public/privacy-addedit';
+import {publicRegisterAddEdit} from './redux/public/register-addedit';
+import {publicBuyADS} from './redux/public/buyADS';
+import {publicBuyADSAddEdit} from './redux/public/buyADS-addedit';
+import {publicSellETH} from './redux/public/sellETH';
+import {publicSellETHAddEdit} from './redux/public/sellETH-addedit';
+import {publicTransactionRemindAddEdit} from './redux/public/TransactionRemind-addedit';
 import {publicNotice} from './redux/public/notice';
 import {publicNoticeAddEdit} from './redux/public/notice-addedit';
 import {generalTextParam} from './redux/general/text-param';
@@ -142,6 +148,14 @@ import {quotationQuotationX} from './redux/biz/quotation/quotationX';
 
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
+
+// 活动管理
+// 邀请好友
+import {activityInvitingFriends} from './redux/activity/invitingFriends/invitingFriends';
+import {activityInvitingFriendsAddEdit} from './redux/activity/invitingFriends/invitingFriends-addedit';
+
+// 邀请好友链接文本
+import {activityInvitingTxtAddEdit} from './redux/activity/invitingHref/invitingTxt-addedit';
 
 // 业务规则
 // 广告费规则
@@ -266,11 +280,17 @@ export default combineReducers({
     systemNodeAddEdit,
     systemNodeSetMateriallist,
     // public
-    publicHotLineAddEdit,
     publicBanner,
     publicBannerAddEdit,
     publicAboutusAddEdit,
-    publicTimeAddEdit,
+    publicContactAddEdit,
+    publicPrivacyAddEdit,
+    publicRegisterAddEdit,
+    publicBuyADS,
+    publicBuyADSAddEdit,
+    publicSellETH,
+    publicSellETHAddEdit,
+    publicTransactionRemindAddEdit,
     publicNotice,
     publicNoticeAddEdit,
     generalTextParam,
@@ -348,6 +368,12 @@ export default combineReducers({
     quotationQuotationETH,
     quotationQuotationX,
     quotationExchangeRate,
+    // 活动管理
+    // 邀请好友
+    activityInvitingFriends,
+    activityInvitingFriendsAddEdit,
+    // 邀请好友链接文本
+    activityInvitingTxtAddEdit,
     // 业务规则
     // 广告费规则
     rulesAdvertisingFee,

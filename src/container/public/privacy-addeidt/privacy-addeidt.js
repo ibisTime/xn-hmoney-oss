@@ -6,37 +6,38 @@ import {
     setSelectData,
     setPageData,
     restore
-} from '@redux/public/aboutus-addedit';
+} from '@redux/public/contact-addedit';
 import {showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
 @DetailWrapper(
-    state => state.publicAboutusAddEdit,
+    state => state.publicContactAddEdit,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
-class AboutusAddEdit extends React.Component {
+class PrivacyAddeidt extends React.Component {
     render() {
         const fields = [{
             field: 'id',
-            hidden: true
-        }, {
-            field: 'remark',
-            value: '关于我们',
             hidden: true
         }, {
             title: '内容',
             field: 'cvalue',
             type: 'textarea',
             required: true
+        }, {
+            field: 'remark',
+            hidden: true,
+            value: '隐私政策'
         }];
         return this.props.buildDetail({
             fields,
             key: 'ckey',
-            code: 'about_us',
+            code: 'reg_protocol',
             detailCode: 630047,
+            editCode: 630042,
             buttons: [{
-                title: '保存',
+                title: 'privacy',
                 check: true,
                 handler: (params) => {
                     this.props.doFetching();
@@ -50,4 +51,4 @@ class AboutusAddEdit extends React.Component {
     }
 }
 
-export default AboutusAddEdit;
+export default PrivacyAddeidt;

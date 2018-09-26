@@ -69,16 +69,40 @@ const ROUTES = [
         component: asyncComponent(() => import('container/system/node-setMateriallist/node-setMateriallist'))
     },
     {
-        path: '/public/aboutus_addedit',
+        path: '/public/aboutus',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
     {
-        path: '/public/hotLine_addedit',
-        component: asyncComponent(() => import('container/public/hotLine-addedit/hotLine-addedit'))
+        path: '/public/contact',
+        component: asyncComponent(() => import('container/public/contact-addeidt/contact-addeidt'))
     },
     {
-        path: '/public/time_addedit',
-        component: asyncComponent(() => import('container/public/time-addedit/time-addedit'))
+        path: '/public/privacy',
+        component: asyncComponent(() => import('container/public/privacy-addeidt/privacy-addeidt'))
+    },
+    {
+        path: '/public/register',
+        component: asyncComponent(() => import('container/public/register-addeidt/register-addeidt'))
+    },
+    {
+        path: '/public/buyADS',
+        component: asyncComponent(() => import('container/public/buyADS/buyADS'))
+    },
+    {
+        path: '/public/buyADS/addedit',
+        component: asyncComponent(() => import('container/public/buyADS/buyADS-addedit'))
+    },
+    {
+        path: '/public/sellETH',
+        component: asyncComponent(() => import('container/public/sellETH/sellETH'))
+    },
+    {
+        path: '/public/sellETH/addedit',
+        component: asyncComponent(() => import('container/public/sellETH/sellETH-addedit'))
+    },
+    {
+        path: '/public/TransactionRemind',
+        component: asyncComponent(() => import('container/public/TransactionRemind/TransactionRemind-addedit'))
     },
     {
         path: '/public/notice',
@@ -371,6 +395,21 @@ const ROUTES = [
         component: asyncComponent(() => import('container/biz/quotation/exchangeRate'))
     },
 
+    // 活动管理
+    // 邀请好友
+    {
+        path: '/activity/invitingFriends',
+        component: asyncComponent(() => import('container/biz/activity/invitingFriends/invitingFriends'))
+    },
+    {
+        path: '/activity/invitingFriends/addedit',
+        component: asyncComponent(() => import('container/biz/activity/invitingFriends/invitingFriends-addedit'))
+    },
+    // 邀请好友链接文本
+    {
+        path: '/activity/invitingTxt',
+        component: asyncComponent(() => import('container/biz/activity/invitingHref/invitingTxt-addedit'))
+    },
     // 业务规则
     // 广告费规则
     {

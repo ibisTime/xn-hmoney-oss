@@ -86,7 +86,7 @@ class GJAddress extends React.Component {
                             content: `确认弃用地址？`,
                             onOk: () => {
                                 this.props.doFetching();
-                                fetch(802511, {
+                                fetch(802521, {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();

@@ -6,34 +6,33 @@ import {
     setSelectData,
     setPageData,
     restore
-} from '@redux/public/hotLine-addedit';
+} from '@redux/activity/invitingHref/invitingTxt-addedit';
 import {showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
-// import { COMPANY_CODE } from 'common/js/config';
 import fetch from 'common/js/fetch';
 
 @DetailWrapper(
-    state => state.publicHotLineAddEdit,
+    state => state.activityInvitingTxtAddEdit,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
-class HotLineAddEdit extends React.Component {
+class InvitingTxtAddedit extends React.Component {
     render() {
         const fields = [{
             field: 'id',
             hidden: true
         }, {
-            title: '内容',
+            title: '链接文本',
             field: 'cvalue',
             required: true
         }, {
             field: 'remark',
             hidden: true,
-            value: '服务热线'
+            value: '邀请好友链接文本'
         }];
         return this.props.buildDetail({
             fields,
             key: 'ckey',
-            code: 'telephone',
+            code: 'invite_url',
             detailCode: 630047,
             editCode: 630042,
             buttons: [{
@@ -51,4 +50,4 @@ class HotLineAddEdit extends React.Component {
     }
 }
 
-export default HotLineAddEdit;
+export default InvitingTxtAddedit;
