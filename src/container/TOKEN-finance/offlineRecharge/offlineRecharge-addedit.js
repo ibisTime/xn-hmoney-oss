@@ -33,7 +33,8 @@ class OfflineRechargeAddedit extends React.Component {
             pageCode: '805120',
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
-            searchName: 'mobile',
+            searchName: 'nickname',
+            placeholder: '请输入用户昵称搜索',
             onChange: (v, data) => {
                 if (v) {
                     getListUserAccount({userId: v, currency: 'X'}).then((d) => {
@@ -52,7 +53,7 @@ class OfflineRechargeAddedit extends React.Component {
             coinAmount: true,
             coin: 'X',
             formatter: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                return v ? moneyFormat(v, '', data.currency) : '';
             }
         }, {
             field: 'payCardInfo',

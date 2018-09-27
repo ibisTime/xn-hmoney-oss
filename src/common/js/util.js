@@ -162,6 +162,8 @@ export function moneyFormat(money, format, coin, isRe = false) {
     let flag = false;// 是否是负数
     if (isNaN(money)) {
         return '-';
+    } else {
+        Number(money);
     }
     if (money < 0) {
         money = -1 * money;
@@ -226,9 +228,25 @@ export function moneyFormatSubtract(s1, s2, format, coin, coinList) {
     if (!isNumeric(s1) || !isNumeric(s2)) {
         return '-';
     }
-    let num1 = new BigDecimal(s1.toString());
-    let num2 = new BigDecimal(s2.toString());
+    let num1 = new BigDecimal(Number(s1).toString());
+    let num2 = new BigDecimal(Number(s2).toString());
     return moneyFormat(num1.subtract(num2).toString(), format, coin, coinList);
+}
+
+/**
+ * 金额乘法
+ * @param s1
+ * @param s2
+ * @param coin 币种
+ * @param coinList 币种列表
+ */
+export function moneyFormatMultiply(s1, s2, format, coin, coinList) {
+    if (!isNumeric(s1) || !isNumeric(s2)) {
+        return '-';
+    }
+    let num1 = new BigDecimal(Number(s1).toString());
+    let num2 = new BigDecimal(Number(s2).toString());
+    return moneyFormat(num1.multiply(num2).toString(), format, coin, coinList);
 }
 
 /**

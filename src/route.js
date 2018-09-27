@@ -57,6 +57,10 @@ const ROUTES = [
         component: asyncComponent(() => import('container/system/user-addedit/user-addedit'))
     },
     {
+        path: '/system/user/resetPwd',
+        component: asyncComponent(() => import('container/system/user-resetPwd/user-resetPwd'))
+    },
+    {
         path: '/system/node',
         component: asyncComponent(() => import('container/system/node/node'))
     },
@@ -266,15 +270,6 @@ const ROUTES = [
         path: '/trade/saleTrade/addedit',
         component: asyncComponent(() => import('container/trade/saleTrade/saleTrade-addedit'))
     },
-    // 交易手续费
-    {
-        path: '/trade/handsFee',
-        component: asyncComponent(() => import('container/trade/handsFee/handsFee'))
-    },
-    {
-        path: '/trade/handsFee/addedit',
-        component: asyncComponent(() => import('container/trade/handsFee/handsFee-addedit'))
-    },
     // OTC订单管理
     // 进行中订单
     {
@@ -464,7 +459,7 @@ const ROUTES = [
         component: asyncComponent(() => import('container/finance/diviAddress/diviAddress'))
     },
     {
-        path: '/finance/diviAddress/addedit',
+        path: '/finance/diviAddress/ledger',
         component: asyncComponent(() => import('container/finance/diviAddress/diviAddress-ledger'))
     },
     // 充币管理
@@ -508,8 +503,20 @@ const ROUTES = [
         component: asyncComponent(() => import('container/finance/GJAddress/GJAddress'))
     },
     {
+        path: '/finance/GJAddress/addedit',
+        component: asyncComponent(() => import('container/finance/GJAddress/GJAddress-addedit'))
+    },
+    {
         path: '/finance/GJAddressQuery',
-        component: asyncComponent(() => import('container/finance/GJAddress/GJAddressQuery'))
+        component: asyncComponent(() => import('container/finance/GJAddressQuery/GJAddressQuery'))
+    },
+    {
+        path: '/finance/GJAddressQuery/addedit',
+        component: asyncComponent(() => import('container/finance/GJAddressQuery/GJAddressQuery-addedit'))
+    },
+    {
+        path: '/finance/GJManually',
+        component: asyncComponent(() => import('container/finance/GJManually/GJManually-addedit'))
     },
 
     // BTC财务管理
@@ -573,8 +580,20 @@ const ROUTES = [
         component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddress'))
     },
     {
+        path: '/BTC-finance/GJAddress/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddress-addedit'))
+    },
+    {
         path: '/BTC-finance/GJAddressQuery',
-        component: asyncComponent(() => import('container/BTC-finance/GJAddress/GJAddressQuery'))
+        component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery'))
+    },
+    {
+        path: '/BTC-finance/GJAddressQuery/addedit',
+        component: asyncComponent(() => import('container/BTC-finance/GJAddressQuery/GJAddressQuery-addedit'))
+    },
+    {
+        path: '/BTC-finance/GJManually',
+        component: asyncComponent(() => import('container/BTC-finance/GJManually/GJManually-addedit'))
     },
 
     // TOKEN财务管理
@@ -593,7 +612,7 @@ const ROUTES = [
         component: asyncComponent(() => import('container/TOKEN-finance/diviAddress/diviAddress'))
     },
     {
-        path: '/TOKEN-finance/diviAddress/addedit',
+        path: '/TOKEN-finance/diviAddress/ledger',
         component: asyncComponent(() => import('container/TOKEN-finance/diviAddress/diviAddress-ledger'))
     },
     // 充币管理
@@ -637,8 +656,20 @@ const ROUTES = [
         component: asyncComponent(() => import('container/TOKEN-finance/GJAddress/GJAddress'))
     },
     {
+        path: '/TOKEN-finance/GJAddress/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/GJAddress/GJAddress-addedit'))
+    },
+    {
         path: '/TOKEN-finance/GJAddressQuery',
-        component: asyncComponent(() => import('container/TOKEN-finance/GJAddress/GJAddressQuery'))
+        component: asyncComponent(() => import('container/TOKEN-finance/GJAddressQuery/GJAddressQuery'))
+    },
+    {
+        path: '/TOKEN-finance/GJAddressQuery/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/GJAddressQuery/GJAddressQuery-addedit'))
+    },
+    {
+        path: '/TOKEN-finance/GJManually',
+        component: asyncComponent(() => import('container/TOKEN-finance/GJManually/GJManually-addedit'))
     }
 ];
 

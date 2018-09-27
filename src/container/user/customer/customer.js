@@ -32,7 +32,11 @@ class Customer extends React.Component {
             search: true
         }, {
             field: 'nickname',
-            title: '昵称'
+            title: '昵称',
+            search: true
+        }, {
+            field: 'email',
+            title: '邮箱'
         }, {
             field: 'userReferee',
             title: '推荐人',

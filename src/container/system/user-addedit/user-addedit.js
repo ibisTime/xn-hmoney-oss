@@ -143,7 +143,7 @@ class Post extends React.Component {
                             initialValue: ''
                         })(<Input/>)}
                     </Item> */}
-                    <Item key='mobile' {...formItemLayout} label='登录名'>
+                    <Item key='mobile' {...formItemLayout} label='登录名(手机号)'>
                         {getFieldDecorator('mobile', {
                             rules,
                             initialValue: ''

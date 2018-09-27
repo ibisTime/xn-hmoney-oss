@@ -32,6 +32,9 @@ class CustomerAddedit extends React.Component {
             field: 'nickname',
             readonly: this.view
         }, {
+            field: 'email',
+            title: '邮箱'
+        }, {
             field: 'idKind',
             title: '证件类型',
             type: 'select',

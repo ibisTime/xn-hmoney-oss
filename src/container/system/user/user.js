@@ -63,7 +63,7 @@ class User extends React.Component {
                     if (!keys || !keys.length || !items || !items.length) {
                         showWarnMsg('请选择记录');
                     } else {
-                        this.props.history.push(`/system/user/pwd_reset?userId=${keys[0]}`);
+                        this.props.history.push(`/system/user/resetPwd?userId=${keys[0]}`);
                     }
                 },
                 rock: (keys, items) => {

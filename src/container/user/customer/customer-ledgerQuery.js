@@ -59,7 +59,7 @@ class CustomerLedgerQuery extends React.Component {
             data: getCoinList(),
             keyName: 'key',
             valueName: 'value',
-            search: true
+            search: !this.isPlat
         }, {
             field: 'bizType',
             title: '业务类型',

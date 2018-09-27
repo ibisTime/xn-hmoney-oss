@@ -12,10 +12,12 @@ import {
 } from '@redux/TOKEN-finance/diviAddress/diviAddress-ledger';
 import {listWrapper} from 'common/js/build-list';
 import {
+    getQueryString,
     moneyFormat,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showWarnMsg,
+    moneyFormatMultiply
 } from 'common/js/util';
 
 @listWrapper(
@@ -29,56 +31,67 @@ import {
     }
 )
 class DiviAddress extends React.Component {
+    constructor(props) {
+        super(props);
+        this.address = getQueryString('address', this.props.location.search);
+    }
+
     render() {
         const fields = [{
-            field: 'address',
-            title: '地址',
-            search: true
+            title: '交易HASH',
+            field: 'hash'
         }, {
-            title: '拥有者',
-            field: 'userId',
-            formatter: function(v, data) {
-                if (data.user) {
-                    return data.user.mobile + '(' + data.user.nickname + ')';
+            field: 'value',
+            title: '交易金额',
+            render: (v, data) => {
+                if (data.from === this.address) {
+                    return '-' + moneyFormat(v);
+                } else {
+                    return moneyFormat(v);
                 }
-            },
-            type: 'select',
-            pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
-            keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'mobile',
-            search: true
+            }
         }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '启用'
-            }, {
-                key: '2',
-                value: '弃用'
-            }],
-            kayName: 'key',
-            valueName: 'value',
-            search: true
+            field: 'fromTo',
+            title: '对方地址',
+            render: (v, data) => {
+                if (data.from === this.address) {
+                    return data.to;
+                } else {
+                    return data.from;
+                }
+            }
         }, {
-            field: 'balanceString',
-            title: '当前余额',
-            amount: true,
-            formatter: moneyFormat
+            title: 'gasLimit',
+            field: 'gas'
+        }, {
+            title: 'gas价格',
+            field: 'gasPrice',
+            coin: 'ETH',
+            coinAmount: true
+        }, {
+            title: '消耗gas',
+            field: 'gasUsed'
+        }, {
+            title: '矿工费',
+            field: 'kgPrice',
+            render: (v, data) => {
+                let kgPrice = moneyFormatMultiply(data.gasPrice, data.gasUsed, '', 'ETH');
+                return kgPrice;
+            }
+        }, {
+            field: 'refNo',
+            title: '关联订单号'
+        }, {
+            field: 'creates',
+            title: '网络记账时间',
+            type: 'datatime'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802590',
+            pageCode: '802530',
             searchParams: {
-                // address: address,
-            },
-            btnEvent: {
+                address: this.address
             }
         });
     }

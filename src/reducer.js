@@ -9,6 +9,7 @@ import {systemMenuAddEdit} from './redux/system/menu-addedit';
 import {systemSysParam} from './redux/system/sysParam';
 import {systemSysParamAddEdit} from './redux/system/sysParam-addedit';
 import {systemUser} from './redux/system/user';
+import {systemUserResetPwd} from './redux/system/user-resetPwd';
 import {systemAssign} from './redux/system/assign';
 import {systemPwdReset} from './redux/system/pwdReset';
 import {systemUserAddEdit} from './redux/system/user-addedit';
@@ -87,10 +88,6 @@ import {tradeBuyTradeAddEdit} from './redux/trade/buyTrade/buyTrade-addedit';
 // 出售交易
 import {tradeSaleTrade} from './redux/trade/saleTrade/saleTrade';
 import {tradeSaleTradeAddEdit} from './redux/trade/saleTrade/saleTrade-addedit';
-
-// 交易手续费
-import {tradeHandsFee} from './redux/trade/handsFee/handsFee';
-import {tradeHandsFeeAddEdit} from './redux/trade/handsFee/handsFee-addedit';
 
 // OTC订单管理
 // 进行中订单
@@ -200,7 +197,10 @@ import {financeTBunderlineMultiCheck} from './redux/finance/TBunderline/TBunderl
 
 // 归集管理
 import {financeGJAddress} from './redux/finance/GJAddress/GJAddress';
-import {financeGJAddressQuery} from './redux/finance/GJAddress/GJAddressQuery';
+import {financeGJAddressAddEdit} from './redux/finance/GJAddress/GJAddress-addedit';
+import {financeGJAddressQuery} from './redux/finance/GJAddressQuery/GJAddressQuery';
+import {financeGJAddressQueryAddEdit} from './redux/finance/GJAddressQuery/GJAddressQuery-addedit';
+import {financeGJManuallyAddEdit} from './redux/finance/GJManually/GJManually-addedit';
 
 /* BTC财务管理 */
 // 平台账户
@@ -229,7 +229,10 @@ import {BTCFinanceTBunderlineMultiCheck} from './redux/BTC-finance/TBunderline/T
 
 // 归集管理
 import {BTCFinanceGJAddress} from './redux/BTC-finance/GJAddress/GJAddress';
-import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddress/GJAddressQuery';
+import {BTCFinanceGJAddressAddEdit} from './redux/BTC-finance/GJAddress/GJAddress-addedit';
+import {BTCFinanceGJAddressQuery} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery';
+import {BTCFinanceGJAddressQueryAddEdit} from './redux/BTC-finance/GJAddressQuery/GJAddressQuery-addedit';
+import {BTCFinanceGJManuallyAddEdit} from './redux/BTC-finance/GJManually/GJManually-addedit';
 
 /* TOKEN财务管理 */
 // 平台账户
@@ -258,7 +261,10 @@ import {TOKENFinanceTBunderlineMultiCheck} from './redux/TOKEN-finance/TBunderli
 
 // 归集管理
 import {TOKENFinanceGJAddress} from './redux/TOKEN-finance/GJAddress/GJAddress';
-import {TOKENFinanceGJAddressQuery} from './redux/TOKEN-finance/GJAddress/GJAddressQuery';
+import {TOKENFinanceGJAddressAddEdit} from './redux/TOKEN-finance/GJAddress/GJAddress-addedit';
+import {TOKENFinanceGJAddressQuery} from './redux/TOKEN-finance/GJAddressQuery/GJAddressQuery';
+import {TOKENFinanceGJAddressQueryAddEdit} from './redux/TOKEN-finance/GJAddressQuery/GJAddressQuery-addedit';
+import {TOKENFinanceGJManuallyAddEdit} from './redux/TOKEN-finance/GJManually/GJManually-addedit';
 
 export default combineReducers({
     user,
@@ -274,6 +280,7 @@ export default combineReducers({
     systemSysParam,
     systemSysParamAddEdit,
     systemUserAddEdit,
+    systemUserResetPwd,
     systemDataDict,
     systemDataDictAddEdit,
     systemNode,
@@ -335,8 +342,6 @@ export default combineReducers({
     tradeBuyTradeAddEdit,
     tradeSaleTrade,
     tradeSaleTradeAddEdit,
-    tradeHandsFee,
-    tradeHandsFeeAddEdit,
     tradeUnderWayOrder,
     tradeUnderWayOrderAddEdit,
     tradeFinishOrder,
@@ -404,7 +409,10 @@ export default combineReducers({
     financeTBunderlineMultiCheck,
     // 归集管理
     financeGJAddress,
+    financeGJAddressAddEdit,
     financeGJAddressQuery,
+    financeGJAddressQueryAddEdit,
+    financeGJManuallyAddEdit,
 
     /* BTC 财务管理 */
     // 平台账户
@@ -423,7 +431,10 @@ export default combineReducers({
     BTCFinanceTBunderlineMultiCheck,
     // 归集管理
     BTCFinanceGJAddress,
+    BTCFinanceGJAddressAddEdit,
     BTCFinanceGJAddressQuery,
+    BTCFinanceGJAddressQueryAddEdit,
+    BTCFinanceGJManuallyAddEdit,
     /* TOKEN 财务管理 */
     // 平台账户
     TOKENFinancePlatformAccount,
@@ -441,5 +452,8 @@ export default combineReducers({
     TOKENFinanceTBunderlineMultiCheck,
     // 归集管理
     TOKENFinanceGJAddress,
-    TOKENFinanceGJAddressQuery
+    TOKENFinanceGJAddressAddEdit,
+    TOKENFinanceGJAddressQuery,
+    TOKENFinanceGJAddressQueryAddEdit,
+    TOKENFinanceGJManuallyAddEdit
 });

@@ -37,7 +37,8 @@ class SaleTrade extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'mobile',
+            searchName: 'nickname',
+            placeholder: '请输入用户昵称搜索',
             render: (v, data) => {
                 if (data.user) {
                     return data.user.mobile + '(' + data.user.nickname + ')';

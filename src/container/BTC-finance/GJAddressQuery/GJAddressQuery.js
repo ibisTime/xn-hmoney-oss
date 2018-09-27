@@ -9,7 +9,7 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/TOKEN-finance/GJAddress/GJAddressQuery';
+} from '@redux/BTC-finance/GJAddressQuery/GJAddressQuery';
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
@@ -20,7 +20,7 @@ import {
 
 @listWrapper(
     state => ({
-        ...state.TOKENFinanceGJAddressQuery,
+        ...state.BTCFinanceGJAddressQuery,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -31,50 +31,46 @@ import {
 class GJAddressQuery extends React.Component {
     render() {
         const fields = [{
-            field: 'address',
-            title: '地址',
-            search: true
+            field: 'amountString',
+            title: '交易数量',
+            coin: 'ETH',
+            coinAmount: true
         }, {
-            title: '拥有者',
-            field: 'userId',
-            formatter: function(v, data) {
-                if (data.user) {
-                    return data.user.mobile + '(' + data.user.nickname + ')';
-                }
-            },
-            type: 'select',
-            pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
-            keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'mobile',
-            search: true
+            field: 'fromAddress',
+            title: '来方归集'
+        }, {
+            title: '去方归集地址',
+            field: 'toAddress'
+        }, {
+            title: '交易HASH',
+            field: 'txHash'
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
             data: [{
                 key: '0',
-                value: '启用'
+                value: '广播中'
+            }, {
+                key: '1',
+                value: '广播成功'
             }, {
                 key: '2',
-                value: '弃用'
+                value: '广播失败'
             }],
-            kayName: 'key',
+            keyName: 'key',
             valueName: 'value',
             search: true
         }, {
-            field: 'balanceString',
-            title: '当前余额',
-            amount: true,
-            formatter: moneyFormat
+            field: 'createDatetime',
+            title: '归集时间',
+            type: 'datetime'
         }];
         return this.props.buildList({
             fields,
-            pageCode: '802565',
+            pageCode: '802365',
             searchParams: {
+                currency: 'BTC'
             }
         });
     }

@@ -37,9 +37,9 @@ class DiviAddress extends React.Component {
         }, {
             title: '拥有者',
             field: 'userId',
-            formatter: function(v, data) {
+            render: function(v, data) {
                 if (data.userInfo) {
-                    return data.userInfo.mobile + '(' + data.userInfo.nickname + ')';
+                    return data.userInfo.nickname;
                 }
             },
             type: 'select',
@@ -49,7 +49,8 @@ class DiviAddress extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'mobile',
+            searchName: 'nickname',
+            placeholder: '请输入用户昵称搜索',
             search: true
         }, {
             field: 'balanceString',
@@ -61,7 +62,16 @@ class DiviAddress extends React.Component {
             fields,
             rowKey: 'id',
             pageCode: '802505',
-            searchParams: {
+            btnEvent: {
+                diviLedger: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/TOKEN-finance/diviAddress/ledger?address=${selectedRowKeys[0]}`);
+                    }
+                }
             }
         });
     }

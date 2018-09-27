@@ -36,7 +36,8 @@ class ChannelDealerCommissions extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
-            searchName: 'mobile',
+            searchName: 'nickname',
+            placeholder: '请输入用户昵称搜索',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '-';
             },
