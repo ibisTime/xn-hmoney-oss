@@ -37,8 +37,7 @@ class BuyTrade extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             render: (v, data) => {
                 if (data.user) {
                     return data.user.mobile + '(' + data.user.nickname + ')';
@@ -82,6 +81,9 @@ class BuyTrade extends React.Component {
         }, {
             title: '保护价',
             field: 'protectPrice'
+        }, {
+            title: '售价',
+            field: 'truePrice'
         }, {
             title: '单笔最大量',
             field: 'maxTrade'

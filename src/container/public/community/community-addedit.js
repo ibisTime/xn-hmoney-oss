@@ -6,15 +6,15 @@ import {
     setSelectData,
     setPageData,
     restore
-} from '@redux/public/banner-addedit';
+} from '@redux/public/community-addedit';
 import {getQueryString} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 
 @DetailWrapper(
-    state => state.publicBannerAddEdit,
+    state => state.publicCommunityAddEdit,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
-class BannerAddEdit extends React.Component {
+class CommunityAddedit extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
@@ -28,36 +28,31 @@ class BannerAddEdit extends React.Component {
             hidden: true
         }, {
             field: 'type',
-            value: 2,
+            value: 6,
             hidden: true
         }, {
             field: 'parentCode',
             value: 0,
             hidden: true
         }, {
-            title: 'banner名称',
+            title: '名称',
             field: 'name',
             required: true
         }, {
-            title: '位置',
-            field: 'location',
-            type: 'select',
-            key: 'banner_location',
+            title: '图标',
+            field: 'pic',
+            type: 'img',
+            required: true,
+            single: true
+        }, {
+            title: '社群号',
+            field: 'url',
             required: true
         }, {
             title: '顺序',
             field: 'orderNo',
             help: '数字越小，排序越靠前',
             required: true
-        }, {
-            title: 'banner图片',
-            field: 'pic',
-            type: 'img',
-            required: true,
-            single: true
-        }, {
-            title: 'url地址',
-            field: 'url'
         }, {
             title: '备注',
             field: 'remark'
@@ -68,9 +63,13 @@ class BannerAddEdit extends React.Component {
             view: this.view,
             addCode: '630500',
             editCode: '630502',
-            detailCode: '630507'
+            detailCode: '630507',
+            beforeSubmit: (data) => {
+                data.location = 'community';
+                return data;
+            }
         });
     }
 }
 
-export default BannerAddEdit;
+export default CommunityAddedit;

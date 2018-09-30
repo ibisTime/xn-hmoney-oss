@@ -36,8 +36,7 @@ class ChannelDealerSettleHistory extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '-';
             },
@@ -81,7 +80,7 @@ class ChannelDealerSettleHistory extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/user/channelDealerCommissions/checklist`);
+                        this.props.history.push(`/user/channelDealerSettleHistory/commissions`);
                     }
                 }
             }

@@ -44,7 +44,11 @@ class CustomerLedgerQuery extends React.Component {
             field: 'realName',
             title: '户名',
             render: (v, data) => {
-                return data.userId === SYS_USER ? '平台账户' : v;
+                if (data.userId === SYS_USER) {
+                    return '平台账户';
+                } else {
+                    return !v ? data.mobile : v;
+                }
             }
         }, {
             field: 'channelType',

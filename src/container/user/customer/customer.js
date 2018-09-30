@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/user/customer/customer';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 
 @listWrapper(
@@ -67,9 +67,9 @@ class Customer extends React.Component {
                 return data.realName ? data.realName : '-';
             }
         }, {
-            field: 'tradeRate',
-            title: '广告费率'
-        }, {
+        //     field: 'tradeRate',
+        //     title: '广告费率'
+        // }, {
             field: 'createDatetime',
             title: '注册时间',
             type: 'date',
@@ -108,7 +108,7 @@ class Customer extends React.Component {
                                 this.props.doFetching();
                                 return activateUser(selectedRowKeys[0]).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });
@@ -132,7 +132,7 @@ class Customer extends React.Component {
                                 this.props.doFetching();
                                 return activateUser(selectedRowKeys[0]).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

@@ -9,7 +9,11 @@ import {
     cancelFetching,
     setSearchData
 } from '@redux/public/notice';
-import {showWarnMsg, getUserName} from 'common/js/util';
+import {
+    showSucMsg,
+    getUserName,
+    showWarnMsg
+} from 'common/js/util';
 import {listWrapper} from 'common/js/build-list';
 import {SYSTEM_CODE} from 'common/js/config';
 import {Button, Upload, Modal} from 'antd';
@@ -42,7 +46,7 @@ class Notice extends React.Component {
         }, {
             field: 'updateDatetime',
             title: '最近修改时间',
-            formatter: 'datetime'
+            type: 'datetime'
         }, {
             field: 'remark',
             title: '备注'
@@ -59,8 +63,8 @@ class Notice extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '0') {
-
+                    } else if (selectedRows[0].status === '0' || selectedRows[0].status === '2') {
+                        this.props.history.push(`/public/notice/addedit?isPushDown=1&code=${selectedRowKeys[0]}`);
                     } else if (selectedRows[0].status === '1') {
                         Modal.confirm({
                             okText: '确认',
@@ -70,10 +74,12 @@ class Notice extends React.Component {
                                 this.props.doFetching();
                                 return fetch(805302, {
                                     code: selectedRowKeys[0],
-                                    updater: getUserName()
+                                    updater: getUserName(),
+                                    remark: selectedRows[0].remark
                                 }).then(() => {
                                     this.props.cancelFetching();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
+                                    this.props.getPageData();
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

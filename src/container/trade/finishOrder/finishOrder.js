@@ -46,8 +46,7 @@ class FinishOrder extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             search: true
         }, {
             title: '卖家',
@@ -64,8 +63,7 @@ class FinishOrder extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             search: true
         }, {
             field: 'tradeCoin',

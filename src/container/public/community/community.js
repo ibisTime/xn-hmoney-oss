@@ -8,13 +8,12 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/biz/quotation/tradePair';
+} from '@redux/public/community';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.quotationTradePair,
+        ...state.publicCommunity,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,29 +21,32 @@ import {dateTimeFormat} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class TradePair extends React.Component {
+class Community extends React.Component {
     render() {
         const fields = [{
-            title: '交易所',
-            field: 'exchangeEname'
-        }, {
-            title: '基础币种',
-            field: 'symbol',
+            title: '名称',
+            field: 'name',
             search: true
         }, {
-            title: '计价币种',
-            field: 'toSymbol',
-            search: true
+            title: '社群号',
+            field: 'url'
         }, {
-            title: '价格',
-            field: 'price'
+            title: '顺序',
+            field: 'orderNo'
+        }, {
+            title: '备注',
+            field: 'remark'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'id',
-            pageCode: '650100'
+            pageCode: '630505',
+            deleteCode: '630501',
+            searchParams: {
+                type: 6,
+                location: 'community'
+            }
         });
     }
 }
 
-export default TradePair;
+export default Community;

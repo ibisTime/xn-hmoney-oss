@@ -42,13 +42,17 @@ class ArbitrationOrder extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 var html = '';
                 if (data.beigaoInfo) {
-                    html = data.beigaoInfo.mobile + '(' + data.beigaoInfo.nickname + ')';
+                    html = data.beigaoInfo.nickname;
+                    if(data.beigaoInfo.mobile) {
+                        html += '(' + data.beigaoInfo.mobile + ')';
+                    } else {
+                        html += '(' + data.beigaoInfo.email + ')';
+                    }
                 }
                 if(v === data.tradeOrder.buyUser) {
                     html += '-买家';
@@ -67,13 +71,17 @@ class ArbitrationOrder extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             search: true,
             render: (v, data) => {
                 var html = '';
                 if (data.yuangaoInfo) {
-                    html = data.yuangaoInfo.mobile + '(' + data.yuangaoInfo.nickname + ')';
+                    html = data.yuangaoInfo.nickname;
+                    if(data.yuangaoInfo.mobile) {
+                        html += '(' + data.yuangaoInfo.mobile + ')';
+                    } else {
+                        html += '(' + data.yuangaoInfo.email + ')';
+                    }
                 }
                 if(v === data.tradeOrder.buyUser) {
                     html += '-买家';

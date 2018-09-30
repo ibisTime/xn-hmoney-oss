@@ -31,12 +31,7 @@ class Banner extends React.Component {
             title: '位置',
             field: 'location',
             type: 'select',
-            data: [{
-                key: 'web_banner',
-                value: 'WEB首页'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            key: 'banner_location',
             search: true
         }, {
             title: '顺序',

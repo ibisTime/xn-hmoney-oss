@@ -283,9 +283,24 @@ export function isUndefined(value) {
     return value === undefined || value === null || value === '';
 }
 
-export function tempString(str, data) {
+/**
+ * select valueName格式化
+ * @str
+ * @data
+ * @fields
+ */
+export function tempString(str, data, fields) {
     return str.replace(/\{\{(\w+)\.DATA\}\}/gi, function (matchs) {
-        var returns = data[matchs.replace(/\{\{(\w+)\.DATA\}\}/, '$1')];
+        var returns;
+        // if(fields.dict) {
+        //     dict.
+        //     getDictList({parentKey: fields.key, bizType: fields.keyCode}).then(dictData => {
+        //
+        //     }).catch(() => {});
+        //     returns = matchs.replace(/\{\{(\w+)\.DATA\}\}/, '$1').replace(/\{\{(\w+)\.DICT\}\}/, '$1');
+        // } else {
+            returns = data[matchs.replace(/\{\{(\w+)\.DATA\}\}/, '$1')];
+        // }
         return isUndefined(returns) ? '' : returns;
     });
 }

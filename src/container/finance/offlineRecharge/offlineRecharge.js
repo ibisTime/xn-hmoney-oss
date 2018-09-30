@@ -36,6 +36,9 @@ class OfflineRecharge extends React.Component {
         }, {
             field: 'accountName',
             title: '户名',
+            render: (v, data) => {
+                return data.payer ? data.payer.realName ? data.payer.realName : data.payer.mobile : '';
+            },
             search: true
         }, {
             field: 'amount',

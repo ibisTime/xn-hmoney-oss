@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Card, Row, Col, Button, Spin} from 'antd';
-import {initData} from '@redux/BTC-finance/platformAccount/platformAccount';
+import {initData} from '@redux/BTC-finance/platformAccount/serviceCharge';
 import {moneyFormat} from 'common/js/util';
 
 const {Meta} = Card;
 
 @connect(
-    state => state.BTCFinancePlatformAccount,
+    state => state.BTCFinanceServiceCharge,
     {initData}
 )
 class PlatformAccount extends React.Component {
@@ -26,14 +26,14 @@ class PlatformAccount extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col style={{marginBottom: '30px', width: '390px', float: 'left', marginRight: '30px'}}>
+                    <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
                         <Card title="冷钱包账户余额" extra={
                             moneyFormat(unsettledLoan['SYS_ACOUNT_BTC_COLD'] ? unsettledLoan['SYS_ACOUNT_BTC_COLD'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
                             <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC_COLD'] ? unsettledLoan['SYS_ACOUNT_BTC_COLD'].accountNumber : '')} type="primary">资金流水</Button>
                         </div>}</Card>
                     </Col>
-                    <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
+                    <Col style={{marginBottom: '30px', width: '390px', float: 'left', marginLeft: '30px'}}>
                         <Card title="散取账户余额" extra={
                             moneyFormat(unsettledLoan['SYS_ACOUNT_BTC_M'] ? unsettledLoan['SYS_ACOUNT_BTC_M'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
@@ -48,7 +48,7 @@ class PlatformAccount extends React.Component {
                             moneyFormat(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
                             <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px'}}>资金流水</Button>
-                            {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
+                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_BTC'] ? unsettledLoan['SYS_ACOUNT_BTC'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button>
                         </div>}</Card>
                     </Col>
                 </Row>

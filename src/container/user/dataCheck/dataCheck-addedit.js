@@ -23,10 +23,10 @@ class DataCheckAddedit extends React.Component {
         this.isCheck = !!getQueryString('isCheck', this.props.location.search);
         this.buttons = [];
         this.fields = [{
-            field: 'type',
+            field: 'idKind',
             title: '类型',
             type: 'select',
-            key: 'user_status',
+            key: 'id_kind',
             required: true
         }, {
             field: 'realName',
@@ -37,17 +37,34 @@ class DataCheckAddedit extends React.Component {
             title: '手机号',
             required: true,
             formatter: (v, data) => {
-                return data.user ? data.user.mobile : '';
+                return data.applyUserInfo ? data.applyUserInfo.mobile : '';
             }
         }, {
             field: 'email',
             title: '邮箱',
-            required: true
+            required: true,
+            formatter: (v, data) => {
+                return data.applyUserInfo ? data.applyUserInfo.email : '';
+            }
         }, {
             field: 'idNo',
-            title: '身份证',
+            title: '证件号',
             required: true
         }, {
+            field: 'idFace',
+            title: '证件正面',
+            type: 'img',
+            required: true
+        }, {
+            field: 'idOppo',
+            title: '证件反面',
+            type: 'img',
+            required: true
+        }, {
+            //     field: 'idHold',
+            //     title: '手持证件照',
+            //     type: 'img'
+            // }, {
             field: 'remark',
             title: this.isCheck ? '审核意见' : '备注',
             readonly: !this.isCheck,
@@ -62,7 +79,7 @@ class DataCheckAddedit extends React.Component {
                     param.id = this.code;
                     param.approveUser = getUserName();
                     this.props.doFetching();
-                    fetch(805132, param).then(() => {
+                    fetch(805161, param).then(() => {
                         showSucMsg('操作成功');
                         this.props.cancelFetching();
                         setTimeout(() => {
@@ -79,7 +96,7 @@ class DataCheckAddedit extends React.Component {
                     param.id = this.code;
                     param.approveUser = getUserName();
                     this.props.doFetching();
-                    fetch(805132, param).then(() => {
+                    fetch(805161, param).then(() => {
                         showSucMsg('操作成功');
                         this.props.cancelFetching();
                         setTimeout(() => {
@@ -103,7 +120,7 @@ class DataCheckAddedit extends React.Component {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '805136',
+            detailCode: '805166',
             buttons: this.buttons
         });
     }

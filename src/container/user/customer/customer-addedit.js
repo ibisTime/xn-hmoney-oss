@@ -73,9 +73,9 @@ class CustomerAddedit extends React.Component {
                 return data.realName ? '是' : '否';
             }
         }, {
-            field: 'tradeRate',
-            title: '广告费率'
-        }, {
+        //     field: 'tradeRate',
+        //     title: '广告费率'
+        // }, {
             field: 'status',
             title: '状态',
             type: 'select',

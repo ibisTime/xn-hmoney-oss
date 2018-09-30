@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealer/channelDealer';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 
 @listWrapper(
@@ -76,7 +76,7 @@ class ChannelDealer extends React.Component {
                                 this.props.doFetching();
                                 return activateUser(selectedRowKeys[0]).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });
@@ -101,7 +101,17 @@ class ChannelDealer extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/user/customer/lowerLevelQuery?userId=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/user/channelDealer/lowerLevelQuery?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 分佣账户
+                divideAccount: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/channelDealer/divideAccount?userId=${selectedRowKeys[0]}`);
                     }
                 }
             }

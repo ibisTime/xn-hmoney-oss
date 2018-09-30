@@ -27,7 +27,7 @@ class KycCheckAddedit extends React.Component {
             field: 'type',
             title: '类型',
             type: 'select',
-            key: 'user_status',
+            key: 'apply_type',
             required: true
         }, {
             field: 'realName',
@@ -38,26 +38,18 @@ class KycCheckAddedit extends React.Component {
             title: '手机号',
             required: true,
             formatter: (v, data) => {
-                return data.user ? data.user.mobile : '';
+                return data.applyUserInfo ? data.applyUserInfo.mobile : '';
+            }
+        }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.applyUserInfo ? data.applyUserInfo.email : '';
             }
         }, {
             field: 'idNo',
-            title: '证件号',
+            title: '身份证',
             required: true
-        }, {
-            field: 'idFace',
-            title: '证件正面',
-            type: 'img',
-            required: true
-        }, {
-            field: 'idOppo',
-            title: '证件反面',
-            type: 'img',
-            required: true
-        }, {
-            field: 'idHold',
-            title: '手持证件照',
-            type: 'img'
         }, {
             field: 'remark',
             title: this.isCheck ? '审核意见' : '备注',
@@ -73,7 +65,7 @@ class KycCheckAddedit extends React.Component {
                     param.id = this.code;
                     param.approveUser = getUserName();
                     this.props.doFetching();
-                    fetch(805161, param).then(() => {
+                    fetch(805132, param).then(() => {
                         showSucMsg('操作成功');
                         this.props.cancelFetching();
                         setTimeout(() => {
@@ -90,7 +82,7 @@ class KycCheckAddedit extends React.Component {
                     param.id = this.code;
                     param.approveUser = getUserName();
                     this.props.doFetching();
-                    fetch(805161, param).then(() => {
+                    fetch(805132, param).then(() => {
                         showSucMsg('操作成功');
                         this.props.cancelFetching();
                         setTimeout(() => {
@@ -114,7 +106,7 @@ class KycCheckAddedit extends React.Component {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '805166',
+            detailCode: '805136',
             buttons: this.buttons
         });
     }

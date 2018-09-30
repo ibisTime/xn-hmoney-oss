@@ -114,8 +114,7 @@ class TBunderlineAddedit extends React.Component {
             fields,
             code: this.code,
             view: this.view,
-            addCode: '802340',
-            detailCode: '802346',
+            detailCode: '802356',
             beforeSubmit: function(data) {
                 data.applyUser = getUserId();
                 return data;

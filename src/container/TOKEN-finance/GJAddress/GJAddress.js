@@ -15,7 +15,8 @@ import {
     moneyFormat,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showWarnMsg,
+    showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -39,7 +40,15 @@ class GJAddress extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'maddress_status'
+            data: [{
+                'key': '0',
+                'value': '启用'
+            }, {
+                'key': '1',
+                'value': '弃用'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
             title: '创建日期',
             field: 'createDatetime',
@@ -58,7 +67,7 @@ class GJAddress extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '2') {
+                    } else if (selectedRows[0].status === '1') {
                         showWarnMsg('已经是无效地址，无需重复弃用');
                     } else {
                         Modal.confirm({
@@ -71,7 +80,7 @@ class GJAddress extends React.Component {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

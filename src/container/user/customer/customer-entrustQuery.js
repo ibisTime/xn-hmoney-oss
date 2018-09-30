@@ -111,7 +111,7 @@ class CustomerEntrustQuery extends React.Component {
         }];
         return this.props.buildList({
             fields,
-            pageCode: '650055',
+            pageCode: '650059',
             searchParams: {
                 userId: this.userId
             },

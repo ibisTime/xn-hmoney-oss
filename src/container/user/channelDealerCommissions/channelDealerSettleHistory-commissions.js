@@ -35,14 +35,35 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
             name: '返回',
             check: false,
             handler: () => {
-                this.props.history.push(`/user/commissionsHistoryList`);
+                this.props.history.push(`/user/channelDealerSettleHistory`);
             }
         }];
     }
 
     render() {
         const fields = [{
-            field: 'amount',
+            field: 'userId',
+            title: '渠道商',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                kind: 'Q'
+            },
+            keyName: 'userId',
+            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
+            searchName: 'keyword',
+            render: (v, data) => {
+                return data.user ? data.user.nickname : '-';
+            },
+            search: true
+        }, {
+            field: 'mobile',
+            title: '手机号',
+            render: (v, data) => {
+                return data.user ? data.user.mobile : '-';
+            }
+        }, {
+            field: 'count',
             title: '佣金',
             render: (v, data) => {
                 return moneyFormat(v, '', data.currency);
@@ -86,6 +107,7 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
         }];
         return this.props.buildList({
             fields,
+            rowKey: 'id',
             pageCode: '802395',
             searchParams: {
                 userId: this.userId

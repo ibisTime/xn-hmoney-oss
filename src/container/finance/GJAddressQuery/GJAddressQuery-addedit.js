@@ -18,6 +18,7 @@ class GJAddressQueryAddedit extends React.Component {
     constructor(props) {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
+        this.view = !!getQueryString('v', this.props.location.search);
     }
     render() {
         let fields = [{
@@ -71,6 +72,7 @@ class GJAddressQueryAddedit extends React.Component {
         return this.props.buildDetail({
             fields,
             code: this.code,
+            view: this.view,
             detailCode: '802366'
         });
     }

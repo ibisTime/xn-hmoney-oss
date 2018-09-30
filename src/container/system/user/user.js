@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/system/user';
 import {listWrapper} from 'common/js/build-list';
-import {showWarnMsg} from 'common/js/util';
+import {showWarnMsg, showSucMsg} from 'common/js/util';
 import {activateSysUser} from 'api/user';
 
 @listWrapper(
@@ -27,12 +27,13 @@ import {activateSysUser} from 'api/user';
 class User extends React.Component {
     render() {
         const fields = [{
-            title: '用户名',
+            title: '关键字',
             field: 'keyword',
             search: true,
-            render: (v, data) => {
-                return data.loginName;
-            }
+            noVisible: true
+        }, {
+            title: '用户名',
+            field: 'loginName'
         }, {
             title: '真实姓名',
             field: 'realName',
@@ -78,7 +79,7 @@ class User extends React.Component {
                                 this.props.doFetching();
                                 return activateSysUser(keys[0]).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

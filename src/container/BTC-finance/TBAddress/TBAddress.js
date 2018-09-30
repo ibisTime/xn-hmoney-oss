@@ -15,7 +15,8 @@ import {
     moneyFormat,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showWarnMsg,
+    showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -63,7 +64,7 @@ class TBAddress extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802515',
+            pageCode: '802575',
             searchParams: {
                 type: 'M'
             },
@@ -75,9 +76,9 @@ class TBAddress extends React.Component {
                         content: `确认生成提币地址？`,
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802510, {}).then(() => {
+                            fetch(802570, {}).then(() => {
                                 this.props.getPageData();
-                                showWarnMsg('操作成功');
+                                showSucMsg('操作成功');
                             }).catch(() => {
                                 this.props.cancelFetching();
                             });
@@ -89,7 +90,7 @@ class TBAddress extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '2') {
+                    } else if (selectedRows[0].status === '1') {
                         showWarnMsg('已经是无效地址，无需重复弃用');
                     } else {
                         Modal.confirm({
@@ -98,11 +99,11 @@ class TBAddress extends React.Component {
                             content: `确认弃用地址？`,
                             onOk: () => {
                                 this.props.doFetching();
-                                fetch(802511, {
+                                fetch(802571, {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

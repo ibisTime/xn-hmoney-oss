@@ -36,7 +36,7 @@ class ChannelDealerCommissionsChecklist extends React.Component {
                 } else if (selectedRowKeys.length > 1) {
                     showWarnMsg('请选择一条记录');
                 } else {
-                    this.props.history.push(`/user/channelDealerCommissions/settlement?v=1&${selectedRowKeys[0]}`);
+                    this.props.history.push(`/user/channelDealerCommissions/settlement?v=1&code=${selectedRowKeys[0]}`);
                 }
             }
         }, {
@@ -44,7 +44,7 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             name: '返回',
             check: false,
             handler: () => {
-                this.props.history.push(`/user/commissionsHistoryList`);
+                this.props.history.push(`/user/channelDealerCommissions`);
             }
         }];
     }
@@ -60,8 +60,7 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '-';
             },
@@ -73,47 +72,33 @@ class ChannelDealerCommissionsChecklist extends React.Component {
                 return data.user ? data.user.mobile : '-';
             }
         }, {
-            field: 'amount',
-            title: '佣金',
+            field: 'email',
+            title: '邮箱',
             render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+                return data.user ? data.user.email : '-';
             }
         }, {
-            field: 'currency',
-            title: '币种'
+            field: 'settleCount',
+            title: '结算金额'
         }, {
-            field: 'refType',
-            title: '佣金类型'
+            field: 'unsettleCount',
+            title: '未结算金额'
         }, {
-            field: 'refNote',
-            title: '佣金说明'
+            field: 'nosettleCount',
+            title: '不结算金额'
         }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            data: [{
-                key: '0',
-                value: '待结算'
-            }, {
-                key: '1',
-                value: '已结算'
-            }],
-            keyName: 'key',
-            valueName: 'value',
-            search: true
+            field: 'tradeCount',
+            title: '交易总金额'
         }, {
-            field: 'settleDatetime',
-            title: '结算时间',
-            type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
-            render: dateTimeFormat,
-            search: true
+            field: 'tradeAward',
+            title: '交易奖励'
         }, {
-            field: 'refCode',
-            title: '关联单号'
+            field: 'regAward',
+            title: '注册奖励'
         }, {
-            field: 'remark',
-            title: '备注'
+            field: 'endDate',
+            title: '结束日期',
+            type: 'dates'
         }];
         return this.props.buildList({
             fields,

@@ -25,15 +25,15 @@ class PlatformAccount extends React.Component {
 
         return (
             <div>
-                <Row gutter={{xs: 16, sm: 16, md: 24, lg: 32}}>
-                    <Col span={8} style={{marginBottom: '20px'}}>
+                <Row>
+                    <Col style={{marginBottom: '30px', width: '390px', float: 'left', marginRight: '30px'}}>
                         <Card title="冷钱包账户余额" extra={
                             moneyFormat(unsettledLoan['SYS_ACOUNT_ETH_COLD'] ? unsettledLoan['SYS_ACOUNT_ETH_COLD'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
                             <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_ETH_COLD'] ? unsettledLoan['SYS_ACOUNT_ETH_COLD'].accountNumber : '')} type="primary">资金流水</Button>
                         </div>}</Card>
                     </Col>
-                    <Col span={8} style={{marginBottom: '20px'}}>
+                    <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
                         <Card title="散取账户余额" extra={
                             moneyFormat(unsettledLoan['SYS_ACOUNT_ETH_M'] ? unsettledLoan['SYS_ACOUNT_ETH_M'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
@@ -42,13 +42,13 @@ class PlatformAccount extends React.Component {
                     </Col>
                 </Row>
 
-                <Row gutter={{xs: 16, sm: 16, md: 24, lg: 32}}>
-                    <Col span={8} style={{marginBottom: '20px'}}>
+                <Row>
+                    <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
                         <Card title="盈亏账户余额 " extra={
                             moneyFormat(unsettledLoan['SYS_ACOUNT_ETH'] ? unsettledLoan['SYS_ACOUNT_ETH'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
                             <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_ETH'] ? unsettledLoan['SYS_ACOUNT_ETH'].accountNumber : '')} type="primary" style={{marginTop: '15px'}}>资金流水</Button>
-                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_ETH'] ? unsettledLoan['SYS_ACOUNT_ETH'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button>
+                            {/* <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_ETH'] ? unsettledLoan['SYS_ACOUNT_ETH'].accountNumber : '')} type="primary" style={{marginTop: '15px', marginLeft: '15px', marginRight: '15px'}}>手续费收入</Button> */}
                         </div>}</Card>
                     </Col>
                 </Row>

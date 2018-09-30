@@ -137,8 +137,8 @@ class TBunderline extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
+                    } else if (selectedRows[0].status !== '3') {
+                        showWarnMsg('不是可广播的记录');
                     } else {
                         this.props.history.push(`/finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
                     }

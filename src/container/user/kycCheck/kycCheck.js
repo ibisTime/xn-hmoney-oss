@@ -35,21 +35,25 @@ class KycCheck extends React.Component {
             title: '手机号',
             search: true,
             render: (v, data) => {
-                return data.user ? data.user.mobile : '';
+                return data.applyUserInfo ? data.applyUserInfo.mobile : '';
             }
         }, {
-            field: 'userReferee',
-            title: '推荐人'
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.applyUserInfo ? data.applyUserInfo.email : '';
+            }
         }, {
             field: 'type',
             title: '类型',
             type: 'select',
+            key: 'apply_type',
             search: true
         }, {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'user_status',
+            key: 'approve_status',
             search: true
         }, {
             field: 'remark',
@@ -58,7 +62,7 @@ class KycCheck extends React.Component {
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '805165',
+            pageCode: '805135',
             btnEvent: {
                 check: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

@@ -13,7 +13,8 @@ import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
     getCoinList,
-    dateTimeFormat
+    dateTimeFormat,
+    showWarnMsg
 } from 'common/js/util';
 
 @listWrapper(
@@ -35,6 +36,9 @@ class OfflineRechargeQuery extends React.Component {
         }, {
             field: 'accountName',
             title: '户名',
+            render: (v, data) => {
+                return data.payer ? data.payer.realName ? data.payer.realName : data.payer.mobile : '';
+            },
             search: true
         }, {
             field: 'amount',
@@ -64,6 +68,17 @@ class OfflineRechargeQuery extends React.Component {
             pageCode: '802345',
             searchParams: {
                 currency: 'ETH'
+            },
+            btnEvent: {
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/finance/offlineRecharge/addedit?v=1&code=${selectedRowKeys[0]}`);
+                    }
+                }
             }
         });
     }

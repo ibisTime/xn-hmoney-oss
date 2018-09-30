@@ -95,6 +95,48 @@ class CoinAddedit extends React.Component {
             type: 'textarea',
             normalArea: true
         }, {
+            title: '简介',
+            field: 'introduction',
+            type: 'textarea',
+            required: true
+        }, {
+            title: '流通量',
+            field: 'totalSupply',
+            required: true
+        }, {
+            title: '流通市值',
+            field: 'totalSupplyMarket',
+            required: true
+        }, {
+            title: '发行总量',
+            field: 'maxSupply',
+            required: true
+        }, {
+            title: '发行市值',
+            field: 'maxSupplyMarket',
+            required: true
+        }, {
+            title: '市值排名',
+            field: 'rank',
+            required: true
+        }, {
+            title: '白皮书',
+            field: 'whitePaper',
+            required: true
+        }, {
+            title: '区块查询',
+            field: 'blockUrl',
+            required: true
+        }, {
+            title: 'ico时间',
+            field: 'icoDatetime',
+            type: 'date',
+            required: true
+        }, {
+            title: '官网',
+            field: 'webUrl',
+            required: true
+        }, {
             title: '序号',
             field: 'orderNo',
             number: true,

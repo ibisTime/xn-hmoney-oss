@@ -31,8 +31,8 @@ import {publicSellETHAddEdit} from './redux/public/sellETH-addedit';
 import {publicTransactionRemindAddEdit} from './redux/public/TransactionRemind-addedit';
 import {publicNotice} from './redux/public/notice';
 import {publicNoticeAddEdit} from './redux/public/notice-addedit';
-import {generalTextParam} from './redux/general/text-param';
-import {generalTextParamAddEdit} from './redux/general/text-param-addedit';
+import {publicCommunity} from './redux/public/community';
+import {publicCommunityAddEdit} from './redux/public/community-addedit';
 
 /* 业务管理 */
 // 客户管理
@@ -49,6 +49,7 @@ import {userCustomerAccountSummary} from './redux/user/customer/customer-account
 // 渠道商管理
 import {userChannelDealer} from './redux/user/channelDealer/channelDealer';
 import {userChannelDealerAddEdit} from './redux/user/channelDealer/channelDealer-addedit';
+import {userChannelDealerLowerLevelQuery} from './redux/user/channelDealer/channelDealer-lowerLevelQuery';
 
 // 待结算佣金名单
 import {userChannelDealerCommissions} from './redux/user/channelDealerCommissions/channelDealerCommissions';
@@ -300,8 +301,8 @@ export default combineReducers({
     publicTransactionRemindAddEdit,
     publicNotice,
     publicNoticeAddEdit,
-    generalTextParam,
-    generalTextParamAddEdit,
+    publicCommunity,
+    publicCommunityAddEdit,
     // 会员查询
     userCustomer,
     userCustomerAddEdit,
@@ -330,6 +331,7 @@ export default combineReducers({
     // 渠道商管理
     userChannelDealer,
     userChannelDealerAddEdit,
+    userChannelDealerLowerLevelQuery,
     // 待结算佣金名单
     userChannelDealerCommissions,
     userChannelDealerCommissionsChecklist,

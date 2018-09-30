@@ -13,7 +13,8 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {
     moneyFormat,
-    showWarnMsg
+    showWarnMsg,
+    showSucMsg
 } from 'common/js/util';
 import {downCoin, upCoin} from 'api/coin';
 
@@ -82,6 +83,17 @@ class Coin extends React.Component {
             rowKey: 'id',
             pageCode: '802005',
             btnEvent: {
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    // } else if (selectedRows[0].status !== '1') {
+                    //     showWarnMsg('当前记录不可修改');
+                    } else {
+                        this.props.history.push(`/biz/coin/addedit?code=${selectedRowKeys[0]}`);
+                    }
+                },
                 up: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
@@ -100,7 +112,7 @@ class Coin extends React.Component {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });
@@ -126,7 +138,7 @@ class Coin extends React.Component {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

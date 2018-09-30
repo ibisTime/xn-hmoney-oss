@@ -32,8 +32,7 @@ class CustomerAddedit extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             required: true
         }, {
             field: 'type',

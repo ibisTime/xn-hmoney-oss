@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealer/channelDealer-lowerLevelQuery';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {getQueryString, dateTimeFormat, moneyFormat} from 'common/js/util';
 import {activateUser} from 'api/user';
 
 @listWrapper(
@@ -24,21 +24,29 @@ import {activateUser} from 'api/user';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class ChannelDealer extends React.Component {
+class ChannelDealerLowerLevelQuery extends React.Component {
+    constructor(props) {
+        super(props);
+        this.userId = getQueryString('userId', this.props.location.search);
+    }
+
     render() {
         const fields = [{
-            field: 'mobile',
+            title: '用户名',
+            field: 'userName',
+            render: (v, data) => {
+                return data.nickname;
+            }
+        }, {
             title: '手机号',
-            search: true
+            field: 'mobile'
         }, {
-            field: 'nickname',
-            title: '昵称'
+            title: '邮箱',
+            field: 'email'
         }, {
-            field: 'status',
-            title: '状态',
-            type: 'select',
-            key: 'user_status',
-            search: true
+            title: '注册时间',
+            field: 'createDatetime',
+            type: 'datetime'
         }, {
             field: 'isRealname',
             title: '是否实名',
@@ -46,79 +54,41 @@ class ChannelDealer extends React.Component {
                 return data.realName ? '是' : '否';
             }
         }, {
-            field: 'realName',
-            title: '真实姓名',
+            title: '交易总额',
+            field: 'tradeCount',
             render: (v, data) => {
-                return data.realName ? data.realName : '-';
+                return v === '0' ? '0' : moneyFormat(v, '', 'X');
             }
         }, {
-            field: 'createDatetime',
-            title: '注册时间',
-            type: 'date',
-            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-            render: dateTimeFormat,
-            search: true
+            title: '交易佣金',
+            field: 'tradeAwardCount',
+            render: (v, data) => {
+                return v === '0' ? '0' : moneyFormat(v, '', 'X');
+            }
         }, {
-            field: 'lastLogin',
-            title: '最后登录时间',
-            type: 'datetime'
-        }, {
-            field: 'remark',
-            title: '备注'
+            title: '注册佣金',
+            field: 'regAwardCount',
+            render: (v, data) => {
+                return v === '0' ? '0' : moneyFormat(v, '', 'X');
+            }
         }];
         return this.props.buildList({
             fields,
             rowKey: 'userId',
-            pageCode: '805120',
+            pageCode: '802399',
             searchParams: {
-                kind: 'Q'
+                userId: this.userId
             },
-            btnEvent: {
-                rockActive: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确认${selectedRows[0].status === '0' ? '注销' : '激活'}用户？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return activateUser(selectedRowKeys[0]).then(() => {
-                                    this.props.getPageData();
-                                    showWarnMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
-                    }
-                },
-                // 账户查询
-                accountQuery: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/user/customer/accountQuery?userId=${selectedRowKeys[0]}`);
-                    }
-                },
-                // 查看下级
-                lowerLevelQuery: (selectedRowKeys, selectedRows) => {
-                    if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else {
-                        this.props.history.push(`/user/customer/lowerLevelQuery?userId=${selectedRowKeys[0]}`);
-                    }
+            buttons: [{
+                code: 'goBack',
+                name: '返回',
+                check: false,
+                handler: () => {
+                    this.props.history.go(-1);
                 }
-            }
+            }]
         });
     }
 }
 
-export default ChannelDealer;
+export default ChannelDealerLowerLevelQuery;

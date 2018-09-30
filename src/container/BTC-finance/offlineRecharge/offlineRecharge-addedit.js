@@ -32,15 +32,17 @@ class OfflineRechargeAddedit extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{nickname.DATA}}-{{mobile.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            valueName: '{{realName.DATA}}({{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
             onChange: (v, data) => {
                 if (v) {
                     getListUserAccount({userId: v, currency: 'BTC'}).then((d) => {
                         this.props.setPageData({'accountNumber': d[0].accountNumber});
                     });
                 }
+            },
+            formatter: (v, data) => {
+                return data.payer ? data.payer.realName ? data.payer.realName : data.payer.mobile ? data.payer.mobile : data.payer.email : '';
             }
         }, {
             field: 'accountNumber',
@@ -67,13 +69,15 @@ class OfflineRechargeAddedit extends React.Component {
         }];
 
         let buttons = [];
-        if (this.isCheck) {
+        if (this.isCheck || (this.code && !this.isCheck)) {
             fields = fields.concat([{
                 field: 'payNote',
                 title: '审核意见',
                 readonly: !this.isCheck,
                 required: true
             }]);
+        }
+        if (this.isCheck) {
             buttons = [{
                 title: '通过',
                 handler: (param) => {

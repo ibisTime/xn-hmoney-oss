@@ -51,8 +51,7 @@ class HistoryDivideListDivideList extends React.Component {
             },
             keyName: 'userId',
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            searchName: 'keyword',
             render: (v, data) => {
                 return data.userInfo ? data.userInfo.nickname : '-';
             }

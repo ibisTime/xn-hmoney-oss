@@ -7,9 +7,10 @@ import {
     setPageData,
     restore
 } from '@redux/public/notice-addedit';
-import {getQueryString, getUserName} from 'common/js/util';
+import {getQueryString, getUserName, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import {SYSTEM_CODE} from 'common/js/config';
+import fetch from 'common/js/fetch';
 
 @DetailWrapper(
     state => state.publicNoticeAddEdit,
@@ -20,6 +21,68 @@ class NoticeAddEdit extends React.Component {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
+        // 发布
+        this.isPushDown = !!getQueryString('isPushDown', this.props.location.search);
+        this.buttons = [];
+        if (this.isPushDown) {
+            this.buttons = [{
+                title: '发布',
+                handler: (param) => {
+                    param.updater = getUserName();
+                    this.props.doFetching();
+                    fetch(805301, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true,
+                type: 'primary'
+            }, {
+                title: '返回',
+                handler: (param) => {
+                    this.props.history.go(-1);
+                }
+            }];
+        } else if (!this.code) {
+            this.buttons = [{
+                title: '发布',
+                handler: (param) => {
+                    param.updater = getUserName();
+                    this.props.doFetching();
+                    fetch(805301, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true,
+                type: 'primary'
+            }, {
+                title: '保存',
+                handler: (param) => {
+                    param.updater = getUserName();
+                    this.props.doFetching();
+                    fetch(805300, param).then(() => {
+                        showSucMsg('操作成功');
+                        this.props.cancelFetching();
+                        setTimeout(() => {
+                            this.props.history.go(-1);
+                        }, 1000);
+                    }).catch(this.props.cancelFetching);
+                },
+                check: true
+            }, {
+                title: '返回',
+                handler: (param) => {
+                    this.props.history.go(-1);
+                }
+            }];
+        }
     }
 
     render() {
@@ -45,12 +108,10 @@ class NoticeAddEdit extends React.Component {
         }];
         return this.props.buildDetail({
             fields,
-            key: 'id',
             code: this.code,
             view: this.view,
             detailCode: 805307,
-            addCode: 805300,
-            editCode: 805300,
+            buttons: this.buttons,
             beforeSumit: (params) => {
                 params.updater = getUserName();
                 return params;

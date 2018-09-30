@@ -948,7 +948,7 @@ export default class DetailComponent extends React.Component {
                                 val = item
                                     ? item[f.valueName]
                                         ? item[f.valueName]
-                                        : tempString(f.valueName, item)
+                                        : tempString(f.valueName, item, f)
                                     : '';
                             }
                             return f.nowrap ? <span style={{whiteSpace: 'nowrap'}}>{val}</span> : val;
@@ -1143,12 +1143,12 @@ export default class DetailComponent extends React.Component {
             if (item.multiple) {
                 value = initVal.map(i => {
                     let obj = item.data.find(v => v[item.keyName] === i);
-                    return obj[item.valueName] || tempString(item.valueName, obj) || '';
+                    return obj[item.valueName] || tempString(item.valueName, obj, item) || '';
                 }).join('、');
             } else {
                 value = item.data.filter(v => v[item.keyName] === initVal);
                 value = value && value.length
-                    ? value[0][item.valueName] || tempString(item.valueName, value[0])
+                    ? value[0][item.valueName] || tempString(item.valueName, value[0], item)
                     : initVal;
             }
         }
@@ -1164,7 +1164,7 @@ export default class DetailComponent extends React.Component {
             <FormItem key={item.field} {...this.getInputItemProps()} label={this.getLabel(item)}>
                 {
                     item.readonly ? <div
-                            className="readonly-text">{data && data.length ? data[0][item.valueName] || tempString(item.valueName, data[0]) : value}</div>
+                            className="readonly-text">{data && data.length ? data[0][item.valueName] || tempString(item.valueName, data[0], item) : value}</div>
                         : getFieldDecorator(item.field, {
                             rules,
                             initialValue: item.data || initVal ? initVal : ''
@@ -1191,7 +1191,7 @@ export default class DetailComponent extends React.Component {
                             {/* {...this.getSelectProps(item, initVal)} */}
                             {item.data ? item.data.map(d => (
                                 <Option key={d[item.keyName]} value={d[item.keyName]}>
-                                    {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}
+                                    {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d, item)}
                                 </Option>
                             )) : null}
                         </Select>
@@ -1330,12 +1330,12 @@ export default class DetailComponent extends React.Component {
             if (item.multiple) {
                 value = initVal.map(i => {
                     let obj = item.data.find(v => v[item.keyName] === i);
-                    return obj[item.valueName] || tempString(item.valueName, obj) || '';
+                    return obj[item.valueName] || tempString(item.valueName, obj, item) || '';
                 }).join('、');
             } else {
                 value = item.data.filter(v => v[item.keyName] === initVal);
                 value = value && value.length
-                    ? value[0][item.valueName] || tempString(item.valueName, value[0])
+                    ? value[0][item.valueName] || tempString(item.valueName, value[0], item)
                     : initVal;
             }
         }
@@ -1356,7 +1356,7 @@ export default class DetailComponent extends React.Component {
                         <Select {...this.getSelectProps(item, initVal)}>
                             {item.data ? item.data.map(d => (
                                 <Option key={d[item.keyName]} value={d[item.keyName]}>
-                                    {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d)}
+                                    {d[item.valueName] ? d[item.valueName] : tempString(item.valueName, d, item)}
                                 </Option>
                             )) : null}
                         </Select>

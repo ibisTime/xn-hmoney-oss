@@ -68,6 +68,9 @@ class BuyTradeAddedit extends React.Component {
             title: '保护价',
             field: 'protectPrice'
         }, {
+            title: '售价',
+            field: 'truePrice'
+        }, {
             title: '单笔最大量',
             field: 'maxTrade'
         }, {

@@ -62,14 +62,18 @@ class CustomerAccount extends React.Component {
     render() {
         const fields = [{
             field: 'realName',
-            title: '户名'
+            title: '户名',
+            render: (v, data) => {
+                return !v ? data.mobile : v;
+            }
         }, {
             field: 'currency',
             title: '币种',
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value'
+            valueName: 'value',
+            search: true
         }, {
             field: 'accountNumber',
             title: '账号'

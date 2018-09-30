@@ -15,7 +15,7 @@ import {
     moneyFormat,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
 
@@ -47,18 +47,18 @@ class TBAddress extends React.Component {
         }, {
             title: '使用次数',
             field: 'useCount'
-        // }, {
-        //     field: 'useAmountString',
-        //     title: '提币金额',
-        //     render: (v, data) => {
-        //         return moneyFormat(Number(data.useAmount), '', data.currency);
-        //     }
-        // }, {
-        //     title: '余额',
-        //     field: 'balanceString',
-        //     render: (v, data) => {
-        //         return moneyFormat(Number(data.useAmount), '', data.currency);
-        //     }
+        }, {
+            field: 'useAmountString',
+            title: '提币金额',
+            render: (v, data) => {
+                return moneyFormat(Number(data.useAmount), '', data.currency);
+            }
+        }, {
+            title: '余额',
+            field: 'balanceString',
+            render: (v, data) => {
+                return moneyFormat(Number(data.useAmount), '', data.currency);
+            }
         }];
         return this.props.buildList({
             fields,
@@ -77,7 +77,7 @@ class TBAddress extends React.Component {
                             this.props.doFetching();
                             fetch(802510, {}).then(() => {
                                 this.props.getPageData();
-                                showWarnMsg('操作成功');
+                                showSucMsg('操作成功');
                             }).catch(() => {
                                 this.props.cancelFetching();
                             });
@@ -86,11 +86,11 @@ class TBAddress extends React.Component {
                 },
                 dele: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
-                        showWarnMsg('请选择记录');
+                        showSucMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status === '2') {
-                        showWarnMsg('已经是无效地址，无需重复弃用');
+                        showSucMsg('请选择一条记录');
+                    } else if (selectedRows[0].status === '1') {
+                        showSucMsg('已经是无效地址，无需重复弃用');
                     } else {
                         Modal.confirm({
                             okText: '确认',
@@ -102,7 +102,7 @@ class TBAddress extends React.Component {
                                     id: selectedRowKeys[0]
                                 }).then(() => {
                                     this.props.getPageData();
-                                    showWarnMsg('操作成功');
+                                    showSucMsg('操作成功');
                                 }).catch(() => {
                                     this.props.cancelFetching();
                                 });

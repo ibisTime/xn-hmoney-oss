@@ -7,7 +7,7 @@ import {
     setPageData,
     restore
 } from '@redux/trade/arbitrationOrder/arbitrationOrder-resolve';
-import {getQueryString, moneyFormat, showSucMsg} from 'common/js/util';
+import {getQueryString, moneyFormat, showSucMsg, getUserId} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
@@ -33,7 +33,12 @@ class ArbitrationOrderResolve extends React.Component {
             formatter: (v, data) => {
                 var html = '';
                 if (data.beigaoInfo) {
-                    html = data.beigaoInfo.mobile + '(' + data.beigaoInfo.nickname + ')';
+                    html = data.beigaoInfo.nickname;
+                    if(data.beigaoInfo.mobile) {
+                        html += '(' + data.beigaoInfo.mobile + ')';
+                    } else {
+                        html += '(' + data.beigaoInfo.email + ')';
+                    }
                 }
                 if (v === data.tradeOrder.buyUser) {
                     html += '-买家';
@@ -49,7 +54,12 @@ class ArbitrationOrderResolve extends React.Component {
             formatter: (v, data) => {
                 var html = '';
                 if (data.yuangaoInfo) {
-                    html = data.yuangaoInfo.mobile + '(' + data.yuangaoInfo.nickname + ')';
+                    html = data.yuangaoInfo.nickname;
+                    if(data.yuangaoInfo.mobile) {
+                        html += '(' + data.yuangaoInfo.mobile + ')';
+                    } else {
+                        html += '(' + data.yuangaoInfo.email + ')';
+                    }
                 }
                 if (v === data.tradeOrder.buyUser) {
                     html += '-买家';
@@ -103,6 +113,7 @@ class ArbitrationOrderResolve extends React.Component {
                 title: '通过',
                 handler: (param) => {
                     param.result = '1';
+                    param.updater = getUserId();
                     this.props.doFetching();
                     fetch(625260, param).then(() => {
                         showSucMsg('操作成功');
@@ -118,6 +129,7 @@ class ArbitrationOrderResolve extends React.Component {
                 title: '不通过',
                 handler: (param) => {
                     param.result = '0';
+                    param.updater = getUserId();
                     this.props.doFetching();
                     fetch(625260, param).then(() => {
                         showSucMsg('操作成功');

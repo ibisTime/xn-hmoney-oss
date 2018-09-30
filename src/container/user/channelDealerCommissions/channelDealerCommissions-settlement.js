@@ -9,9 +9,10 @@ import {
 } from '@redux/user/channelDealerCommissions/channelDealerCommissions-settlement';
 import {getQueryString, moneyFormat, dateTimeFormat, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
+import fetch from 'common/js/fetch';
 
 @DetailWrapper(
-    state => state.userCustomerAddEdit,
+    state => state.userChannelDealerCommissionsSettlement,
     {initStates, doFetching, cancelFetching, setSelectData, setPageData, restore}
 )
 class ChannelDealerCommissionsSettlement extends React.Component {
@@ -25,36 +26,48 @@ class ChannelDealerCommissionsSettlement extends React.Component {
         const fields = [{
             field: 'userId',
             title: '渠道商',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                kind: 'Q'
+            },
+            keyName: 'userId',
+            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
+            searchName: 'keyword',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '-';
-            }
+            },
+            search: true
         }, {
             field: 'mobile',
             title: '手机号',
-            render: (v, data) => {
+            formatter: (v, data) => {
                 return data.user ? data.user.mobile : '-';
             }
         }, {
-            field: 'amount',
-            title: '佣金',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
+            field: 'email',
+            title: '邮箱',
+            formatter: (v, data) => {
+                return data.user ? data.user.email : '-';
             }
         }, {
-            field: 'currency',
-            title: '币种'
+            field: 'settleCount',
+            title: '结算金额'
         }, {
-            field: 'refType',
-            title: '佣金类型'
+            field: 'unsettleCount',
+            title: '未结算金额'
         }, {
-            field: 'refNote',
-            title: '佣金说明'
+            field: 'nosettleCount',
+            title: '不结算金额'
         }, {
-            field: 'refCode',
-            title: '关联单号'
+            field: 'tradeCount',
+            title: '交易总金额'
         }, {
-            field: 'remark',
-            title: '备注'
+            field: 'tradeAward',
+            title: '交易奖励'
+        }, {
+            field: 'regAward',
+            title: '注册奖励'
         }, {
             field: 'handleNote',
             title: '处理说明',
@@ -66,16 +79,14 @@ class ChannelDealerCommissionsSettlement extends React.Component {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '805121',
+            detailCode: '802398',
             buttons: [{
                 title: '结算',
                 handler: (param) => {
                     var data = {
-                        'awardList': [{
-                            id: this.code,
-                            handleResult: '1',
-                            handleNote: param.handleNote
-                        }]
+                        id: this.code,
+                        handleResult: '1',
+                        handleNote: param.handleNote
                     };
                     this.props.doFetching();
                     fetch(802390, data).then(() => {
@@ -89,14 +100,12 @@ class ChannelDealerCommissionsSettlement extends React.Component {
                 check: true,
                 type: 'primary'
             }, {
-                title: '不通过',
+                title: '不结算',
                 handler: (param) => {
                     var data = {
-                        'awardList': [{
-                            id: this.code,
-                            handleResult: '0',
-                            handleNote: param.handleNote
-                        }]
+                        id: this.code,
+                        handleResult: '0',
+                        handleNote: param.handleNote
                     };
                     this.props.doFetching();
                     fetch(802390, data).then(() => {

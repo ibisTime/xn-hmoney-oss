@@ -125,12 +125,12 @@ const ROUTES = [
         component: asyncComponent(() => import('container/public/banner-addedit/banner-addedit'))
     },
     {
-        path: '/general/textParam',
-        component: asyncComponent(() => import('container/general/text-param/text-param'))
+        path: '/public/community',
+        component: asyncComponent(() => import('container/public/community/community'))
     },
     {
-        path: '/general/textParam/addedit',
-        component: asyncComponent(() => import('container/general/text-param-addedit/text-param-addedit'))
+        path: '/public/community/addedit',
+        component: asyncComponent(() => import('container/public/community/community-addedit'))
     },
 
     // 业务管理
@@ -227,6 +227,14 @@ const ROUTES = [
     {
         path: '/user/channelDealer/accountQuery',
         component: asyncComponent(() => import('container/user/customer/customer-account'))
+    },
+    {
+        path: '/user/channelDealer/lowerLevelQuery',
+        component: asyncComponent(() => import('container/user/channelDealer/channelDealer-lowerLevelQuery'))
+    },
+    {
+        path: '/user/channelDealer/divideAccount',
+        component: asyncComponent(() => import('container/user/customer/customer-accountSummary'))
     },
     // 待结算佣金名单
     {
