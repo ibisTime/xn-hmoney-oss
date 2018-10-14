@@ -63,25 +63,18 @@ class FinishOrderAddedit extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '2',
-                'value': '已释放'
-            }, {
-                'key': '3',
-                'value': '已取消'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+            key: 'accept_order_status',
+            search: true
         }, {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
+        }, {
+            field: 'receiveBank',
+            title: '付款方式'
+        }, {
+            field: 'receiveCardNo',
+            title: '付款账号'
         }];
         return this.props.buildDetail({
             fields,

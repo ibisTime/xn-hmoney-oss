@@ -42,17 +42,18 @@ class CommissionsHistoryListCommissions extends React.Component {
 
     render() {
         const fields = [{
-            field: 'amount',
+            field: 'count',
             title: '佣金',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
-            }
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'currency',
             title: '币种'
         }, {
             field: 'refType',
-            title: '佣金类型'
+            title: '佣金类型',
+            type: 'select',
+            key: 'award_ref_type'
         }, {
             field: 'refNote',
             title: '佣金说明'
@@ -71,12 +72,16 @@ class CommissionsHistoryListCommissions extends React.Component {
             valueName: 'value',
             search: true
         }, {
-            field: 'settleDatetime',
-            title: '结算时间',
+            field: 'createDatetime',
+            title: '申请时间',
             type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
+            rangedate: ['dateStart', 'dateEnd'],
             render: dateTimeFormat,
             search: true
+        }, {
+            field: 'handleDatetime',
+            title: '结算时间',
+            type: 'datetime'
         }, {
             field: 'refCode',
             title: '关联单号'
@@ -88,7 +93,8 @@ class CommissionsHistoryListCommissions extends React.Component {
             fields,
             pageCode: '802395',
             searchParams: {
-                userId: this.userId
+                userId: this.userId,
+                userKind: 'C'
             },
             buttons: this.buttons
         });

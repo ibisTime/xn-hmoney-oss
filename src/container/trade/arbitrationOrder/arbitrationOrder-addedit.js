@@ -101,10 +101,10 @@ class ArbitrationOrderAddedit extends React.Component {
             type: 'select',
             data: [{
                 'key': '0',
-                'value': '通过'
+                'value': '不通过'
             }, {
                 'key': '1',
-                'value': '不通过'
+                'value': '通过'
             }],
             keyName: 'key',
             valueName: 'value'

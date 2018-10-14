@@ -27,10 +27,6 @@ class CommunityAddedit extends React.Component {
             value: 1,
             hidden: true
         }, {
-            field: 'type',
-            value: 6,
-            hidden: true
-        }, {
             field: 'parentCode',
             value: 0,
             hidden: true
@@ -38,6 +34,13 @@ class CommunityAddedit extends React.Component {
             title: '名称',
             field: 'name',
             required: true
+        }, {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'commit_type',
+            required: true,
+            readonly: !!this.code
         }, {
             title: '图标',
             field: 'pic',

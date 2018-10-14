@@ -45,9 +45,9 @@ class TBAddress extends React.Component {
             title: '创建日期',
             field: 'createDatetime',
             type: 'datetime'
-        }, {
-            title: '使用次数',
-            field: 'useCount'
+        // }, {
+            // title: '使用次数',
+            // field: 'useCount'
         // }, {
         //     field: 'useAmountString',
         //     title: '提币金额',

@@ -50,10 +50,10 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
                 kind: 'Q'
             },
             keyName: 'userId',
-            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
+            valueName: '{{realName.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
-                return data.user ? data.user.nickname : '-';
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             },
             search: true
         }, {
@@ -65,15 +65,16 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
         }, {
             field: 'count',
             title: '佣金',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.currency);
-            }
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'currency',
             title: '币种'
         }, {
             field: 'refType',
-            title: '佣金类型'
+            title: '佣金类型',
+            type: 'select',
+            key: 'award_ref_type'
         }, {
             field: 'refNote',
             title: '佣金说明'
@@ -92,12 +93,16 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
             valueName: 'value',
             search: true
         }, {
-            field: 'settleDatetime',
-            title: '结算时间',
+            field: 'createDatetime',
+            title: '申请时间',
             type: 'date',
-            rangedate: ['applyDateStart', 'applyDateEnd'],
+            rangedate: ['dateStart', 'dateEnd'],
             render: dateTimeFormat,
             search: true
+        }, {
+            field: 'handleDatetime',
+            title: '结算时间',
+            type: 'datetime'
         }, {
             field: 'refCode',
             title: '关联单号'
@@ -110,7 +115,9 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
             rowKey: 'id',
             pageCode: '802395',
             searchParams: {
-                userId: this.userId
+                userId: this.userId,
+                userKind: 'Q',
+                status: '1'
             },
             buttons: this.buttons
         });

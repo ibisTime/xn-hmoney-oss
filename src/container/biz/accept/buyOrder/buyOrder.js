@@ -83,21 +83,8 @@ class BuyOrder extends React.Component {
             title: '状态',
             field: 'status',
             type: 'select',
-            data: [{
-                'key': '0',
-                'value': '待支付'
-            }, {
-                'key': '1',
-                'value': '已支付'
-            }, {
-                'key': '2',
-                'value': '已释放'
-            }, {
-                'key': '3',
-                'value': '已取消'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+            key: 'accept_order_status',
+            search: true
         }, {
             field: 'createDatetime',
             title: '下单时间',
@@ -116,6 +103,8 @@ class BuyOrder extends React.Component {
                         showWarnMsg('请选择记录');
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].status !== '1') {
+                        showWarnMsg('不是已支付待释放的订单');
                     } else {
                         this.props.history.push(`/accept/buyOrder/addedit?v=1&isSale=1&code=${selectedRowKeys[0]}`);
                     }

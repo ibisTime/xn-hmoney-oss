@@ -132,6 +132,18 @@ const ROUTES = [
         path: '/public/community/addedit',
         component: asyncComponent(() => import('container/public/community/community-addedit'))
     },
+    {
+        path: '/public/warmReminding',
+        component: asyncComponent(() => import('container/public/warmReminding-addedit/warmReminding-addedit'))
+    },
+    {
+        path: '/public/legalDeclaration',
+        component: asyncComponent(() => import('container/public/legalDeclaration/legalDeclaration-addedit'))
+    },
+    {
+        path: '/public/rateExplain',
+        component: asyncComponent(() => import('container/public/rateExplain/rateExplain-addedit'))
+    },
 
     // 业务管理
     // 客户管理
@@ -397,6 +409,15 @@ const ROUTES = [
         path: '/quotation/exchangeRate',
         component: asyncComponent(() => import('container/biz/quotation/exchangeRate'))
     },
+    // 市价调节值
+    {
+        path: '/quotation/marketAdjustment',
+        component: asyncComponent(() => import('container/biz/quotation/marketAdjustment'))
+    },
+    {
+        path: '/quotation/marketAdjustment/addedit',
+        component: asyncComponent(() => import('container/biz/quotation/marketAdjustment-addedit'))
+    },
 
     // 活动管理
     // 邀请好友
@@ -480,6 +501,10 @@ const ROUTES = [
         path: '/finance/offlineRecharge/addedit',
         component: asyncComponent(() => import('container/finance/offlineRecharge/offlineRecharge-addedit'))
     },
+    {
+        path: '/finance/offlineRecharge/detail',
+        component: asyncComponent(() => import('container/finance/offlineRecharge/offlineRecharge-detail'))
+    },
     // 充值查询
     {
         path: '/finance/offlineRechargeQuery',
@@ -556,6 +581,10 @@ const ROUTES = [
         path: '/BTC-finance/offlineRecharge/addedit',
         component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge-addedit'))
     },
+    {
+        path: '/BTC-finance/offlineRecharge/detail',
+        component: asyncComponent(() => import('container/BTC-finance/offlineRecharge/offlineRecharge-detail'))
+    },
     // 充值查询
     {
         path: '/BTC-finance/offlineRechargeQuery',
@@ -623,6 +652,46 @@ const ROUTES = [
         path: '/TOKEN-finance/diviAddress/ledger',
         component: asyncComponent(() => import('container/TOKEN-finance/diviAddress/diviAddress-ledger'))
     },
+    // 平台分红
+    {
+        path: '/TOKEN-finance/platformDivide',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformDivide/platformDivide'))
+    },
+    {
+        path: '/TOKEN-finance/platformDivide/divide',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformDivide/platformDivide-divide'))
+    },
+    {
+        path: '/TOKEN-finance/platformDivide/divideList',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformDivide/platformDivide-divideList'))
+    },
+    {
+        path: '/TOKEN-finance/platformDivideHistory',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformDivideHistory/platformDivideHistory'))
+    },
+    {
+        path: '/TOKEN-finance/platformDivideNext',
+        component: asyncComponent(() => import('container/TOKEN-finance/platformDivideNext/platformDivideNext'))
+    },
+
+// 特殊奖励
+    {
+        path: '/TOKEN-finance/specialReward',
+        component: asyncComponent(() => import('container/TOKEN-finance/specialReward/specialReward'))
+    },
+    {
+        path: '/TOKEN-finance/specialReward/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/specialReward/specialReward-addedit'))
+    },
+    {
+        path: '/TOKEN-finance/specialRewardHistory',
+        component: asyncComponent(() => import('container/TOKEN-finance/specialRewardHistory/specialRewardHistory'))
+    },
+    {
+        path: '/TOKEN-finance/specialRewardHistory/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/specialReward/specialReward-addedit'))
+    },
+
     // 充币管理
     // 线下充值
     {
@@ -632,6 +701,10 @@ const ROUTES = [
     {
         path: '/TOKEN-finance/offlineRecharge/addedit',
         component: asyncComponent(() => import('container/TOKEN-finance/offlineRecharge/offlineRecharge-addedit'))
+    },
+    {
+        path: '/TOKEN-finance/offlineRecharge/detail',
+        component: asyncComponent(() => import('container/TOKEN-finance/offlineRecharge/offlineRecharge-detail'))
     },
     // 充值查询
     {

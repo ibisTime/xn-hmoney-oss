@@ -22,15 +22,16 @@ class GJAddressQueryAddedit extends React.Component {
     }
     render() {
         let fields = [{
-            field: 'amountString',
+            field: 'amount',
             title: '交易数量',
             coin: 'X',
             coinAmount: true
         }, {
             title: '矿工费',
-            field: 'txFeeString',
-            coin: 'ETH',
-            coinAmount: true
+            field: 'txFee',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', 'ETH');
+            }
         }, {
             field: 'fromAddress',
             title: '来方归集'
@@ -47,18 +48,7 @@ class GJAddressQueryAddedit extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            data: [{
-                key: '0',
-                value: '广播中'
-            }, {
-                key: '1',
-                value: '广播成功'
-            }, {
-                key: '2',
-                value: '广播失败'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+            key: 'collect_status'
         }, {
             field: 'confirmDatetime',
             title: '区块确认时间',

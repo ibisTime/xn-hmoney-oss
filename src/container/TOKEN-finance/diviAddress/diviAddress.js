@@ -52,15 +52,19 @@ class DiviAddress extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            field: 'balanceString',
+            field: 'balance',
             title: '当前余额',
-            amount: true,
-            formatter: moneyFormat
+            render: (v, data) => {
+                return moneyFormat(v, '', 'X');
+            }
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
             pageCode: '802505',
+            searchParams: {
+                symbol: 'X'
+            },
             btnEvent: {
                 diviLedger: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {

@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/user/commissionsHistoryList/commissionsHistoryList';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {dateTimeFormat, showWarnMsg, dateFormat} from 'common/js/util';
 import {activateUser} from 'api/user';
 
 @listWrapper(
@@ -38,7 +38,7 @@ class CommissionsHistoryList extends React.Component {
             valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
-                return data.user ? data.user.nickname : '-';
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             }
         }, {
             field: 'mobile',
@@ -48,22 +48,30 @@ class CommissionsHistoryList extends React.Component {
             }
         }, {
             field: 'settleCount',
-            title: '结算金额'
+            title: '结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'unsettleCount',
-            title: '未结算金额'
+            title: '未结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'nosettleCount',
-            title: '不结算金额'
+            title: '不结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'tradeCount',
-            title: '交易总金额'
+            field: 'nextUnsettleCount',
+            title: '下月未结算数量',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'tradeAward',
-            title: '交易奖励'
-        }, {
-            field: 'regAward',
-            title: '注册奖励'
+            field: 'date',
+            title: '时间',
+            render: (v, data) => {
+                return dateFormat(data.startDate) + '至' + dateFormat(data.endDate);
+            }
         }];
         return this.props.buildList({
             fields,
@@ -80,6 +88,15 @@ class CommissionsHistoryList extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/user/commissionsHistoryList/commissions`);
+                    }
+                },
+                settle: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/user/channelDealerCommissions/settlement?v=1&code=${selectedRowKeys[0]}`);
                     }
                 }
             }

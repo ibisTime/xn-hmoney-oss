@@ -53,9 +53,9 @@ class GJAddress extends React.Component {
             title: '创建日期',
             field: 'createDatetime',
             type: 'datetime'
-        }, {
-            title: '使用次数',
-            field: 'useCount'
+        // }, {
+        //     title: '使用次数',
+        //     field: 'useCount'
         }];
         return this.props.buildList({
             fields,

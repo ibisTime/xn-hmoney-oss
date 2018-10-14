@@ -26,16 +26,11 @@ class Login extends React.Component {
         const {getFieldDecorator} = this.props.form;
         return (
             <div className="login-body">
-                <div className='logo-wrap'>
-                    {/* <img src={logoWhite}/> */}
-                    <p>后台管理系统</p>
-                </div>
                 <div className="login-wrap">
-                    <div className="title">用户登录</div>
+                    <div className="title">FUN MVP</div>
                     {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <FormItem className="form-item">
-                            <div className="icon icon-user"></div>
                             {getFieldDecorator('loginName', {
                                 rules: [{
                                     required: true,
@@ -46,7 +41,6 @@ class Login extends React.Component {
                             )}
                         </FormItem>
                         <FormItem className="form-item">
-                            <div className="icon icon-pwd"></div>
                             {getFieldDecorator('loginPwd', {
                                 rules: [{
                                     required: true,

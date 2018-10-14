@@ -45,18 +45,28 @@ class TBunderline extends React.Component {
             keyName: 'realName',
             valueName: '{{realName.DATA}}',
             searchName: 'realName',
-            search: true
-        }, {
-            field: 'amountW',
-            title: '提现金额',
+            search: true,
             render: (v, data) => {
-                return moneyFormat(Number(data.amount), '', data.currency);
+                if (data.applyUserInfo) {
+                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    if (data.applyUserInfo.kind === 'Q') {
+                        return data.applyUserInfo.realName + '(' + tmpl + ')';
+                    }
+                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                }
+                return '';
             }
         }, {
             field: 'amount',
+            title: '提现金额',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'actualAmount',
             title: '实际到账金额',
             render: (v, data) => {
-                return moneyFormatSubtract(data.amount, data.feeString, '', data.currency);
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'channelType',
@@ -74,15 +84,14 @@ class TBunderline extends React.Component {
             field: 'mobile',
             title: '申请人',
             render: (v, data) => {
-                if (data.user) {
-                    if(data.user.kind === 'P') {
-                        return data.user.loginName;
-                    }else{
-                        return data.user.mobile;
+                if (data.applyUserInfo) {
+                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    if (data.applyUserInfo.kind === 'Q') {
+                        return data.applyUserInfo.realName + '(' + tmpl + ')';
                     }
-                } else {
-                    return data.approveUser;
+                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
                 }
+                return '';
             }
         }, {
             field: 'applyDatetime',
@@ -105,7 +114,10 @@ class TBunderline extends React.Component {
             title: '审核意见'
         }, {
             field: 'approveUser',
-            title: '审核人'
+            title: '审核人',
+            render: (v, data) => {
+                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+            }
         }, {
             field: 'approveDatetime',
             title: '审核时间',

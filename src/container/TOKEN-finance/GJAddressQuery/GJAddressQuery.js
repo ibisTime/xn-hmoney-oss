@@ -31,7 +31,7 @@ import {
 class GJAddressQuery extends React.Component {
     render() {
         const fields = [{
-            field: 'amountString',
+            field: 'amount',
             title: '交易数量',
             coin: 'X',
             coinAmount: true
@@ -48,18 +48,7 @@ class GJAddressQuery extends React.Component {
             field: 'status',
             title: '状态',
             type: 'select',
-            data: [{
-                key: '0',
-                value: '广播中'
-            }, {
-                key: '1',
-                value: '广播成功'
-            }, {
-                key: '2',
-                value: '广播失败'
-            }],
-            keyName: 'key',
-            valueName: 'value',
+            key: 'collect_status',
             search: true
         }, {
             field: 'createDatetime',

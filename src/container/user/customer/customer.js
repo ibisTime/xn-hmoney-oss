@@ -42,10 +42,13 @@ class Customer extends React.Component {
             title: '推荐人',
             render: (v, data) => {
                 if (data.refereeUser) {
-                    return data.refereeUser.mobile;
-                } else {
-                    return '-';
+                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
+                    if (data.refereeUser.kind === 'Q') {
+                        return data.refereeUser.realName + '(' + tmpl + ')';
+                    }
+                    return data.refereeUser.nickname + '(' + tmpl + ')';
                 }
+                return '';
             },
             required: true
         }, {

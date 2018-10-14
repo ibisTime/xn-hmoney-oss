@@ -33,11 +33,11 @@ class PrivacyAddeidt extends React.Component {
         return this.props.buildDetail({
             fields,
             key: 'ckey',
-            code: 'reg_protocol',
+            code: 'privacy',
             detailCode: 630047,
             editCode: 630042,
             buttons: [{
-                title: 'privacy',
+                title: '保存',
                 check: true,
                 handler: (params) => {
                     this.props.doFetching();

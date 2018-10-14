@@ -254,7 +254,7 @@ export default class DetailComponent extends React.Component {
         values[key] = isUndefined(values[key]) ? this.props.code || '' : values[key];
         this.options.fields.forEach(v => {
             if (v.amount || v.coinAmount) {
-                values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin ? v.coin : '');
+                values[v.field] = moneyParse(values[v.field], v.amountRate, v.coin);
             } else if (v.type === 'citySelect') {
                 let mid = values[v.field].map(a => a === '全部' ? '' : a);
                 v.cFields.forEach((f, i) => {
@@ -427,13 +427,21 @@ export default class DetailComponent extends React.Component {
         fetch(this.options.detailCode, param).then(data => {
             this.props.cancelFetching();
             let keys = Object.keys(this.props.pageData);
+            var _data = {};
+            if(this.options._keys) {
+                this.options._keys.map(item => {
+                    _data = data[item];
+                });
+            } else {
+                _data = data;
+            }
             if (keys.length) {
                 this.props.setPageData({
                     ...this.props.pageData,
-                    ...data
+                    ..._data
                 });
             } else {
-                this.props.setPageData(data);
+                this.props.setPageData(_data);
             }
         }).catch(this.props.cancelFetching);
     }
@@ -858,7 +866,7 @@ export default class DetailComponent extends React.Component {
                                 if (f.render) {
                                     value = f.render(d[f.field], d);
                                 } else if (f.amount || f.coinAmount) {
-                                    value = moneyFormat(d[f.field], '', f.coin ? f.coin : '');
+                                    value = moneyFormat(d[f.field], '', f.coin);
                                 } else if (f.type === 'date' || f.type === 'datetime') {
                                     value = f.type === 'date' ? dateFormat(d[f.field]) : dateTimeFormat(d[f.field]);
                                 } else {
@@ -982,7 +990,7 @@ export default class DetailComponent extends React.Component {
                 }
             }
             if ((f.amount || f.coinAmount) && !f.render) {
-                obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d)}</span>;
+                obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, d, f.coin)}</span>;
             }
             if (!obj.render) {
                 if (f.render) {
@@ -1576,7 +1584,7 @@ export default class DetailComponent extends React.Component {
             if (item.formatter) {
                 result = item.formatter(result, this.props.pageData);
             } else if (item.amount || item.coinAmount) {
-                result = isUndefined(result) ? '' : moneyFormat(result, item.amountRate);
+                result = isUndefined(result) ? '' : moneyFormat(result, item.amountRate, item.coin);
             }
         } catch (e) {
         }

@@ -22,14 +22,14 @@ class GJAddressQueryAddedit extends React.Component {
     }
     render() {
         let fields = [{
-            field: 'amountString',
+            field: 'amount',
             title: '交易数量',
-            coin: 'ETH',
+            coin: 'BTC',
             coinAmount: true
         }, {
             title: '矿工费',
-            field: 'txFeeString',
-            coin: 'ETH',
+            field: 'txFee',
+            coin: 'BTC',
             coinAmount: true
         }, {
             field: 'fromAddress',
@@ -41,24 +41,10 @@ class GJAddressQueryAddedit extends React.Component {
             title: '交易HASH',
             field: 'txHash'
         }, {
-            title: '关联订单号',
-            field: 'refNo'
-        }, {
             field: 'status',
             title: '状态',
             type: 'select',
-            data: [{
-                key: '0',
-                value: '广播中'
-            }, {
-                key: '1',
-                value: '广播成功'
-            }, {
-                key: '2',
-                value: '广播失败'
-            }],
-            keyName: 'key',
-            valueName: 'value'
+            key: 'collect_status'
         }, {
             field: 'confirmDatetime',
             title: '区块确认时间',

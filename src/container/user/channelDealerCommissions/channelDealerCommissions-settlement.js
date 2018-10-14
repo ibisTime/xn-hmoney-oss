@@ -7,7 +7,7 @@ import {
     setPageData,
     restore
 } from '@redux/user/channelDealerCommissions/channelDealerCommissions-settlement';
-import {getQueryString, moneyFormat, dateTimeFormat, showSucMsg} from 'common/js/util';
+import {getQueryString, moneyFormat, dateTimeFormat, showSucMsg, dateFormat} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
@@ -25,19 +25,10 @@ class ChannelDealerCommissionsSettlement extends React.Component {
     render() {
         const fields = [{
             field: 'userId',
-            title: '渠道商',
-            type: 'select',
-            pageCode: '805120',
-            params: {
-                kind: 'Q'
-            },
-            keyName: 'userId',
-            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
-            searchName: 'keyword',
-            render: (v, data) => {
-                return data.user ? data.user.nickname : '-';
-            },
-            search: true
+            title: '用户',
+            formatter: (v, data) => {
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
+            }
         }, {
             field: 'mobile',
             title: '手机号',
@@ -51,23 +42,45 @@ class ChannelDealerCommissionsSettlement extends React.Component {
                 return data.user ? data.user.email : '-';
             }
         }, {
-            field: 'settleCount',
-            title: '结算金额'
+            field: 'count',
+            title: '佣金',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'unsettleCount',
-            title: '未结算金额'
+            field: 'currency',
+            title: '币种'
         }, {
-            field: 'nosettleCount',
-            title: '不结算金额'
+            field: 'refType',
+            title: '佣金类型',
+            type: 'select',
+            key: 'award_ref_type'
         }, {
-            field: 'tradeCount',
-            title: '交易总金额'
+            field: 'refNote',
+            title: '佣金说明'
         }, {
-            field: 'tradeAward',
-            title: '交易奖励'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '待结算'
+            }, {
+                key: '1',
+                value: '已结算'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
-            field: 'regAward',
-            title: '注册奖励'
+            field: 'createDatetime',
+            title: '申请时间',
+            type: 'datetime'
+        }, {
+            field: 'refCode',
+            title: '关联单号'
+        }, {
+            field: 'remark',
+            title: '备注'
         }, {
             field: 'handleNote',
             title: '处理说明',
@@ -79,7 +92,7 @@ class ChannelDealerCommissionsSettlement extends React.Component {
             key: 'id',
             code: this.code,
             view: this.view,
-            detailCode: '802398',
+            detailCode: '802394',
             buttons: [{
                 title: '结算',
                 handler: (param) => {

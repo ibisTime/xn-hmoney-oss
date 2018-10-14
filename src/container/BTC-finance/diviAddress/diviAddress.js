@@ -52,10 +52,10 @@ class BTCDiviAddress extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            field: 'balanceString',
+            field: 'balance',
             title: '当前余额',
-            amount: true,
-            formatter: moneyFormat
+            coin: 'BTC',
+            coinAmount: true
         }];
         return this.props.buildList({
             fields,

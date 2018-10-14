@@ -45,18 +45,25 @@ class TBunderline extends React.Component {
             keyName: 'realName',
             valueName: '{{realName.DATA}}',
             searchName: 'realName',
-            search: true
-        }, {
-            field: 'amountW',
-            title: '提现金额',
+            search: true,
             render: (v, data) => {
-                return moneyFormat(Number(data.amount), '', data.currency);
+                if (data.applyUserInfo) {
+                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    return data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.nickname + '(' + tmpl + ')';
+                }
+                return '';
             }
         }, {
             field: 'amount',
+            title: '提现金额',
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'actualAmount',
             title: '实际到账金额',
             render: (v, data) => {
-                return moneyFormatSubtract(data.amount, data.feeString, '', data.currency);
+                return moneyFormat(v, '', data.currency);
             }
         }, {
             field: 'channelType',
@@ -74,15 +81,14 @@ class TBunderline extends React.Component {
             field: 'mobile',
             title: '申请人',
             render: (v, data) => {
-                if (data.user) {
-                    if(data.user.kind === 'P') {
-                        return data.user.loginName;
-                    }else{
-                        return data.user.mobile;
+                if (data.applyUserInfo) {
+                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    if (data.applyUserInfo.kind === 'Q') {
+                        return data.applyUserInfo.realName + '(' + tmpl + ')';
                     }
-                } else {
-                    return data.approveUser;
+                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
                 }
+                return '';
             }
         }, {
             field: 'applyDatetime',
@@ -105,7 +111,10 @@ class TBunderline extends React.Component {
             title: '审核意见'
         }, {
             field: 'approveUser',
-            title: '审核人'
+            title: '审核人',
+            render: (v, data) => {
+                return data.approveUserInfo ? data.approveUserInfo.loginName : '';
+            }
         }, {
             field: 'approveDatetime',
             title: '审核时间',
@@ -129,7 +138,7 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/TOKEN-finance/TBunderline/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
                     }
                 },
                 sp: (selectedRowKeys, selectedRows) => {
@@ -140,7 +149,7 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '3') {
                         showWarnMsg('不是可广播的记录');
                     } else {
-                        this.props.history.push(`/finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/TOKEN-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
                     }
                 }
             }

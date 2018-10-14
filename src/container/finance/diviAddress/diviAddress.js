@@ -52,15 +52,18 @@ class DiviAddress extends React.Component {
             searchName: 'keyword',
             search: true
         }, {
-            field: 'balanceString',
+            field: 'balance',
             title: '当前余额',
-            amount: true,
-            formatter: moneyFormat
+            coin: 'ETH',
+            coinAmount: true
         }];
         return this.props.buildList({
             fields,
             rowKey: 'address',
             pageCode: '802505',
+            searchParams: {
+                symbol: 'ETH'
+            },
             btnEvent: {
                 diviLedger: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
@@ -68,7 +71,7 @@ class DiviAddress extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/finance/diviAddress/ledger?address=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/finance/diviAddress/ledger?symbol=ETH&address=${selectedRowKeys[0]}`);
                     }
                 }
             }

@@ -56,12 +56,12 @@ class Coin extends React.Component {
                 return moneyFormat(v, '', data.symbol);
             }
         }, {
-            title: '取现手续费',
-            field: 'withdrawFee',
-            render: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            }
-        }, {
+        //     title: '取现手续费',
+        //     field: 'withdrawFee',
+        //     render: (v, data) => {
+        //         return moneyFormat(v, '', data.symbol);
+        //     }
+        // }, {
             title: '状态',
             field: 'status',
             type: 'select',

@@ -45,28 +45,29 @@ class TBAddress extends React.Component {
             title: '创建日期',
             field: 'createDatetime',
             type: 'datetime'
-        }, {
-            title: '使用次数',
-            field: 'useCount'
-        }, {
-            field: 'useAmountString',
-            title: '提币金额',
-            render: (v, data) => {
-                return moneyFormat(Number(data.useAmount), '', data.currency);
-            }
-        }, {
-            title: '余额',
-            field: 'balanceString',
-            render: (v, data) => {
-                return moneyFormat(Number(data.useAmount), '', data.currency);
-            }
+        // }, {
+        //     title: '使用次数',
+        //     field: 'useCount'
+        // }, {
+        //     field: 'useAmountString',
+        //     title: '提币金额',
+        //     render: (v, data) => {
+        //         return moneyFormat(Number(data.useAmount), '', data.currency);
+        //     }
+        // }, {
+        //     title: '余额',
+        //     field: 'balanceString',
+        //     render: (v, data) => {
+        //         return moneyFormat(Number(data.useAmount), '', data.currency);
+        //     }
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
             pageCode: '802515',
             searchParams: {
-                type: 'M'
+                type: 'M',
+                symbol: 'X'
             },
             btnEvent: {
                 add: (selectedRowKeys, selectedRows) => {
@@ -76,7 +77,7 @@ class TBAddress extends React.Component {
                         content: `确认生成提币地址？`,
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802510, {}).then(() => {
+                            fetch(802510, {symbol: 'X'}).then(() => {
                                 this.props.getPageData();
                                 showSucMsg('操作成功');
                             }).catch(() => {

@@ -31,6 +31,12 @@ class Community extends React.Component {
             title: '社群号',
             field: 'url'
         }, {
+            title: '类型',
+            field: 'type',
+            type: 'select',
+            key: 'commit_type',
+            search: true
+        }, {
             title: '顺序',
             field: 'orderNo'
         }, {
@@ -42,7 +48,6 @@ class Community extends React.Component {
             pageCode: '630505',
             deleteCode: '630501',
             searchParams: {
-                type: 6,
                 location: 'community'
             }
         });

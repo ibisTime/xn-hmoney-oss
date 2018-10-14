@@ -143,12 +143,9 @@ export default class ListComponent extends React.Component {
             obj.render = (value) => <img src={PIC_PREFIX + value}/>;
         }
         if (f.amount || f.coinAmount) {
-            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, '', f.coin ? f.coin : '')}</span>;
-            this.addRender(f, moneyFormat);
+            obj.render = (v, d) => <span style={{whiteSpace: 'nowrap'}}>{moneyFormat(v, '', f.coin)}</span>;
             if (!f.render) {
-                f.render = (v, d) => {
-                    moneyFormat(v, '', f.coin ? f.coin : '');
-                };
+                f.render = (v, d) => moneyFormat(v, '', f.coin);
             }
         }
         if (!obj.render) {
@@ -220,11 +217,6 @@ export default class ListComponent extends React.Component {
                 this.props.cancelFetching();
                 showWarnMsg('暂无数据');
             } else {
-                let operator = getUserId();
-                fetch(632090, {
-                    url,
-                    operator
-                }).then(info => {
                     let titles = [];
                     let bodys = [];
                     data.list.forEach((d, i) => {
@@ -240,9 +232,8 @@ export default class ListComponent extends React.Component {
                     let result = [titles].concat(bodys);
                     const wb = getWorkbook();
                     wb.getSheet(result, 'SheetJS');
-                    wb.downloadXls(info);
+                    wb.downloadXls('表格导出');
                     this.props.cancelFetching();
-                });
             }
         }).catch(this.props.cancelFetching);
     }

@@ -7,7 +7,7 @@ import {
     setPageData,
     restore
 } from '@redux/finance/TBunderline/TBunderline-multiCheck';
-import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/util';
+import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
 
@@ -24,37 +24,33 @@ class TBunderlineMultiCheck extends React.Component {
 
     render() {
         let fields = [{
-            field: 'mAddressCode',
+            field: 'mAddressId',
             title: '广播地址',
             required: true,
             type: 'select',
-            listCode: '802515',
+            pageCode: '802515',
             params: {
                 type: 'M',
+                symbol: 'ETH',
                 statusList: ['0']
             },
-            keyName: 'code',
-            valueName: '{{address.DATA}}--{{balanceString.DATA}}',
+            keyName: 'address',
+            valueName: '{{address.DATA}}',
             searchName: 'address'
         }];
         return this.props.buildDetail({
             fields,
             code: '',
             view: this.view,
-            addCode: '802340',
-            detailCode: '802346',
-            beforeSubmit: function(data) {
-                data.applyUser = getUserName();
-                return data;
-            },
             buttons: [{
                 title: '广播',
-                handler: (param) => {
-                    param.payResult = '1';
-                    param.code = this.code;
-                    param.approveUser = getUserName();
+                handler: (params) => {
+                    let address = this.props.selectData.mAddressId.find(v => v.mAddressId === params.address);
+                    params.mAddressId = address.id;
+                    params.code = this.code;
+                    params.approveUser = getUserId();
                     this.props.doFetching();
-                    fetch(802353, param).then(() => {
+                    fetch(802353, params).then(() => {
                         showSucMsg('操作成功');
                         this.props.cancelFetching();
                         setTimeout(() => {

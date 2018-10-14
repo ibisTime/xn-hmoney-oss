@@ -35,7 +35,7 @@ class ChannelDealerLowerLevelQuery extends React.Component {
             title: '用户名',
             field: 'userName',
             render: (v, data) => {
-                return data.nickname;
+                return data.realName ? data.realName : data.nickname;
             }
         }, {
             title: '手机号',

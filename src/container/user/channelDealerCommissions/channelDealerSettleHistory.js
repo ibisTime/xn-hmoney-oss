@@ -11,7 +11,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealerCommissions/channelDealerSettleHistory';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {dateTimeFormat, showWarnMsg, dateFormat, formatDate} from 'common/js/util';
 import {activateUser} from 'api/user';
 
 @listWrapper(
@@ -28,17 +28,17 @@ class ChannelDealerSettleHistory extends React.Component {
     render() {
         const fields = [{
             field: 'userId',
-            title: '用户',
+            title: '渠道商',
             type: 'select',
             pageCode: '805120',
             params: {
-                kind: 'C'
+                kind: 'Q'
             },
             keyName: 'userId',
-            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
+            valueName: '{{realName.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
-                return data.user ? data.user.nickname : '-';
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             },
             search: true
         }, {
@@ -49,29 +49,38 @@ class ChannelDealerSettleHistory extends React.Component {
             }
         }, {
             field: 'settleCount',
-            title: '结算金额'
+            title: '结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'unsettleCount',
-            title: '未结算金额'
+            title: '未结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
             field: 'nosettleCount',
-            title: '不结算金额'
+            title: '不结算金额',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'tradeCount',
-            title: '交易总金额'
+            field: 'nextUnsettleCount',
+            title: '下月未结算数量',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'tradeAward',
-            title: '交易奖励'
-        }, {
-            field: 'regAward',
-            title: '注册奖励'
+            field: 'date',
+            title: '时间',
+            render: (v, data) => {
+                return dateFormat(data.startDate) + '至' + dateFormat(data.endDate);
+            }
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
             pageCode: '802396',
             searchParams: {
-                userKind: 'Q'
+                userKind: 'Q',
+                dataEnd: formatDate(new Date(), 'yyyy-MM-01')
             },
             btnEvent: {
                 commissions: (selectedRowKeys, selectedRows) => {

@@ -79,7 +79,16 @@ class OfflineRecharge extends React.Component {
                     } else if (selectedRows[0].status !== '1') {
                         showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/finance/offlineRecharge/addedit?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                    }
+                },
+                detail: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/BTC-finance/offlineRecharge/detail?v=1&code=${selectedRowKeys[0]}`);
                     }
                 }
             }

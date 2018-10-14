@@ -115,7 +115,7 @@ export function padLeftZero(str) {
  * @param date
  * @param format
  */
-export function dateFormat(date) {
+export function dateFormat(date, format) {
     return formatDate(date, 'yyyy-MM-dd');
 }
 

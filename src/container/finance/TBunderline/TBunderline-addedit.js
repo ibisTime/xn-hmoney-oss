@@ -37,13 +37,37 @@ class TBunderlineAddedit extends React.Component {
             keyName: 'accountNumber',
             valueName: '{{realName.DATA}}',
             searchName: 'accountNumber',
-            help: '支持户名查询'
+            help: '支持户名查询',
+            formatter: (v, data) => {
+                if (data.applyUserInfo) {
+                    let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
+                    if (data.applyUserInfo.kind === 'Q') {
+                        return data.applyUserInfo.realName + '(' + tmpl + ')';
+                    }
+                    return data.applyUserInfo.nickname + '(' + tmpl + ')';
+                }
+                return '';
+            }
         }, {
             field: 'amount',
             title: '取现金额',
             required: true,
             coinAmount: true,
             coin: 'ETH',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'actualAmount',
+            title: '到账金额',
+            required: true,
             formatter: (v, data) => {
                 return moneyFormat(v, '', data.currency);
             }
@@ -114,6 +138,7 @@ class TBunderlineAddedit extends React.Component {
             fields,
             code: this.code,
             view: this.view,
+            _keys: ['withdraw'],
             detailCode: '802356',
             beforeSubmit: function(data) {
                 data.applyUser = getUserId();

@@ -33,6 +33,9 @@ import {publicNotice} from './redux/public/notice';
 import {publicNoticeAddEdit} from './redux/public/notice-addedit';
 import {publicCommunity} from './redux/public/community';
 import {publicCommunityAddEdit} from './redux/public/community-addedit';
+import {publicWarmRemindingAddedit} from './redux/public/warmReminding-addedit';
+import {publicLegalDeclarationAddEdit} from './redux/public/legalDeclaration-addedit';
+import {publicRateExplainAddEdit} from './redux/public/rateExplain-addedit';
 
 /* 业务管理 */
 // 客户管理
@@ -147,6 +150,10 @@ import {quotationQuotationX} from './redux/biz/quotation/quotationX';
 // 法币汇率
 import {quotationExchangeRate} from './redux/biz/quotation/exchangeRate';
 
+// 市价调节值
+import {quotationMarketAdjustment} from './redux/biz/quotation/marketAdjustment';
+import {quotationMarketAdjustmentAddEdit} from './redux/biz/quotation/marketAdjustment-addedit';
+
 // 活动管理
 // 邀请好友
 import {activityInvitingFriends} from './redux/activity/invitingFriends/invitingFriends';
@@ -184,6 +191,8 @@ import {financeDiviAddressLedger} from './redux/finance/diviAddress/diviAddress-
 // 线下充值
 import {financeOfflineRecharge} from './redux/finance/offlineRecharge/offlineRecharge';
 import {financeOfflineRechargeAddEdit} from './redux/finance/offlineRecharge/offlineRecharge-addedit';
+import {financeOfflineRechargeDetail} from './redux/finance/offlineRecharge/offlineRecharge-detail';
+
 // 充值查询
 import {financeOfflineRechargeQuery} from './redux/finance/offlineRecharge/offlineRechargeQuery';
 
@@ -215,6 +224,7 @@ import {BTCFinanceDiviAddressLedger} from './redux/BTC-finance/diviAddress/diviA
 // 线下充值
 import {BTCFinanceOfflineRecharge} from './redux/BTC-finance/offlineRecharge/offlineRecharge';
 import {BTCFinanceOfflineRechargeAddEdit} from './redux/BTC-finance/offlineRecharge/offlineRecharge-addedit';
+import {BTCFinanceOfflineRechargeDetail} from './redux/BTC-finance/offlineRecharge/offlineRecharge-detail';
 
 // 充值查询
 import {BTCFinanceOfflineRechargeQuery} from './redux/BTC-finance/offlineRecharge/offlineRechargeQuery';
@@ -243,10 +253,23 @@ import {TOKENFinancePlatformAccount} from './redux/TOKEN-finance/platformAccount
 import {TOKENFinanceDiviAddress} from './redux/TOKEN-finance/diviAddress/diviAddress';
 import {TOKENFinanceDiviAddressLedger} from './redux/TOKEN-finance/diviAddress/diviAddress-ledger';
 
+// 平台分红
+import {TOKENFinancePlatformDivide} from './redux/TOKEN-finance/platformDivide/platformDivide';
+import {TOKENFinancePlatformDivideDivide} from './redux/TOKEN-finance/platformDivide/platformDivide-divide';
+import {TOKENFinancePlatformDivideDivideList} from './redux/TOKEN-finance/platformDivide/platformDivide-divideList';
+import {TOKENFinancePlatformDivideHistory} from './redux/TOKEN-finance/platformDivideHistory/platformDivideHistory';
+import {TOKENFinancePlatformDivideNext} from './redux/TOKEN-finance/platformDivideNext/platformDivideNext';
+
+// 特殊奖励
+import {TOKENFinanceSpecialReward} from './redux/TOKEN-finance/specialReward/specialReward';
+import {TOKENFinanceSpecialRewardAddEdit} from './redux/TOKEN-finance/specialReward/specialReward-addedit';
+import {TOKENFinanceSpecialRewardHistory} from './redux/TOKEN-finance/specialRewardHistory/specialRewardHistory';
+
 // 充币管理
 // 线下充值
 import {TOKENFinanceOfflineRecharge} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge';
 import {TOKENFinanceOfflineRechargeAddEdit} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge-addedit';
+import {TOKENFinanceOfflineRechargeDetail} from './redux/TOKEN-finance/offlineRecharge/offlineRecharge-detail';
 
 // 充值查询
 import {TOKENFinanceOfflineRechargeQuery} from './redux/TOKEN-finance/offlineRecharge/offlineRechargeQuery';
@@ -303,6 +326,9 @@ export default combineReducers({
     publicNoticeAddEdit,
     publicCommunity,
     publicCommunityAddEdit,
+    publicWarmRemindingAddedit,
+    publicLegalDeclarationAddEdit,
+    publicRateExplainAddEdit,
     // 会员查询
     userCustomer,
     userCustomerAddEdit,
@@ -375,6 +401,8 @@ export default combineReducers({
     quotationQuotationETH,
     quotationQuotationX,
     quotationExchangeRate,
+    quotationMarketAdjustment,
+    quotationMarketAdjustmentAddEdit,
     // 活动管理
     // 邀请好友
     activityInvitingFriends,
@@ -403,6 +431,7 @@ export default combineReducers({
     // 充币管理
     financeOfflineRecharge,
     financeOfflineRechargeAddEdit,
+    financeOfflineRechargeDetail,
     financeOfflineRechargeQuery,
     // 提币管理
     financeTBAddress,
@@ -425,6 +454,7 @@ export default combineReducers({
     // 充币管理
     BTCFinanceOfflineRecharge,
     BTCFinanceOfflineRechargeAddEdit,
+    BTCFinanceOfflineRechargeDetail,
     BTCFinanceOfflineRechargeQuery,
     // 提币管理
     BTCFinanceTBAddress,
@@ -443,9 +473,20 @@ export default combineReducers({
     // 分发地址
     TOKENFinanceDiviAddress,
     TOKENFinanceDiviAddressLedger,
+    // 平台分红
+    TOKENFinancePlatformDivide,
+    TOKENFinancePlatformDivideDivide,
+    TOKENFinancePlatformDivideDivideList,
+    TOKENFinancePlatformDivideHistory,
+    TOKENFinancePlatformDivideNext,
+    // 特殊奖励
+    TOKENFinanceSpecialReward,
+    TOKENFinanceSpecialRewardAddEdit,
+    TOKENFinanceSpecialRewardHistory,
     // 充币管理
     TOKENFinanceOfflineRecharge,
     TOKENFinanceOfflineRechargeAddEdit,
+    TOKENFinanceOfflineRechargeDetail,
     TOKENFinanceOfflineRechargeQuery,
     // 提币管理
     TOKENFinanceTBAddress,

@@ -34,6 +34,7 @@ class DiviAddress extends React.Component {
     constructor(props) {
         super(props);
         this.address = getQueryString('address', this.props.location.search);
+        this.symbol = getQueryString('symbol', this.props.location.search);
     }
 
     render() {
@@ -45,9 +46,9 @@ class DiviAddress extends React.Component {
             title: '交易金额',
             render: (v, data) => {
                 if (data.from === this.address) {
-                    return '-' + moneyFormat(v);
+                    return '-' + moneyFormat(v, '', this.symbol);
                 } else {
-                    return moneyFormat(v);
+                    return moneyFormat(v, '', this.symbol);
                 }
             }
         }, {
@@ -62,11 +63,11 @@ class DiviAddress extends React.Component {
             }
         }, {
             title: 'gasLimit',
-            field: 'gas'
+            field: 'gasLimit'
         }, {
             title: 'gas价格',
             field: 'gasPrice',
-            coin: 'ETH',
+            coin: this.symbol,
             coinAmount: true
         }, {
             title: '消耗gas',
@@ -75,14 +76,11 @@ class DiviAddress extends React.Component {
             title: '矿工费',
             field: 'kgPrice',
             render: (v, data) => {
-                let kgPrice = moneyFormatMultiply(data.gasPrice, data.gasUsed, '', 'ETH');
+                let kgPrice = moneyFormatMultiply(data.gasPrice, data.gasUsed, '', this.symbol);
                 return kgPrice;
             }
         }, {
-            field: 'refNo',
-            title: '关联订单号'
-        }, {
-            field: 'creates',
+            field: 'syncDatetime',
             title: '网络记账时间',
             type: 'datatime'
         }];
@@ -92,7 +90,15 @@ class DiviAddress extends React.Component {
             pageCode: '802530',
             searchParams: {
                 address: this.address
-            }
+            },
+            buttons: [{
+                code: 'goBack',
+                name: '返回',
+                check: false,
+                handler: () => {
+                    this.props.history.go(-1);
+                }
+            }]
         });
     }
 }

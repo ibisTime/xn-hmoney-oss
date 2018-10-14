@@ -78,13 +78,12 @@ class CoinAddedit extends React.Component {
         }, {
             title: '取现手续费',
             field: 'withdrawFee',
-            formatter: (v, data) => {
-                return moneyFormat(v, '', data.symbol);
-            },
-            required: true
+            value: 0,
+            required: true,
+            hidden: true
         }, {
             title: '合约地址',
-            field: 'contractAddress',
+            field: 'contractAsddress',
             required: true,
             readonly: !!this.code
         }, {

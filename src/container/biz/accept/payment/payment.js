@@ -59,10 +59,10 @@ class Payment extends React.Component {
             type: 'select',
             data: [{
                 'key': '0',
-                'value': '可用'
+                'value': '不可用'
             }, {
                 'key': '1',
-                'value': '不可用'
+                'value': '可用'
             }],
             keyName: 'key',
             valueName: 'value',

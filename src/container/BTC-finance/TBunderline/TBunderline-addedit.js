@@ -28,22 +28,39 @@ class TBunderlineAddedit extends React.Component {
             field: 'accountNumber',
             title: '充值账户',
             required: true,
-            type: 'select',
-            pageCode: '802300',
-            params: {
-                currency: 'BTC',
-                type: 'C'
-            },
-            keyName: 'accountNumber',
-            valueName: '{{realName.DATA}}',
-            searchName: 'accountNumber',
-            help: '支持户名查询'
+            // type: 'select',
+            // pageCode: '802300',
+            // params: {
+            //     currency: 'BTC',
+            //     type: 'C'
+            // },
+            // keyName: 'accountNumber',
+            // valueName: '{{realName.DATA}}',
+            // searchName: 'accountNumber',
+            // help: '支持户名查询',
+            formatter: (v, data) => {
+                return data.applyUserInfo ? data.applyUserInfo.realName ? data.applyUserInfo.realName : data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email : '';
+            }
         }, {
             field: 'amount',
             title: '取现金额',
             required: true,
             coinAmount: true,
             coin: 'BTC',
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'fee',
+            title: '手续费',
+            required: true,
+            formatter: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
+        }, {
+            field: 'actualAmount',
+            title: '到账金额',
+            required: true,
             formatter: (v, data) => {
                 return moneyFormat(v, '', data.currency);
             }
@@ -114,6 +131,7 @@ class TBunderlineAddedit extends React.Component {
             fields,
             code: this.code,
             view: this.view,
+            _keys: ['withdraw'],
             detailCode: '802356',
             beforeSubmit: function(data) {
                 data.applyUser = getUserId();

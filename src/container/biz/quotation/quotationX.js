@@ -25,69 +25,54 @@ import {dateTimeFormat} from 'common/js/util';
 class QuotationX extends React.Component {
     render() {
         const fields = [{
-            field: 'mobile',
-            title: '手机号',
-            search: true
+            title: '币种',
+            field: 'coin'
         }, {
-            field: 'nickname',
-            title: '昵称'
+            title: '最新成交价',
+            field: 'lastPrice'
         }, {
-            field: 'userReferee',
-            title: '推荐人',
-            render: (v, data) => {
-                if (data.refereeUser) {
-                    return data.refereeUser.mobile;
-                } else {
-                    return '-';
-                }
-            },
-            required: true
+            title: '卖家期望价格',
+            field: 'ask'
         }, {
-            field: 'status',
-            title: '状态',
+            title: '买家期望价格',
+            field: 'bid'
+        }, {
+            title: '最高价',
+            field: 'high'
+        }, {
+            title: '最低价',
+            field: 'low'
+        }, {
+            title: '中间价',
+            field: 'mid'
+        }, {
+            title: '来源',
+            field: 'origin'
+        }, {
+            title: '参照货币',
+            field: 'referCurrency',
             type: 'select',
-            key: 'user_status',
-            search: true
+            data: [{
+                key: 'CNY',
+                value: '人民币'
+            }],
+            keyName: 'key',
+            valueName: 'value'
         }, {
-            field: 'isRealname',
-            title: '是否实名',
-            render: (v, data) => {
-                return data.realName ? '是' : '否';
-            }
+            title: '过去24小时成交量',
+            field: 'volume'
         }, {
-            field: 'realName',
-            title: '真实姓名',
-            render: (v, data) => {
-                return data.realName ? data.realName : '-';
-            }
-        }, {
-            field: 'divRate1',
-            title: '普通分成'
-        }, {
-            field: 'divRate2',
-            title: '代理人分成'
-        }, {
-            field: 'tradeRate',
-            title: '广告费率'
-        }, {
-            field: 'createDatetime',
-            title: '注册时间',
-            type: 'date',
-            rangedate: ['createDatetimeStart', 'createDatetimeEnd'],
-            render: dateTimeFormat,
-            search: true
-        }, {
-            field: 'lastLogin',
-            title: '最后登录时间',
+            title: '更新时间',
+            field: 'updateDatetime',
             type: 'datetime'
-        }, {
-            field: 'remark',
-            title: '备注'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'userId',
-            pageCode: '805120'
+            rowKey: 'id',
+            pageCode: '650101',
+            searchParams: {
+                symbol: 'X'
+            }
         });
     }
 }

@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/user/channelDealerCommissions/channelDealerCommissions-checklist';
 import {listWrapper} from 'common/js/build-list';
-import {getQueryString, moneyFormat, dateTimeFormat, showWarnMsg} from 'common/js/util';
+import {getQueryString, moneyFormat, dateTimeFormat, showWarnMsg, dateFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -52,17 +52,17 @@ class ChannelDealerCommissionsChecklist extends React.Component {
     render() {
         const fields = [{
             field: 'userId',
-            title: '渠道商',
+            title: '用户',
             type: 'select',
             pageCode: '805120',
             params: {
                 kind: 'Q'
             },
             keyName: 'userId',
-            valueName: '{{nickName.DATA}}-{{mobile.DATA}}',
+            valueName: '{{realName.DATA}}-{{mobile.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
-                return data.user ? data.user.nickname : '-';
+                return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';
             },
             search: true
         }, {
@@ -77,33 +77,57 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             render: (v, data) => {
                 return data.user ? data.user.email : '-';
             }
+        }, {field: 'count',
+            title: '佣金',
+            coin: 'X',
+            coinAmount: true
         }, {
-            field: 'settleCount',
-            title: '结算金额'
+            field: 'currency',
+            title: '币种'
         }, {
-            field: 'unsettleCount',
-            title: '未结算金额'
+            field: 'refType',
+            title: '佣金类型',
+            type: 'select',
+            key: 'award_ref_type'
         }, {
-            field: 'nosettleCount',
-            title: '不结算金额'
+            field: 'refNote',
+            title: '佣金说明'
         }, {
-            field: 'tradeCount',
-            title: '交易总金额'
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            data: [{
+                key: '0',
+                value: '待结算'
+            }, {
+                key: '1',
+                value: '已结算'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
         }, {
-            field: 'tradeAward',
-            title: '交易奖励'
+            field: 'createDatetime',
+            title: '申请时间',
+            type: 'date',
+            rangedate: ['dateStart', 'dateEnd'],
+            render: dateTimeFormat,
+            search: true
         }, {
-            field: 'regAward',
-            title: '注册奖励'
+            field: 'handleDatetime',
+            title: '结算时间',
+            type: 'datetime'
         }, {
-            field: 'endDate',
-            title: '结束日期',
-            type: 'dates'
+            field: 'refCode',
+            title: '关联单号'
+        }, {
+            field: 'remark',
+            title: '备注'
         }];
         return this.props.buildList({
             fields,
             rowKey: 'id',
-            pageCode: '802396',
+            pageCode: '802395',
             buttons: this.buttons,
             searchParams: {
                 status: '0',

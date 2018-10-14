@@ -23,6 +23,7 @@ class ContactAddeidt extends React.Component {
         }, {
             title: '联系客服',
             field: 'cvalue',
+            type: 'textarea',
             required: true
         }, {
             field: 'remark',
