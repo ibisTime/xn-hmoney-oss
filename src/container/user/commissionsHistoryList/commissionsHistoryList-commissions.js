@@ -11,6 +11,7 @@ import {
 } from '@redux/user/commissionsHistoryList/commissionsHistoryList-commissions';
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, moneyFormat, dateTimeFormat} from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -44,7 +45,7 @@ class CommissionsHistoryListCommissions extends React.Component {
         const fields = [{
             field: 'count',
             title: '佣金',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'currency',

@@ -17,6 +17,7 @@ import {
     dateTimeFormat,
     showWarnMsg
 } from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -127,7 +128,7 @@ class TBunderline extends React.Component {
             fields,
             pageCode: '802355',
             searchParams: {
-                currency: 'X'
+                currency: CION_FMVP
             },
             btnEvent: {
                 multiCheck: (selectedRowKeys, selectedRows) => {

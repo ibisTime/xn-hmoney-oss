@@ -1,4 +1,5 @@
 import {getListUserAccount, getCommissionStatistics} from 'api/account';
+import {CION_FMVP} from 'common/js/config';
 
 const PREFIX = 'USER_CUSTOMER_ACCOUNTSUMMARY_';
 const SET_UNSEETTLEDLOAN = PREFIX + 'SET_UNSEETTLEDLOAN';
@@ -45,7 +46,7 @@ export function initData(userId) {
         Promise.all([
             getListUserAccount({
                 userId: userId,
-                currency: 'X'
+                currency: CION_FMVP
             }),
             getCommissionStatistics(userId)
         ]).then(([accData, statData]) => {

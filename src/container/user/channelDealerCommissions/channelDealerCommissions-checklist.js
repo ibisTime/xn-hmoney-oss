@@ -11,6 +11,7 @@ import {
 } from '@redux/user/channelDealerCommissions/channelDealerCommissions-checklist';
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, moneyFormat, dateTimeFormat, showWarnMsg, dateFormat} from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -79,7 +80,7 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             }
         }, {field: 'count',
             title: '佣金',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'currency',

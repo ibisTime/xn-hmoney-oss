@@ -11,6 +11,7 @@ import {
 } from '@redux/biz/quotation/quotationX';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat} from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -71,7 +72,7 @@ class QuotationX extends React.Component {
             rowKey: 'id',
             pageCode: '650101',
             searchParams: {
-                symbol: 'X'
+                symbol: CION_FMVP
             }
         });
     }

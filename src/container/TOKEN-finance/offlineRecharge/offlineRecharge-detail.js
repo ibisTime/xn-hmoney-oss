@@ -11,6 +11,7 @@ import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/ut
 import {DetailWrapper} from 'common/js/build-detail';
 import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceOfflineRechargeDetail,
@@ -41,7 +42,7 @@ class OfflineRechargeDetail extends React.Component {
             field: 'amount',
             required: true,
             coinAmount: true,
-            coin: 'X',
+            coin: CION_FMVP,
             formatter: (v, data) => {
                 return v ? moneyFormat(v, '', data.currency) : '';
             }

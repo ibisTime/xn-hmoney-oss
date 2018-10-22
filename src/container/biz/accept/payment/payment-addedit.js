@@ -9,7 +9,7 @@ import {
 } from '@redux/accept/payment/payment-addedit';
 import {getQueryString, moneyFormat} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
-import {SYS_USER} from 'common/js/config';
+import {SYS_USER, CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.acceptPaymentAddEdit,
@@ -38,7 +38,7 @@ class PaymentAddedit extends React.Component {
             field: 'currency',
             title: '币种',
             required: true,
-            value: 'X',
+            value: CION_FMVP,
             hidden: true
         }, {
             field: 'realName',

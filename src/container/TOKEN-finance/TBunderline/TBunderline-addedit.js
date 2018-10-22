@@ -10,6 +10,7 @@ import {
 import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceTBunderlineAddEdit,
@@ -31,7 +32,7 @@ class TBunderlineAddedit extends React.Component {
             type: 'select',
             pageCode: '802300',
             params: {
-                currency: 'X',
+                currency: CION_FMVP,
                 type: 'C'
             },
             keyName: 'accountNumber',

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Card, Row, Col, Button, Spin} from 'antd';
 import {initData} from '@redux/user/customer/customer-accountSummary';
 import {getQueryString, moneyFormat} from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 const {Meta} = Card;
 
@@ -26,7 +27,7 @@ class Account extends React.Component {
 
     render() {
         const unsettledLoan = this.props.unsettledLoan;
-        const symbol = 'X';
+        const symbol = CION_FMVP;
 
         return (
             <div>

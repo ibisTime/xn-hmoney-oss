@@ -10,6 +10,7 @@ import {
 import {getQueryString, moneyFormat, getUserId, showSucMsg} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceTBunderlineMultiCheck,
@@ -31,7 +32,7 @@ class TBunderlineMultiCheck extends React.Component {
             pageCode: '802515',
             params: {
                 type: 'M',
-                symbol: 'X',
+                symbol: CION_FMVP,
                 statusList: ['0']
             },
             keyName: 'address',

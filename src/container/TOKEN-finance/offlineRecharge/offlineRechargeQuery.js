@@ -16,6 +16,7 @@ import {
     dateTimeFormat,
     showWarnMsg
 } from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -67,7 +68,7 @@ class OfflineRechargeQuery extends React.Component {
             fields,
             pageCode: '802345',
             searchParams: {
-                currency: 'X'
+                currency: CION_FMVP
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {

@@ -13,6 +13,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -39,12 +40,12 @@ class PlatformDivide extends React.Component {
         }, {
             field: 'divideAmount',
             title: '分红总金额',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'divideProfit',
             title: '分红利润',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'divideDatetime',

@@ -13,6 +13,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, dateFormat, formatDate} from 'common/js/util';
 import {activateUser} from 'api/user';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -50,22 +51,22 @@ class ChannelDealerSettleHistory extends React.Component {
         }, {
             field: 'settleCount',
             title: '结算金额',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'unsettleCount',
             title: '未结算金额',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'nosettleCount',
             title: '不结算金额',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'nextUnsettleCount',
             title: '下月未结算数量',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'date',

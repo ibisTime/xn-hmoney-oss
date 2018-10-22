@@ -1187,6 +1187,7 @@ export default class DetailComponent extends React.Component {
                             notFoundContent={this.state.fetching[item.field] ? <Spin size="small"/> : '暂无数据'}
                             placeholder={item.placeholder ? item.placeholder : '请输入关键字搜索'}
                             onFocus={() => {
+                                console.log(this.props.setSelectData[item.field]);
                                 if (!this.props.setSelectData[item.field]) {
                                     this.searchSelectChange({item});
                                 }

@@ -17,6 +17,7 @@ import {
     dateTimeFormat,
     showWarnMsg
 } from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -33,7 +34,7 @@ class GJAddressQuery extends React.Component {
         const fields = [{
             field: 'amount',
             title: '交易数量',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'fromAddress',
@@ -59,7 +60,7 @@ class GJAddressQuery extends React.Component {
             fields,
             pageCode: '802365',
             searchParams: {
-                currency: 'X'
+                currency: CION_FMVP
             }
         });
     }

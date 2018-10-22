@@ -19,6 +19,7 @@ import {
     showSucMsg
 } from 'common/js/util';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -67,7 +68,7 @@ class TBAddress extends React.Component {
             pageCode: '802515',
             searchParams: {
                 type: 'M',
-                symbol: 'X'
+                symbol: CION_FMVP
             },
             btnEvent: {
                 add: (selectedRowKeys, selectedRows) => {
@@ -77,7 +78,7 @@ class TBAddress extends React.Component {
                         content: `确认生成提币地址？`,
                         onOk: () => {
                             this.props.doFetching();
-                            fetch(802510, {symbol: 'X'}).then(() => {
+                            fetch(802510, {symbol: CION_FMVP}).then(() => {
                                 this.props.getPageData();
                                 showSucMsg('操作成功');
                             }).catch(() => {

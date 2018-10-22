@@ -19,6 +19,7 @@ import {
     showWarnMsg,
     moneyFormatMultiply
 } from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -45,9 +46,9 @@ class DiviAddress extends React.Component {
             title: '交易金额',
             render: (v, data) => {
                 if (data.from === this.address) {
-                    return '-' + moneyFormat(v);
+                    return '-' + moneyFormat(v, '', CION_FMVP);
                 } else {
-                    return moneyFormat(v);
+                    return moneyFormat(v, '', CION_FMVP);
                 }
             }
         }, {
@@ -66,7 +67,7 @@ class DiviAddress extends React.Component {
         }, {
             title: 'gas价格',
             field: 'gasPrice',
-            coin: 'ETH',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             title: '消耗gas',

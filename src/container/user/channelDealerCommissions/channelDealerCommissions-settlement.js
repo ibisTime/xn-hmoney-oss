@@ -10,6 +10,7 @@ import {
 import {getQueryString, moneyFormat, dateTimeFormat, showSucMsg, dateFormat} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.userChannelDealerCommissionsSettlement,
@@ -44,7 +45,7 @@ class ChannelDealerCommissionsSettlement extends React.Component {
         }, {
             field: 'count',
             title: '佣金',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'currency',

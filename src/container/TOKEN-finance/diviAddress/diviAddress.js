@@ -17,6 +17,7 @@ import {
     dateTimeFormat,
     showWarnMsg
 } from 'common/js/util';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -55,7 +56,7 @@ class DiviAddress extends React.Component {
             field: 'balance',
             title: '当前余额',
             render: (v, data) => {
-                return moneyFormat(v, '', 'X');
+                return moneyFormat(v, '', CION_FMVP);
             }
         }];
         return this.props.buildList({
@@ -63,7 +64,7 @@ class DiviAddress extends React.Component {
             rowKey: 'id',
             pageCode: '802505',
             searchParams: {
-                symbol: 'X'
+                symbol: CION_FMVP
             },
             btnEvent: {
                 diviLedger: (selectedRowKeys, selectedRows) => {

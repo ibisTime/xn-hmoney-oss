@@ -9,6 +9,7 @@ import {
 } from '@redux/TOKEN-finance/GJAddressQuery/GJAddressQuery-addedit';
 import {getQueryString, moneyFormat} from 'common/js/util';
 import {DetailWrapper} from 'common/js/build-detail';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceGJAddressQueryAddEdit,
@@ -24,7 +25,7 @@ class GJAddressQueryAddedit extends React.Component {
         let fields = [{
             field: 'amount',
             title: '交易数量',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             title: '矿工费',

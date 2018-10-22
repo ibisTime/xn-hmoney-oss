@@ -13,6 +13,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, dateFormat} from 'common/js/util';
 import {activateUser} from 'api/user';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -69,7 +70,7 @@ class SpecialRewardHistory extends React.Component {
         }, {
             field: 'count',
             title: '佣金',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'createDatetime',

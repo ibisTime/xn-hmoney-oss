@@ -13,6 +13,7 @@ import {
 import {listWrapper} from 'common/js/build-list';
 import {getQueryString, dateTimeFormat, moneyFormat} from 'common/js/util';
 import {activateUser} from 'api/user';
+import {CION_FMVP} from 'common/js/config';
 
 @listWrapper(
     state => ({
@@ -57,19 +58,19 @@ class ChannelDealerLowerLevelQuery extends React.Component {
             title: '交易总额',
             field: 'tradeCount',
             render: (v, data) => {
-                return v === '0' ? '0' : moneyFormat(v, '', 'X');
+                return v === '0' ? '0' : moneyFormat(v, '', CION_FMVP);
             }
         }, {
             title: '交易佣金',
             field: 'tradeAwardCount',
             render: (v, data) => {
-                return v === '0' ? '0' : moneyFormat(v, '', 'X');
+                return v === '0' ? '0' : moneyFormat(v, '', CION_FMVP);
             }
         }, {
             title: '注册佣金',
             field: 'regAwardCount',
             render: (v, data) => {
-                return v === '0' ? '0' : moneyFormat(v, '', 'X');
+                return v === '0' ? '0' : moneyFormat(v, '', CION_FMVP);
             }
         }];
         return this.props.buildList({

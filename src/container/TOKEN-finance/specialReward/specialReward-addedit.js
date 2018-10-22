@@ -11,6 +11,7 @@ import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/ut
 import {DetailWrapper} from 'common/js/build-detail';
 import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceSpecialRewardAddEdit,
@@ -39,7 +40,7 @@ class SpecialRewardAddedit extends React.Component {
         }, {
             field: 'count',
             title: '申请数量',
-            coin: 'X',
+            coin: CION_FMVP,
             coinAmount: true
         }, {
             field: 'remark',

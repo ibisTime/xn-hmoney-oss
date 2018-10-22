@@ -11,6 +11,7 @@ import {getQueryString, moneyFormat, getUserName, showSucMsg} from 'common/js/ut
 import {DetailWrapper} from 'common/js/build-detail';
 import {getListUserAccount} from 'api/account';
 import fetch from 'common/js/fetch';
+import {CION_FMVP} from 'common/js/config';
 
 @DetailWrapper(
     state => state.TOKENFinanceOfflineRechargeAddEdit,
@@ -36,7 +37,7 @@ class OfflineRechargeAddedit extends React.Component {
             searchName: 'keyword',
             onChange: (v, data) => {
                 if (v) {
-                    getListUserAccount({userId: v, currency: 'X'}).then((d) => {
+                    getListUserAccount({userId: v, currency: CION_FMVP}).then((d) => {
                         this.props.setPageData({'accountNumber': d[0].accountNumber});
                     });
                 }
@@ -53,7 +54,7 @@ class OfflineRechargeAddedit extends React.Component {
             field: 'amount',
             required: true,
             coinAmount: true,
-            coin: 'X',
+            coin: CION_FMVP,
             formatter: (v, data) => {
                 return v ? moneyFormat(v, '', data.currency) : '';
             }

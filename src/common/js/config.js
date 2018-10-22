@@ -11,6 +11,9 @@ export const SYS_USER = 'SYS_USER';
 // 系统根菜单编号
 export const ROOT_MENU_CODE = 'COINSM201700000000000000';
 
+// FMVP 币种
+export const CION_FMVP = 'FMVP';
+
 export const formItemLayout = {
     labelCol: {
         xs: {span: 24},
