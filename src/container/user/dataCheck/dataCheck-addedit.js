@@ -53,13 +53,11 @@ class DataCheckAddedit extends React.Component {
         }, {
             field: 'idFace',
             title: '证件正面',
-            type: 'img',
-            required: true
+            type: 'img'
         }, {
             field: 'idOppo',
             title: '证件反面',
-            type: 'img',
-            required: true
+            type: 'img'
         }, {
             //     field: 'idHold',
             //     title: '手持证件照',

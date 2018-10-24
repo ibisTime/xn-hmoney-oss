@@ -25,11 +25,19 @@ import {dateTimeFormat} from 'common/js/util';
 class CustomerBlackList extends React.Component {
     render() {
         const fields = [{
+            field: 'nickname',
+            title: '昵称',
+            render: (v, data) => {
+                if(data.userInfo) {
+                    return data.userInfo.nickname;
+                }
+            }
+        }, {
             field: 'mobile',
             title: '手机号',
             render: (v, data) => {
-                if(data.user) {
-                    return data.user.mobile;
+                if(data.userInfo) {
+                    return data.userInfo.mobile;
                 }
             }
         }, {
@@ -41,17 +49,17 @@ class CustomerBlackList extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'nickname',
             placeholder: '请输入用户昵称搜索',
             search: true,
             noVisible: true
         }, {
-            field: 'nickname',
-            title: '昵称',
+            field: 'email',
+            title: '邮箱',
             render: (v, data) => {
-                if(data.user) {
-                    return data.user.nickname;
+                if(data.userInfo) {
+                    return data.userInfo.mobile;
                 }
             }
         }, {

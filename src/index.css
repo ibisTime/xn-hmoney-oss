@@ -106,6 +106,8 @@ li {
 
 .ant-back-top {
     z-index: 1000;
+    right: 70px;
+    bottom: 20px;
 }
 
 .previewImg-wrap .img-wrap {

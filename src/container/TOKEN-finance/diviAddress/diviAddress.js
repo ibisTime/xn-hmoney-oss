@@ -49,7 +49,7 @@ class DiviAddress extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true
         }, {

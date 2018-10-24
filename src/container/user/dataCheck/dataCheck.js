@@ -60,6 +60,14 @@ class DataCheck extends React.Component {
             key: 'approve_status',
             search: true
         }, {
+            field: 'applyDatetime',
+            title: '申请时间',
+            type: 'datetime'
+        }, {
+            field: 'approveDatetime',
+            title: '审核时间',
+            type: 'datetime'
+        }, {
             field: 'remark',
             title: '备注'
         }];

@@ -75,6 +75,9 @@ class FinishOrderAddedit extends React.Component {
         }, {
             field: 'receiveCardNo',
             title: '付款账号'
+        }, {
+            title: '备注',
+            field: 'remark'
         }];
         return this.props.buildDetail({
             fields,

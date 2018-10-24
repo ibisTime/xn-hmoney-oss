@@ -43,7 +43,7 @@ class FinishOrder extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
@@ -88,6 +88,9 @@ class FinishOrder extends React.Component {
             field: 'createDatetime',
             title: '下单时间',
             type: 'datetime'
+        }, {
+            title: '备注',
+            field: 'remark'
         }];
         return this.props.buildList({
             fields,

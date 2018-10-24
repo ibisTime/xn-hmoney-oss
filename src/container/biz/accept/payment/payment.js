@@ -49,10 +49,7 @@ class Payment extends React.Component {
             title: '卡号'
         }, {
             field: 'bankName',
-            title: '银行名称'
-        }, {
-            field: 'subbranch',
-            title: '支行'
+            title: '名称'
         }, {
             field: 'status',
             title: '状态',

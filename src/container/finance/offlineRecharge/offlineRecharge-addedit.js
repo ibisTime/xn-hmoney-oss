@@ -32,7 +32,7 @@ class OfflineRechargeAddedit extends React.Component {
             type: 'select',
             pageCode: '805120',
             keyName: 'userId',
-            valueName: '{{realName.DATA}}({{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             onChange: (v, data) => {
                 if (v) {

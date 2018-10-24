@@ -10,7 +10,7 @@ import {
     setSearchData
 } from '@redux/rules/acceptRule/acceptRule';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
+import {showWarnMsg, dateTimeFormat} from 'common/js/util';
 
 @listWrapper(
     state => ({
@@ -37,6 +37,17 @@ class AcceptRule extends React.Component {
             pageCode: '630045',
             searchParams: {
                 type: 'accept_rule'
+            },
+            btnEvent: {
+                edit: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/rules/acceptRule/addedit?code=${selectedRowKeys[0]}&ckey=${selectedRows[0].ckey}`);
+                    }
+                }
             }
         });
     }

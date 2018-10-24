@@ -20,7 +20,7 @@ class PaymentAddedit extends React.Component {
         super(props);
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
-        this.isAlipay = getQueryString('isAlipay', this.props.location.search) || '0';
+        this.isAlipay = getQueryString('isAlipay', this.props.location.search) || '1';
     }
 
     render() {
@@ -42,8 +42,7 @@ class PaymentAddedit extends React.Component {
             hidden: true
         }, {
             field: 'realName',
-            title: '户名',
-            required: true
+            title: '户名'
         }, {
             field: 'bankCode',
             title: '名称',
@@ -53,6 +52,8 @@ class PaymentAddedit extends React.Component {
             keyName: 'bankCode',
             valueName: '{{bankName.DATA}}',
             searchName: 'bankName',
+            value: 'alipay',
+            readonly: true,
             onChange: (v, data) => {
                 if (v === 'alipay') {
                     this.isAlipay = '1';
@@ -76,8 +77,14 @@ class PaymentAddedit extends React.Component {
             hidden: this.isAlipay === '1'
         }, {
             field: 'bankcardNumber',
-            title: '卡号',
-            required: true
+            title: '卡号'
+        }, {
+            field: 'pic',
+            title: '二维码图片',
+            type: 'img',
+            single: true,
+            required: true,
+            hidden: this.isAlipay !== '1'
         }, {
             field: 'remark',
             title: '备注'
