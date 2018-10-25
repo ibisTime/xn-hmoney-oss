@@ -53,6 +53,12 @@ class ChannelDealerAddedit extends React.Component {
             title: '证件号码',
             idCard: true,
             hidden: !!this.code && !this.view
+        }, {
+            field: 'loginPwd',
+            title: '登录密码',
+            type: 'password',
+            required: true,
+            hidden: !!this.code
         }];
         return this.props.buildDetail({
             fields,

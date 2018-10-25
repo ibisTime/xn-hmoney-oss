@@ -35,7 +35,7 @@ class ArbitrationNotifierAddedit extends React.Component {
             view: this.view,
             addCode: '630030',
             editCode: '630032',
-            detailCode: '630036',
+            detailCode: '630037',
             beforeSubmit: (data) => {
                 data.remark = this.props.pageData.remark;
                 data.parentKey = 'zc_sms_notice';

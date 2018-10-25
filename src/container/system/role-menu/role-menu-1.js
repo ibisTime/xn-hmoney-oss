@@ -21,6 +21,7 @@ class RoleMenu extends React.Component {
         };
         this.code = getQueryString('code');
         this.name = getQueryString('name');
+        this.treeContact = {};
     }
 
     componentDidMount() {
@@ -44,6 +45,9 @@ class RoleMenu extends React.Component {
         let result = {};
         data.forEach(v => {
             v.parentCode = v.parentCode || 'ROOT';
+            if (v.parentCode && v.parentCode !== 'ROOT') {
+                this.treeContact[v.code] = v.parentCode;
+            }
             if (!result[v.parentCode]) {
                 result[v.parentCode] = [];
             }
@@ -93,6 +97,16 @@ class RoleMenu extends React.Component {
             });
         } else {
             childrenKeys.forEach(c => {
+                let level = 3;// 菜单层级
+                let tmpl = c;
+                for (let i = 0; i <= level; i++) {
+                    if (this.treeContact[tmpl]) {
+                        tmpl = this.treeContact[tmpl];
+                        checked.push(this.treeContact[tmpl]);
+                    } else {
+                        break;
+                    }
+                }
                 let idx = checked.findIndex(v => c === v);
                 if (idx === -1) {
                     checked.push(c);
@@ -101,7 +115,6 @@ class RoleMenu extends React.Component {
         }
         this.setState({checkedKeys});
     }
-
     findCheckItem(arr, key) {
         if (this.findCheckItem[key]) {
             this.checkNode = this.findCheckItem[key];
@@ -146,7 +159,6 @@ class RoleMenu extends React.Component {
         e.preventDefault();
         this.setState({fetching: true});
         setRoleMenus(this.state.checkedKeys.checked, this.code).then(() => {
-        // setRoleMenus(this.state.checkedKeysList, this.code).then(() => {
             this.setState({fetching: false});
             showSucMsg('操作成功');
             setTimeout(() => this.props.history.go(-1), 1000);

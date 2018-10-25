@@ -54,18 +54,18 @@ class ChannelDealerSettleHistory extends React.Component {
             coin: CION_FMVP,
             coinAmount: true
         }, {
-            field: 'unsettleCount',
-            title: '未结算金额',
+            field: 'preUnSettleCount',
+            title: '上个月未结算数量',
             coin: CION_FMVP,
             coinAmount: true
         }, {
-            field: 'nosettleCount',
-            title: '不结算金额',
+            field: 'preSettleCount',
+            title: '上个月结算数量',
             coin: CION_FMVP,
             coinAmount: true
         }, {
-            field: 'nextUnsettleCount',
-            title: '下月未结算数量',
+            field: 'preNoSettleCount',
+            title: '上个月不结算数量',
             coin: CION_FMVP,
             coinAmount: true
         }, {

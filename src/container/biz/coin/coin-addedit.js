@@ -172,7 +172,11 @@ class CoinAddedit extends React.Component {
             view: this.view,
             addCode: '802000',
             editCode: '802002',
-            detailCode: '802006'
+            detailCode: '802006',
+            beforeSubmit: function(data) {
+                data.withdrawFee = 0;
+                return data;
+            }
         });
     }
 }

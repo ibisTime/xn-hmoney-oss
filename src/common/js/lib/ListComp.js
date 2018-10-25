@@ -6,7 +6,7 @@ import 'moment/locale/zh-cn';
 import {
     moneyFormat, dateTimeFormat, dateFormat, tempString,
     showWarnMsg, showSucMsg, showDelConfirm, getUserId,
-    dateListFormat
+    dateListFormat, getUserName
 } from 'common/js/util';
 import {PIC_PREFIX} from 'common/js/config';
 import {getOwnerBtns} from 'api/menu';
@@ -340,6 +340,7 @@ export default class ListComponent extends React.Component {
                     let keyName = this.options.rowKey || 'code';
                     let param = {};
                     param[keyName] = selectedRowKeys[0];
+                    param.updater = getUserName();
                     this.options.beforeDelete && this.options.beforeDelete(param);
                     this.props.doFetching();
                     fetch(this.options.deleteCode, param).then(data => {

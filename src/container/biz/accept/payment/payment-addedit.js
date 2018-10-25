@@ -69,11 +69,13 @@ class PaymentAddedit extends React.Component {
             field: 'bankName',
             title: '银行名称',
             required: true,
+            value: '支付宝',
             hidden: true
         }, {
             field: 'subbranch',
             title: '支行',
             required: true,
+            value: '支付宝',
             hidden: this.isAlipay === '1'
         }, {
             field: 'bankcardNumber',
@@ -97,11 +99,12 @@ class PaymentAddedit extends React.Component {
             editCode: '802022',
             detailCode: '802027',
             beforeSubmit: (params) => {
-                let bank = this.props.selectData.bankCode.find(v => v.bankCode === params.bankCode);
-                params.bankName = bank.bankName;
-                if (this.isAlipay === '1') {
-                    params.subbranch = bank.bankName;
-                }
+            //     let bank = this.props.selectData.bankCode.find(v => v.bankCode === params.bankCode);
+                params.bankCode = this.props.pageData.bankCode;
+                params.bankName = '支付宝';
+            //     if (this.isAlipay === '1') {
+                params.subbranch = '支付宝';
+            //     }
                 return params;
             }
         });
