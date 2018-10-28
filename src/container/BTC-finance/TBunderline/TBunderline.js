@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -15,8 +16,11 @@ import {
     moneyFormatSubtract,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showWarnMsg,
+    getUserId,
+    showSucMsg
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -149,7 +153,26 @@ class TBunderline extends React.Component {
                     } else if (selectedRows[0].status !== '3') {
                         showWarnMsg('不是可广播的记录');
                     } else {
-                        this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定广播？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                let params = {};
+                                params.code = selectedRowKeys[0];
+                                params.approveUser = getUserId();
+                                this.props.doFetching();
+                                fetch(802353, params).then(() => {
+                                    showSucMsg('操作成功');
+                                    this.props.cancelFetching();
+                                    setTimeout(() => {
+                                        this.props.history.go(-1);
+                                    }, 1000);
+                                }).catch(this.props.cancelFetching);
+                            }
+                        });
+                        // this.props.history.push(`/BTC-finance/TBunderline/multiCheck?code=${selectedRowKeys[0]}`);
                     }
                 }
             }
