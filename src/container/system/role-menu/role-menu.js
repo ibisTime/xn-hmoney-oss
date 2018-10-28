@@ -1,9 +1,9 @@
 import React from 'react';
-import {Form, Spin, Button, Tree} from 'antd';
-import {getMenuBtnList, getRoleMenuBtnList} from 'api/menu';
-import {setRoleMenus} from 'api/user';
-import {getQueryString, showSucMsg} from 'common/js/util';
-import {formItemLayout, tailFormItemLayout} from 'common/js/config';
+import { Form, Spin, Button, Tree } from 'antd';
+import { getMenuBtnList, getRoleMenuBtnList } from 'api/menu';
+import { setRoleMenus } from 'api/user';
+import { getQueryString, showSucMsg, showWarnMsg } from 'common/js/util';
+import { formItemLayout, tailFormItemLayout } from 'common/js/config';
 
 const TreeNode = Tree.TreeNode;
 const FormItem = Form.Item;
@@ -22,7 +22,6 @@ class RoleMenu extends React.Component {
         this.code = getQueryString('code');
         this.name = getQueryString('name');
     }
-
     componentDidMount() {
         Promise.all([
             getMenuBtnList(),
@@ -37,11 +36,11 @@ class RoleMenu extends React.Component {
                 },
                 fetching: false
             });
-        }).catch(() => this.setState({fetching: false}));
+        }).catch(() => this.setState({ fetching: false }));
     }
-
     getTree(data) {
         let result = {};
+        let parentKeyMap = {};
         data.forEach(v => {
             v.parentCode = v.parentCode || 'ROOT';
             if (!result[v.parentCode]) {
@@ -51,13 +50,14 @@ class RoleMenu extends React.Component {
                 title: v.name,
                 key: v.code
             });
+            parentKeyMap[v.code] = v.parentCode === 'ROOT' ? '' : v.parentCode;
         });
+        this.parentKeyMap = parentKeyMap;
         this.result = result;
         let tree = [];
         this.getTreeNode(result['ROOT'], tree);
-        this.setState({treeData: tree});
+        this.setState({ treeData: tree });
     }
-
     getTreeNode(arr, children) {
         arr.forEach(a => {
             if (this.result[a.key]) {
@@ -69,9 +69,8 @@ class RoleMenu extends React.Component {
             }
         });
     }
-
     onCheck = (checkedKeys, event) => {
-        const {treeData} = this.state;
+        const { treeData } = this.state;
         this.checkNode = '';
         let key = event.node.props.eventKey;
         this.findCheckItem(treeData, key);
@@ -83,7 +82,7 @@ class RoleMenu extends React.Component {
             this.checkNode.children && this.getChildrenKeys(this.checkNode.children, childrenKeys);
             this.getChildrenKeys[key] = childrenKeys;
         }
-        let {checked} = checkedKeys;
+        let { checked } = checkedKeys;
         if (!event.checked) {
             childrenKeys.forEach(c => {
                 let idx = checked.findIndex(v => c === v);
@@ -91,6 +90,19 @@ class RoleMenu extends React.Component {
                     checked.splice(idx, 1);
                 }
             });
+            if (this.parentKeyMap[key]) {
+                let flag = true;
+                this.result[this.parentKeyMap[key]].forEach(r => {
+                    let idx = checked.findIndex(v => v === r.key);
+                    if (idx > -1) {
+                        flag = false;
+                    }
+                });
+                if (flag) {
+                    let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
+                    checked.splice(idx, 1);
+                }
+            }
         } else {
             childrenKeys.forEach(c => {
                 let idx = checked.findIndex(v => c === v);
@@ -98,10 +110,16 @@ class RoleMenu extends React.Component {
                     checked.push(c);
                 }
             });
+            while(this.parentKeyMap[key]) {
+                let idx = checked.findIndex(c => c === this.parentKeyMap[key]);
+                if (idx === -1) {
+                    checked.push(this.parentKeyMap[key]);
+                }
+                key = this.parentKeyMap[key];
+            }
         }
-        this.setState({checkedKeys});
+        this.setState({ checkedKeys });
     }
-
     findCheckItem(arr, key) {
         if (this.findCheckItem[key]) {
             this.checkNode = this.findCheckItem[key];
@@ -120,7 +138,6 @@ class RoleMenu extends React.Component {
             }
         }
     }
-
     getChildrenKeys(arr, childrenKeys) {
         arr.forEach(a => {
             childrenKeys.push(a.key);
@@ -129,7 +146,6 @@ class RoleMenu extends React.Component {
             }
         });
     }
-
     renderTreeNodes = (data) => {
         return data.map((item) => {
             if (item.children) {
@@ -144,15 +160,17 @@ class RoleMenu extends React.Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({fetching: true});
+        if (this.state.checkedKeys.checked.length <= 0) {
+            showWarnMsg('请勾选权限');
+            return;
+        }
+        this.setState({ fetching: true });
         setRoleMenus(this.state.checkedKeys.checked, this.code).then(() => {
-        // setRoleMenus(this.state.checkedKeysList, this.code).then(() => {
-            this.setState({fetching: false});
+            this.setState({ fetching: false });
             showSucMsg('操作成功');
             setTimeout(() => this.props.history.go(-1), 1000);
-        }).catch(() => this.setState({fetching: false}));
+        }).catch(() => this.setState({ fetching: false }));
     }
-
     render() {
         return (
             <Spin spinning={this.state.fetching}>
