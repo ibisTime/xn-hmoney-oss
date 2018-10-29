@@ -38,6 +38,20 @@ class Customer extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
+            field: 'kind',
+            title: '类型',
+            type: 'select',
+            data: [{
+                key: 'C',
+                value: 'c端'
+            }, {
+                key: 'Q',
+                value: '渠道商'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
+        }, {
             field: 'userReferee',
             title: '推荐人',
             render: (v, data) => {
@@ -92,7 +106,6 @@ class Customer extends React.Component {
             rowKey: 'userId',
             pageCode: '805120',
             searchParams: {
-                kind: 'C'
             },
             btnEvent: {
                 active: (selectedRowKeys, selectedRows) => {

@@ -31,7 +31,9 @@ class OfflineRechargeDetail extends React.Component {
             title: '充值用户',
             required: true,
             formatter: (v, data) => {
-                return data.payer ? data.payer.realName ? data.payer.realName : data.payer.mobile : '';
+                let mobile = data.payer.mobile ? '-' + data.payer.mobile : '';
+                let email = data.payer.email ? '-' + data.payer.email : '';
+                return data.payer ? data.payer.nickname + mobile + email : '';
             }
         }, {
             field: 'accountNumber',

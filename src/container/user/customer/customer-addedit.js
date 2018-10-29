@@ -35,6 +35,19 @@ class CustomerAddedit extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
+            field: 'kind',
+            title: '类型',
+            type: 'select',
+            data: [{
+                key: 'C',
+                value: 'c端'
+            }, {
+                key: 'Q',
+                value: '渠道商'
+            }],
+            keyName: 'key',
+            valueName: 'value'
+        }, {
             field: 'idKind',
             title: '证件类型',
             type: 'select',

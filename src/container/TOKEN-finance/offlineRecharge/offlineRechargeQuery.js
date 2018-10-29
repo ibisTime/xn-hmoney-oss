@@ -38,9 +38,10 @@ class OfflineRechargeQuery extends React.Component {
             field: 'accountName',
             title: '户名',
             render: (v, data) => {
-                return data.payer ? data.payer.realName ? data.payer.realName : data.payer.mobile : '';
-            },
-            search: true
+                let mobile = data.payer.mobile ? '-' + data.payer.mobile : '';
+                let email = data.payer.email ? '-' + data.payer.email : '';
+                return data.payer ? data.payer.nickname + mobile + email : '';
+            }
         }, {
             field: 'amount',
             title: '充值金额',
