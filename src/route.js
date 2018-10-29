@@ -751,6 +751,36 @@ const ROUTES = [
     {
         path: '/TOKEN-finance/GJManually',
         component: asyncComponent(() => import('container/TOKEN-finance/GJManually/GJManually-addedit'))
+    },
+    // 业务管理 -- 评论管理 -- 关键字管理
+    {
+        path: '/comment/keywords',
+        component: asyncComponent(() => import('container/biz/comment/keywords/keywords'))
+    },
+    // 业务管理 -- 评论管理 -- 关键字管理 -- 详情
+    {
+        path: '/comment/keywords/addedit',
+        component: asyncComponent(() => import('container/biz/comment/keywords/keywords-addedit'))
+    },
+    // 业务管理 -- 评论管理 -- 评论审核
+    {
+        path: '/comment/check',
+        component: asyncComponent(() => import('container/biz/comment/check/check'))
+    },
+    // 业务管理 -- 评论管理 -- 评论审核 -- 详情
+    {
+        path: '/comment/check/addedit',
+        component: asyncComponent(() => import('container/biz/comment/check/check-addedit'))
+    },
+    // 业务管理 -- 评论管理 -- 评论查询
+    {
+        path: '/comment/list',
+        component: asyncComponent(() => import('container/biz/comment/list/list'))
+    },
+    // 业务管理 -- 评论管理 -- 评论查询 -- 详情
+    {
+        path: '/comment/list/addedit',
+        component: asyncComponent(() => import('container/biz/comment/check/check-addedit'))
     }
 ];
 

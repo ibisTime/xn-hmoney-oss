@@ -290,6 +290,13 @@ import {TOKENFinanceGJAddressQuery} from './redux/TOKEN-finance/GJAddressQuery/G
 import {TOKENFinanceGJAddressQueryAddEdit} from './redux/TOKEN-finance/GJAddressQuery/GJAddressQuery-addedit';
 import {TOKENFinanceGJManuallyAddEdit} from './redux/TOKEN-finance/GJManually/GJManually-addedit';
 
+// 业务管理--评论管理
+import { commentKeywords } from './redux/biz/comment/keywords';
+import { commentKeywordsAddEdit } from './redux/biz/comment/keywords-addedit';
+import { commentCheck } from './redux/biz/comment/check';
+import { commentCheckAddEdit } from './redux/biz/comment/check-addedit';
+import { commentList } from './redux/biz/comment/list';
+
 export default combineReducers({
     user,
     menu,
@@ -498,5 +505,11 @@ export default combineReducers({
     TOKENFinanceGJAddressAddEdit,
     TOKENFinanceGJAddressQuery,
     TOKENFinanceGJAddressQueryAddEdit,
-    TOKENFinanceGJManuallyAddEdit
+    TOKENFinanceGJManuallyAddEdit,
+    // 业务管理 评论管理
+    commentKeywords,
+    commentKeywordsAddEdit,
+    commentCheck,
+    commentCheckAddEdit,
+    commentList
 });
