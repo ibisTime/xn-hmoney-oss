@@ -50,13 +50,15 @@ class CheckAddEdit extends React.Component {
             field: 'nickname',
             title: '评论人',
             formatter: (v, data) => {
-                return data.user.nickname;
+                let type = data.userId === data.tradeOrder.buyUser ? '卖家' : '买家';
+                return data.user.nickname + '(' + type + ')';
             }
         }, {
             field: 'objUser',
             title: '评论对象',
             formatter: (v, data) => {
-                return data.objectUser.nickname;
+                let type = data.userId === data.tradeOrder.buyUser ? '卖家' : '买家';
+                return data.objectUser.nickname + '(' + type + ')';
             }
         }, {
             field: 'commentDatetime',
