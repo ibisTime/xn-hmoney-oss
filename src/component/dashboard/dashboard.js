@@ -70,6 +70,11 @@ class Dashboard extends React.Component {
     }
     setEditPwdVisible = (editPwdVisible) => {
         this.setState({editPwdVisible});
+        if (!editPwdVisible) {
+            setTimeout(() => {
+                this.logout();
+            }, 800);
+        }
     }
 
     getRoutes() {

@@ -155,7 +155,7 @@ export function dateTimeFormat(date) {
  * @param money
  * @param format
  * @param coin 币种
- * @param isRe 是否千分位转化
+ * @param isRe 是否去零
  */
 export function moneyFormat(money, format, coin, isRe = false) {
     let unit = coin && getCoinData()[coin] ? getCoinUnit(coin) : '1000';
@@ -180,7 +180,7 @@ export function moneyFormat(money, format, coin, isRe = false) {
     money = new BigDecimal(money.toString());
     money = money.divide(new BigDecimal(unit), format, MathContext.ROUND_DOWN).toString();
 
-    // 是否千分位转化
+    // 是否去零
     if (isRe) {
         var re = /\d{1,3}(?=(\d{3})+$)/g;
         money = money.replace(/^(\d+)((\.\d+)?)$/, (s, s1, s2) => (s1.replace(re, '$&,') + s2));
