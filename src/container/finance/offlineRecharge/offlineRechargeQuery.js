@@ -37,9 +37,19 @@ class OfflineRechargeQuery extends React.Component {
             field: 'accountName',
             title: '户名',
             render: (v, data) => {
-                let mobile = data.payer.mobile ? '-' + data.payer.mobile : '';
-                let email = data.payer.email ? '-' + data.payer.email : '';
-                return data.payer ? data.payer.nickname + mobile + email : '';
+                return data.payer ? data.payer.nickname : '';
+            }
+        }, {
+            field: 'mobile',
+            title: '手机号',
+            render: (v, data) => {
+                return data.payer ? data.payer.mobile : '';
+            }
+        }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.payer ? data.payer.email : '';
             }
         }, {
             field: 'amount',
@@ -68,7 +78,8 @@ class OfflineRechargeQuery extends React.Component {
             fields,
             pageCode: '802345',
             searchParams: {
-                currency: 'ETH'
+                currency: 'ETH',
+                channelType: '1'
             },
             btnEvent: {
                 detail: (selectedRowKeys, selectedRows) => {

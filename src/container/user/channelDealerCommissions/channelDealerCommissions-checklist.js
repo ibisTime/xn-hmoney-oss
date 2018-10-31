@@ -109,7 +109,7 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             search: true
         }, {
             field: 'createDatetime',
-            title: '申请时间',
+            title: '产生时间',
             type: 'date',
             rangedate: ['dateStart', 'dateEnd'],
             render: dateTimeFormat,

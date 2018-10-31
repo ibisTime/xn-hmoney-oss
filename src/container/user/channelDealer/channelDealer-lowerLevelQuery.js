@@ -40,20 +40,16 @@ class ChannelDealerLowerLevelQuery extends React.Component {
             }
         }, {
             title: '手机号',
-            field: 'mobile'
+            field: 'mobile',
+            search: true
         }, {
             title: '邮箱',
-            field: 'email'
+            field: 'email',
+            search: true
         }, {
             title: '注册时间',
             field: 'createDatetime',
             type: 'datetime'
-        }, {
-            field: 'isRealname',
-            title: '是否实名',
-            render: (v, data) => {
-                return data.realName ? '是' : '否';
-            }
         }, {
             title: '交易总额',
             field: 'tradeCount',

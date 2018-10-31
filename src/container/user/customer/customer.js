@@ -36,7 +36,8 @@ class Customer extends React.Component {
             search: true
         }, {
             field: 'email',
-            title: '邮箱'
+            title: '邮箱',
+            search: true
         }, {
             field: 'kind',
             title: '类型',
