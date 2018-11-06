@@ -14,9 +14,13 @@ import {
     moneyFormat,
     getCoinList,
     dateTimeFormat,
-    showWarnMsg
+    showWarnMsg,
+    showSucMsg,
+    getUserName
 } from 'common/js/util';
 import {CION_FMVP} from 'common/js/config';
+import OfflineRechargeCheck from 'component/offlineRecharge-check/offlineRecharge-check';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -29,6 +33,42 @@ import {CION_FMVP} from 'common/js/config';
     }
 )
 class OfflineRecharge extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            // 窗口是否显示
+            isVisible: false,
+            // code
+            codeList: []
+        };
+    }
+
+    setModalVisible = (flag, param) => {
+        // 操作
+        if (!flag && param) {
+            let data = {};
+            data.payResult = param.result;
+            data.payNote = param.note;
+            data.codeList = this.state.codeList;
+            data.payUser = getUserName();
+            this.props.doFetching();
+            fetch(802341, data).then(() => {
+                this.setState({
+                    isVisible: flag
+                });
+                showSucMsg('操作成功');
+                this.props.cancelFetching();
+                setTimeout(() => {
+                    this.props.getPageData();
+                }, 1000);
+            }).catch(this.props.cancelFetching);
+        } else {
+            // 显示
+            this.setState({
+                isVisible: flag
+            });
+        }
+    }
     render() {
         const fields = [{
             field: 'code',
@@ -75,23 +115,32 @@ class OfflineRecharge extends React.Component {
             key: 'charge_status',
             search: true
         }];
-        return this.props.buildList({
+        return (<div>
+            {this.props.buildList({
             fields,
             pageCode: '802345',
             searchParams: {
                 channelType: '90',
                 currency: CION_FMVP
             },
+            singleSelect: false,
             btnEvent: {
                 check: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是待审核的记录');
                     } else {
-                        this.props.history.push(`/TOKEN-finance/offlineRecharge/detail?v=1&isCheck=1&code=${selectedRowKeys[0]}`);
+                        let codeList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status === '0') {
+                                showWarnMsg(selectedRows[i].code + '不是待审核的状态！');
+                                codeList = [];
+                                return;
+                            }
+                            codeList.push(selectedRows[i].code);
+                        }
+                        if (codeList.length > 0) {
+                            this.setState({isVisible: true, codeList});
+                        }
                     }
                 },
                 detail: (selectedRowKeys, selectedRows) => {
@@ -104,7 +153,14 @@ class OfflineRecharge extends React.Component {
                     }
                 }
             }
-        });
+        })}
+            <OfflineRechargeCheck
+                isVisible={this.state.isVisible}
+                setModalVisible={this.setModalVisible}
+                onOk={() => {
+                    this.setModalVisible(false);
+                }}/>
+        </div>);
     }
 }
 

@@ -63,9 +63,7 @@ class CustomerAccount extends React.Component {
         const fields = [{
             field: 'realName',
             title: '户名',
-            render: (v, data) => {
-                return !v ? data.mobile : v;
-            }
+            noVisible: !!this.userId
         }, {
             field: 'currency',
             title: '币种',

@@ -59,48 +59,95 @@ class User extends React.Component {
             fields,
             pageCode: 630065,
             rowKey: 'userId',
+            singleSelect: false,
             btnEvent: {
-                reset: (keys, items) => {
-                    if (!keys || !keys.length || !items || !items.length) {
+                reset: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else {
-                        this.props.history.push(`/system/user/resetPwd?userId=${keys[0]}`);
-                    }
-                },
-                rock: (keys, items) => {
-                    if (!keys || !keys.length || !items || !items.length) {
-                        showWarnMsg('请选择记录');
-                    } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确认${items[0].status === '0' ? '注销' : '激活'}用户？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return activateSysUser(keys[0]).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
-                            }
-                        });
-                    }
-                },
-                assign: (keys, items) => {
-                    if (!keys || !keys.length || !items || !items.length) {
-                        showWarnMsg('请选择记录');
-                    } else {
-                        this.props.history.push(`/system/user/role?userId=${keys[0]}`);
-                    }
-                },
-                addPost: (keys, item) => {
-                    if (!keys || !keys.length) {
-                        showWarnMsg('请选择记录');
-                    } else if (keys.length > 1) {
+                    } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/system/user/post?userId=${keys[0]}`);
+                        this.props.history.push(`/system/user/resetPwd?userId=${selectedRowKeys[0]}&userName=${selectedRows[0].loginName}`);
+                    }
+                },
+                active: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        let userIdList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status === '0') {
+                                showWarnMsg(selectedRows[i].realName + ' 用户已是正常状态');
+                                userIdList = [];
+                                return;
+                            }
+                            userIdList.push(selectedRows[i].userId);
+                        }
+                        if (userIdList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确认激活用户？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return activateSysUser(userIdList).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                rock: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        let userIdList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status === '2') {
+                                showWarnMsg(selectedRows[i].realName + ' 用户已禁止登陆');
+                                userIdList = [];
+                                return;
+                            }
+                            userIdList.push(selectedRows[i].userId);
+                        }
+                        if (userIdList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确认注销用户？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return activateSysUser(userIdList).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                assign: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/system/user/role?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                addPost: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else {
+                        this.props.history.push(`/system/user/post?userId=${selectedRowKeys[0]}`);
                     }
                 }
             }

@@ -41,15 +41,6 @@ class TBunderline extends React.Component {
         }, {
             field: 'accountName',
             title: '账号',
-            type: 'select',
-            pageCode: '802500',
-            params: {
-                type: 'C'
-            },
-            keyName: 'realName',
-            valueName: '{{realName.DATA}}',
-            searchName: 'realName',
-            search: true,
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
@@ -82,8 +73,17 @@ class TBunderline extends React.Component {
             title: '提现地址',
             field: 'payCardNo'
         }, {
-            field: 'mobile',
+            field: 'applyUser',
             title: '申请人',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                kind: 'C'
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
             render: (v, data) => {
                 if (data.applyUserInfo) {
                     let tmpl = data.applyUserInfo.mobile ? data.applyUserInfo.mobile : data.applyUserInfo.email;
@@ -167,7 +167,7 @@ class TBunderline extends React.Component {
                                     showSucMsg('操作成功');
                                     this.props.cancelFetching();
                                     setTimeout(() => {
-                                        this.props.history.go(-1);
+                                        this.props.getPageData();
                                     }, 1000);
                                 }).catch(this.props.cancelFetching);
                             }

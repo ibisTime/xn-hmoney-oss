@@ -61,27 +61,68 @@ class ChannelDealer extends React.Component {
             searchParams: {
                 kind: 'Q'
             },
+            singleSelect: false,
             btnEvent: {
-                rockActive: (selectedRowKeys, selectedRows) => {
+                active: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
                     } else {
-                        Modal.confirm({
-                            okText: '确认',
-                            cancelText: '取消',
-                            content: `确认${selectedRows[0].status === '0' ? '注销' : '激活'}用户？`,
-                            onOk: () => {
-                                this.props.doFetching();
-                                return activateUser(selectedRowKeys[0]).then(() => {
-                                    this.props.getPageData();
-                                    showSucMsg('操作成功');
-                                }).catch(() => {
-                                    this.props.cancelFetching();
-                                });
+                        let userIdList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status === '0') {
+                                showWarnMsg(selectedRows[i].nickname + '用户已是正常状态');
+                                userIdList = [];
+                                return;
                             }
-                        });
+                            userIdList.push(selectedRows[i].userId);
+                        }
+                        if (userIdList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定禁止用户登录？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return activateUser(userIdList).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                rock: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        let userIdList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status === '2') {
+                                showWarnMsg(selectedRows[i].nickname + '用户已禁止登陆');
+                                userIdList = [];
+                                return;
+                            }
+                            userIdList.push(selectedRows[i].userId);
+                        }
+                        if (userIdList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定禁止用户登录？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return activateUser(userIdList).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 },
                 // 账户查询

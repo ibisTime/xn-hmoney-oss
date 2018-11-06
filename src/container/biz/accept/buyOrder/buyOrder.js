@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -11,10 +12,13 @@ import {
 } from '@redux/accept/buyOrder/buyOrder';
 import {listWrapper} from 'common/js/build-list';
 import {
+    showSucMsg,
     showWarnMsg,
     moneyFormat,
-    getCoinList
+    getCoinList,
+    getUserId
 } from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -99,17 +103,76 @@ class BuyOrder extends React.Component {
             searchParams: {
                 type: '0'
             },
+            singleSelect: false,
             btnEvent: {
-                // 释放
                 sale: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
-                    } else if (selectedRows[0].status !== '1') {
-                        showWarnMsg('不是已支付待释放的订单');
                     } else {
-                        this.props.history.push(`/accept/buyOrder/addedit?v=1&isSale=1&code=${selectedRowKeys[0]}`);
+                        let codeList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status !== '1') {
+                                showWarnMsg(selectedRows[i].code + '不是已支付的订单');
+                                codeList = [];
+                                return;
+                            }
+                            codeList.push(selectedRows[i].code);
+                        }
+                        if (codeList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定到账？此操作将会释放币`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625274, {
+                                        codeList: codeList,
+                                        result: '1',
+                                        userId: getUserId()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                },
+                noSale: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        let codeList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status !== '1') {
+                                showWarnMsg(selectedRows[i].code + '不是已支付的订单');
+                                codeList = [];
+                                return;
+                            }
+                            codeList.push(selectedRows[i].code);
+                        }
+                        if (codeList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定未到账？平台将会取消订单`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(625274, {
+                                        codeList: codeList,
+                                        result: '0',
+                                        userId: getUserId()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
                     }
                 }
             }

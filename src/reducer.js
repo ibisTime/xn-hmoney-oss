@@ -179,6 +179,10 @@ import {rulesWithdrawUserFeeAddEdit} from './redux/rules/withdrawUserFee/withdra
 import {rulesAcceptRule} from './redux/rules/acceptRule/acceptRule';
 import {rulesAcceptRuleAddEdit} from './redux/rules/acceptRule/acceptRule-addedit';
 
+// 游戏配置
+import {rulesGameConfig} from './redux/rules/gameConfig/gameConfig';
+import {rulesGameConfigAddEdit} from './redux/rules/gameConfig/gameConfig-addedit';
+
 /* ETH财务管理 */
 // 平台账户
 import {financePlatformAccount} from './redux/finance/platformAccount/platformAccount';
@@ -429,6 +433,9 @@ export default combineReducers({
     // 承兑商手续费规则
     rulesAcceptRule,
     rulesAcceptRuleAddEdit,
+    // 游戏配置
+    rulesGameConfig,
+    rulesGameConfigAddEdit,
     /* ETH 财务管理 */
     // 平台账户
     financePlatformAccount,

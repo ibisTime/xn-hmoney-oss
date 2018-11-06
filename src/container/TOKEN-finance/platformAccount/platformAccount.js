@@ -21,23 +21,23 @@ class PlatformAccount extends React.Component {
 
     render() {
         const unsettledLoan = this.props.unsettledLoan;
-        const symbol = 'TOKEN';
+        const symbol = 'FMVP';
 
         return (
             <div>
                 <Row>
                     <Col style={{marginBottom: '30px', width: '390px', float: 'left', marginRight: '30px'}}>
                         <Card title="冷钱包账户余额" extra={
-                            moneyFormat(unsettledLoan['SYS_ACOUNT_TOKEN_COLD'] ? unsettledLoan['SYS_ACOUNT_TOKEN_COLD'].amount : '0', '', symbol)
+                            moneyFormat(unsettledLoan['SYS_ACOUNT_FMVP_COLD'] ? unsettledLoan['SYS_ACOUNT_FMVP_COLD'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_TOKEN_COLD'] ? unsettledLoan['SYS_ACOUNT_TOKEN_COLD'].accountNumber : '')} type="primary">资金流水</Button>
+                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_FMVP_COLD'] ? unsettledLoan['SYS_ACOUNT_FMVP_COLD'].accountNumber : '')} type="primary">资金流水</Button>
                         </div>}</Card>
                     </Col>
                     <Col style={{marginBottom: '30px', width: '390px', float: 'left'}}>
                         <Card title="散取账户余额" extra={
-                            moneyFormat(unsettledLoan['SYS_ACOUNT_TOKEN_M'] ? unsettledLoan['SYS_ACOUNT_TOKEN_M'].amount : '0', '', symbol)
+                            moneyFormat(unsettledLoan['SYS_ACOUNT_FMVP_M'] ? unsettledLoan['SYS_ACOUNT_FMVP_M'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', textAlign: 'center'}}>
-                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_TOKEN_M'] ? unsettledLoan['SYS_ACOUNT_TOKEN_M'].accountNumber : '')} type="primary">资金流水</Button>
+                            <Button onClick={() => this.goFlow(unsettledLoan['SYS_ACOUNT_FMVP_M'] ? unsettledLoan['SYS_ACOUNT_FMVP_M'].accountNumber : '')} type="primary">资金流水</Button>
                         </div>}</Card>
                     </Col>
                 </Row>

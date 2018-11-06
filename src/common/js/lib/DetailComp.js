@@ -272,7 +272,7 @@ export default class DetailComponent extends React.Component {
                 } else {
                     values[v.field] = values[v.field] ? values[v.field].format(format) : values[v.field];
                 }
-            } else if (v.type === 'o2m') {
+            } else if (v.type === '') {
                 values[v.field] = this.props.pageData[v.field];
             } else if (v.type === 'checkbox') {
                 if (values[v.field] !== '' && values[v.field].push) {

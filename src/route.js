@@ -471,6 +471,15 @@ const ROUTES = [
         path: '/rules/acceptRule/addedit',
         component: asyncComponent(() => import('container/rules/acceptRule/acceptRule-addedit'))
     },
+    // 游戏配置
+    {
+        path: '/rules/gameConfig',
+        component: asyncComponent(() => import('container/rules/gameConfig/gameConfig'))
+    },
+    {
+        path: '/rules/gameConfig/addedit',
+        component: asyncComponent(() => import('container/rules/gameConfig/gameConfig-addedit'))
+    },
 
     // ETH财务管理
     // 平台账户

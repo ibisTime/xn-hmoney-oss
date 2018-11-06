@@ -1,14 +1,14 @@
 import {getPageAccount} from 'api/account';
 import {SYS_USER} from 'common/js/config';
 
-const SYMBOL = 'TOKEN';
+const SYMBOL = 'FMVP';
 const PREFIX = 'TOKEN_FINANCE_PLATFORMACCOUNT_';
 const SET_UNSEETTLEDLOAN = PREFIX + 'SET_UNSEETTLEDLOAN';
 const LOADING = PREFIX + 'LOADING';
 const CANCEL_LOADING = PREFIX + 'CANCEL_LOADING';
 
 const initState = {
-    unsettledLoan: 0,
+    unsettledLoan: {},
     fetching: true
 };
 

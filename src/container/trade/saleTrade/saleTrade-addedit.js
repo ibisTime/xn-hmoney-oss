@@ -37,10 +37,20 @@ class SaleTradeAddedit extends React.Component {
         }, {
             title: '发布人',
             field: 'userId',
-            formatter: function(v, data) {
-                if (data.user) {
-                    return data.user.mobile + '(' + data.user.nickname + ')';
-                }
+            formatter: (v, data) => {
+                return data.user ? data.user.nickname : '';
+            }
+        }, {
+            field: 'mobile',
+            title: '手机号',
+            formatter: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
+        }, {
+            field: 'email',
+            title: '邮箱',
+            formatter: (v, data) => {
+                return data.user ? data.user.email : '';
             }
         }, {
             title: '币种',

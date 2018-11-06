@@ -18,13 +18,14 @@ class UserResetPwd extends React.Component {
     constructor(props) {
         super(props);
         this.userId = getQueryString('userId', this.props.location.search);
+        this.userName = getQueryString('userName', this.props.location.search);
     }
 
     render() {
         const fields = [{
             title: '用户名',
             field: 'userName',
-            value: getUserName(),
+            value: this.userName,
             readonly: true
         }, {
             title: '新密码',

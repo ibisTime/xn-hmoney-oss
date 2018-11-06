@@ -1,4 +1,5 @@
 import React from 'react';
+import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -10,7 +11,13 @@ import {
     setSearchData
 } from '@redux/user/customer/customer-blackList';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat} from 'common/js/util';
+import {
+    showSucMsg,
+    showWarnMsg,
+    dateTimeFormat,
+    getUserName
+} from 'common/js/util';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -77,10 +84,41 @@ class CustomerBlackList extends React.Component {
             fields,
             rowKey: 'id',
             pageCode: '805245',
-            deleteCode: '805241',
             searchParams: {
                 status: '1',
                 updater: ''
+            },
+            singleSelect: false,
+            btnEvent: {
+                delete: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else {
+                        let idList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            idList.push(selectedRows[i].id);
+                        }
+                        if (idList.length > 0) {
+                            Modal.confirm({
+                                okText: '确认',
+                                cancelText: '取消',
+                                content: `确定删除？`,
+                                onOk: () => {
+                                    this.props.doFetching();
+                                    return fetch(805241, {
+                                        idList: idList,
+                                        updater: getUserName()
+                                    }).then(() => {
+                                        this.props.getPageData();
+                                        showSucMsg('操作成功');
+                                    }).catch(() => {
+                                        this.props.cancelFetching();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                }
             }
         });
     }

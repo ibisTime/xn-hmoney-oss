@@ -69,7 +69,9 @@ class CommunityAddedit extends React.Component {
             detailCode: '630507',
             beforeSubmit: (data) => {
                 data.location = 'community';
-                data.type = this.props.pageData.type;
+                if (this.code) {
+                    data.type = this.props.pageData.type;
+                }
                 return data;
             }
         });

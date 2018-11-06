@@ -30,7 +30,7 @@ class UnderWayOrderAddedit extends React.Component {
             field: 'buyUser',
             formatter: (v, data) => {
                 if (data.buyUserInfo) {
-                    return data.buyUserInfo.mobile + '(' + data.buyUserInfo.nickname + ')';
+                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
                 }
             },
             search: true
@@ -39,7 +39,7 @@ class UnderWayOrderAddedit extends React.Component {
             field: 'sellUser',
             formatter: (v, data) => {
                 if (data.sellUserInfo) {
-                    return data.sellUserInfo.mobile + '(' + data.sellUserInfo.nickname + ')';
+                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
                 }
             },
             search: true

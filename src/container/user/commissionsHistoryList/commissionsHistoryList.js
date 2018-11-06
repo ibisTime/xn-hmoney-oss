@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal} from 'antd';
 import {
     setTableData,
     setPagination,
@@ -11,9 +10,11 @@ import {
     setSearchData
 } from '@redux/user/commissionsHistoryList/commissionsHistoryList';
 import {listWrapper} from 'common/js/build-list';
-import {dateTimeFormat, showWarnMsg, dateFormat} from 'common/js/util';
+import {dateTimeFormat, showWarnMsg, dateFormat, showSucMsg} from 'common/js/util';
 import {activateUser} from 'api/user';
 import {CION_FMVP} from 'common/js/config';
+import CommissionsSettlement from 'component/commissions-settlement/commissions-settlement';
+import fetch from 'common/js/fetch';
 
 @listWrapper(
     state => ({
@@ -26,8 +27,48 @@ import {CION_FMVP} from 'common/js/config';
     }
 )
 class CommissionsHistoryList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            // 窗口是否显示
+            isVisible: false,
+            // code
+            idList: []
+        };
+    }
+
+    setModalVisible = (flag, param) => {
+        // 操作
+        if (!flag && param) {
+            var data = {
+                idList: this.state.idList,
+                handleResult: param.result,
+                handleNote: param.note
+            };
+            this.props.doFetching();
+            fetch(802390, data).then(() => {
+                this.setState({
+                    isVisible: flag
+                });
+                showSucMsg('操作成功');
+                this.props.cancelFetching();
+                setTimeout(() => {
+                    this.props.getPageData();
+                }, 1000);
+            }).catch(this.props.cancelFetching);
+        } else {
+            // 显示
+            this.setState({
+                isVisible: flag
+            });
+        }
+    }
     render() {
         const fields = [{
+            field: 'id',
+            title: 'id'
+
+        }, {
             field: 'userId',
             title: '用户',
             type: 'select',
@@ -74,7 +115,8 @@ class CommissionsHistoryList extends React.Component {
                 return dateFormat(data.startDate) + '至' + dateFormat(data.endDate);
             }
         }];
-        return this.props.buildList({
+        return (<div>
+            {this.props.buildList({
             fields,
             rowKey: 'id',
             pageCode: '802396',
@@ -94,14 +136,30 @@ class CommissionsHistoryList extends React.Component {
                 settle: (selectedRowKeys, selectedRows) => {
                     if (!selectedRowKeys.length) {
                         showWarnMsg('请选择记录');
-                    } else if (selectedRowKeys.length > 1) {
-                        showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/user/channelDealerCommissions/settlement?v=1&code=${selectedRowKeys[0]}`);
+                        let idList = [];
+                        for(let i = 0, len = selectedRows.length; i < len; i++) {
+                            if(selectedRows[i].status !== '0') {
+                                showWarnMsg('id: ' + selectedRows[i].id + ' 不是待结算的状态！');
+                                idList = [];
+                                return;
+                            }
+                            idList.push(selectedRows[i].id);
+                        }
+                        if (idList.length > 0) {
+                            this.setState({isVisible: true, idList});
+                        }
                     }
                 }
             }
-        });
+        })}
+            <CommissionsSettlement
+                isVisible={this.state.isVisible}
+                setModalVisible={this.setModalVisible}
+                onOk={() => {
+                    this.setModalVisible(false);
+                }}/>
+        </div>);
     }
 }
 

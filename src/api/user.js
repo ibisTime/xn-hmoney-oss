@@ -20,13 +20,13 @@ export function setNodeMenus(nodeList, roleCode) {
 }
 
 // 注销激活平台用户
-export function activateSysUser(userId) {
-    return fetch(630056, {userId, updater: getUserName()});
+export function activateSysUser(userIdList) {
+    return fetch(630056, {userIdList, updater: getUserName()});
 }
 
 // 注销激活c端用户
-export function activateUser(userId) {
-    return fetch(805084, {userId, updater: getUserName()});
+export function activateUser(userIdList) {
+    return fetch(805084, {userIdList, updater: getUserName()});
 }
 
 // 获取用户详情

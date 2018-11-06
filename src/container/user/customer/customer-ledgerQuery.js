@@ -30,6 +30,10 @@ class CustomerLedgerQuery extends React.Component {
         this.isPlat = !!getQueryString('isPlat', this.props.location.search);
         this.buttons = [];
         this.buttons = [{
+            code: 'export',
+            name: '导出',
+            check: false
+        }, {
             code: 'goBack',
             name: '返回',
             check: false,
@@ -44,7 +48,7 @@ class CustomerLedgerQuery extends React.Component {
             field: 'realName',
             title: '户名',
             render: (v, data) => {
-                if (data.userId === SYS_USER) {
+                if (data.accountType === 'P') {
                     return '平台账户';
                 } else {
                     return !v ? data.mobile : v;

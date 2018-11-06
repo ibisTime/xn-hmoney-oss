@@ -31,7 +31,7 @@ class CustomerAddedit extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             required: true
         }, {

@@ -39,11 +39,21 @@ class BuyTrade extends React.Component {
             valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
-                if (data.user) {
-                    return data.user.mobile + '(' + data.user.nickname + ')';
-                }
+                return data.user ? data.user.mobile : '';
             },
             search: true
+        }, {
+            field: 'mobile',
+            title: '手机号',
+            render: (v, data) => {
+                return data.user ? data.user.mobile : '';
+            }
+        }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.user ? data.user.email : '';
+            }
         }, {
             field: 'tradeCoin',
             title: '币种',

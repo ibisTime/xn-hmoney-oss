@@ -136,3 +136,6 @@ li {
 .ant-confirm-body .ant-confirm-content{
     margin-top: 4px;
 }
+.ant-modal-confirm-body > .anticon{
+    margin-top: 8px;
+}

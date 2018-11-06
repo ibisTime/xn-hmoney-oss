@@ -36,7 +36,7 @@ class FinishOrder extends React.Component {
             field: 'buyUser',
             render: (v, data) => {
                 if (data.buyUserInfo) {
-                    return data.buyUserInfo.mobile + '(' + data.buyUserInfo.nickname + ')';
+                    return data.buyUserInfo.loginName + '(' + data.buyUserInfo.nickname + ')';
                 }
             },
             type: 'select',
@@ -53,7 +53,7 @@ class FinishOrder extends React.Component {
             field: 'sellUser',
             render: (v, data) => {
                 if (data.sellUserInfo) {
-                    return data.sellUserInfo.mobile + '(' + data.sellUserInfo.nickname + ')';
+                    return data.sellUserInfo.loginName + '(' + data.sellUserInfo.nickname + ')';
                 }
             },
             type: 'select',
