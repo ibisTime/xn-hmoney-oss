@@ -27,7 +27,7 @@ class Login extends React.Component {
         return (
             <div className="login-body">
                 <div className="login-wrap">
-                    <div className="title">FUN MVP</div>
+                    <div className="title">FUNMVP</div>
                     {this.props.redirectTo ? <Redirect to={this.props.redirectTo}/> : null}
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <FormItem className="form-item">
