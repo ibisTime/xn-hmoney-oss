@@ -40,6 +40,19 @@ class OfflineRechargeQuery extends React.Component {
                 return data.payer ? data.payer.nickname : '';
             }
         }, {
+            title: '充值用户',
+            field: 'userId',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                updater: ''
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            noVisible: true
+        }, {
             field: 'mobile',
             title: '手机号',
             render: (v, data) => {
@@ -88,7 +101,7 @@ class OfflineRechargeQuery extends React.Component {
                     } else if (selectedRowKeys.length > 1) {
                         showWarnMsg('请选择一条记录');
                     } else {
-                        this.props.history.push(`/finance/offlineRecharge/addedit?v=1&code=${selectedRowKeys[0]}`);
+                        this.props.history.push(`/finance/offlineRecharge/addedit?v=1&isQueryDetail=1&code=${selectedRowKeys[0]}`);
                     }
                 }
             }

@@ -34,7 +34,7 @@ class SaleOrder extends React.Component {
             search: true
         }, {
             title: '下单人',
-            field: 'nickname',
+            field: 'sellUser',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '';
             },
@@ -44,7 +44,7 @@ class SaleOrder extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true
         }, {

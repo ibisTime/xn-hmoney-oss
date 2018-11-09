@@ -45,7 +45,7 @@ class UnderWayOrder extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
@@ -62,7 +62,7 @@ class UnderWayOrder extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             search: true
         }, {
@@ -71,16 +71,8 @@ class UnderWayOrder extends React.Component {
             type: 'select',
             data: getCoinList(),
             keyName: 'key',
-            valueName: 'value'
-        }, {
-            field: 'coin',
-            title: '币种',
-            type: 'select',
-            data: getCoinList(),
-            keyName: 'key',
             valueName: 'value',
-            search: true,
-            noVisible: true
+            search: true
         }, {
             title: '交易价格',
             field: 'tradePrice'
@@ -117,7 +109,7 @@ class UnderWayOrder extends React.Component {
             valueName: 'value'
         }, {
             title: '状态',
-            field: 'statusList',
+            field: 'status',
             type: 'select',
             data: [{
                 'key': '0',
@@ -148,9 +140,9 @@ class UnderWayOrder extends React.Component {
                 statusList: ['0', '1', '5']
             },
             beforeSearch: (data) => {
-                if(data.statusList && data.statusList.constructor !== Array) {
+                if(data.status) {
                     var statusList = [];
-                    statusList.push(data.statusList);
+                    statusList.push(data.status);
                     data.statusList = statusList;
                 }
                 return data;

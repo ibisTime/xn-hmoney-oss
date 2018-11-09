@@ -12,7 +12,7 @@ import {
 } from '@redux/user/customer/customer';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
-import {activateUser} from 'api/user';
+import {activateUser, setQ} from 'api/user';
 
 @listWrapper(
     state => ({
@@ -170,6 +170,31 @@ class Customer extends React.Component {
                                 }
                             });
                         }
+                    }
+                },
+                // 发展为渠道商
+                setQ: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].kind === 'Q') {
+                        showWarnMsg('该用户已经是渠道商');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定发展用户为渠道商？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return setQ(selectedRows[0].userId).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
                     }
                 },
                 // 修改广告费率

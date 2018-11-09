@@ -40,6 +40,19 @@ class OfflineRechargeQuery extends React.Component {
                 return data.payer ? data.payer.nickname : '';
             }
         }, {
+            title: '充值用户',
+            field: 'userId',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                updater: ''
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            noVisible: true
+        }, {
             field: 'mobile',
             title: '手机号',
             render: (v, data) => {

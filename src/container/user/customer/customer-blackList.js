@@ -53,12 +53,13 @@ class CustomerBlackList extends React.Component {
             type: 'select',
             pageCode: '805120',
             params: {
-                kind: 'C'
+                kind: 'C',
+                updater: ''
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
-            searchName: 'nickname',
-            placeholder: '请输入用户昵称搜索',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            placeholder: '请输入关键搜索',
             search: true,
             noVisible: true
         }, {

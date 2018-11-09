@@ -42,11 +42,11 @@ class Payment extends React.Component {
             title: '币种'
         }, {
             field: 'realName',
-            title: '户名',
-            search: true
+            title: '户名'
         }, {
             field: 'bankcardNumber',
-            title: '卡号'
+            title: '卡号',
+            search: true
         }, {
             field: 'bankName',
             title: '名称'

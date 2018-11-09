@@ -38,7 +38,7 @@ class BuyOrder extends React.Component {
             search: true
         }, {
             title: '下单人',
-            field: 'nickname',
+            field: 'buyUser',
             render: (v, data) => {
                 return data.user ? data.user.nickname : '';
             },

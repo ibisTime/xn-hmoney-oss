@@ -79,10 +79,25 @@ class TBunderlineAddedit extends React.Component {
             field: 'payCardNo',
             title: '提现地址',
             required: true
-        }, {
+        }];
+
+        if (!this.isCheck && this.view) {
+            fields = fields.concat([{
+                field: 'channelOrder',
+                title: '交易hash'
+            }, {
+                field: 'payFee',
+                title: '矿工费',
+                formatter: (v, data) => {
+                    return moneyFormat(v, '', 'ETH');
+                }
+            }]);
+        }
+
+        fields = fields.concat([{
             field: 'applyNote',
             title: '申请说明'
-        }];
+        }]);
 
         let buttons = [];
         if (this.isCheck) {

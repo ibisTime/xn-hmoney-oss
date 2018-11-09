@@ -36,7 +36,7 @@ class SpecialRewardHistory extends React.Component {
                 kind: 'C'
             },
             keyName: 'userId',
-            valueName: '{{nickname.DATA}})-{{mobile.DATA}}-{{email.DATA}}',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
             render: (v, data) => {
                 return data.user ? data.user.realName ? data.user.realName : data.user.nickname : '';

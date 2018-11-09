@@ -22,6 +22,7 @@ class OfflineRechargeAddedit extends React.Component {
         this.code = getQueryString('code', this.props.location.search);
         this.view = !!getQueryString('v', this.props.location.search);
         this.isCheck = !!getQueryString('isCheck', this.props.location.search);
+        this.isQueryDetail = !!getQueryString('isQueryDetail', this.props.location.search);
     }
 
     render() {
@@ -76,6 +77,14 @@ class OfflineRechargeAddedit extends React.Component {
                 field: 'payNote',
                 title: '审核意见',
                 readonly: !this.isCheck,
+                required: true
+            }]);
+        }
+        if (this.isQueryDetail) {
+            fields = fields.concat([{
+                field: 'channelOrder',
+                title: '交易hash',
+                readonly: true,
                 required: true
             }]);
         }

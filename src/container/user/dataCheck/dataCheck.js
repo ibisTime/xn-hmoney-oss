@@ -28,19 +28,29 @@ class DataCheck extends React.Component {
     render() {
         const fields = [{
             field: 'realName',
-            title: '姓名',
-            search: true
+            title: '姓名'
+        }, {
+            title: '用户',
+            field: 'applyUser',
+            type: 'select',
+            pageCode: '805120',
+            params: {
+                updater: ''
+            },
+            keyName: 'userId',
+            valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
+            searchName: 'keyword',
+            search: true,
+            noVisible: true
         }, {
             field: 'mobile',
             title: '手机号',
-            search: true,
             render: (v, data) => {
                 return data.applyUserInfo ? data.applyUserInfo.mobile : '';
             }
         }, {
             field: 'idNo',
-            title: '身份证',
-            search: true
+            title: '身份证'
         }, {
             field: 'email',
             title: '邮箱',

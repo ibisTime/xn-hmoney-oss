@@ -43,3 +43,8 @@ export function getUserById(userId) {
 export function getSysUsers() {
     return fetch(630066, {status: '0'});
 }
+
+// 发展为渠道商
+export function setQ(userId) {
+    return fetch(805093, {userId});
+}
