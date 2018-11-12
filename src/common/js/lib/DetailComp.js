@@ -1775,7 +1775,7 @@ export default class DetailComponent extends React.Component {
 
         if (item.coinAmount) {
             rules.push({
-                pattern: /(^[1-9](,\d{3}|[0-9])*(\.\d{1,8})?$)|([0])/,
+                pattern: /^\d+(?:\.\d{1,8})?$/,
                 message: '必须>=0，且小数点后最多8位'
             });
         }
