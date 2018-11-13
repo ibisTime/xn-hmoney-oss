@@ -49,6 +49,12 @@ class ChannelDealerSettleHistory extends React.Component {
                 return data.user ? data.user.mobile : '-';
             }
         }, {
+            field: 'email',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.user ? data.user.email : '-';
+            }
+        }, {
             field: 'settleCount',
             title: '结算金额',
             coin: CION_FMVP,

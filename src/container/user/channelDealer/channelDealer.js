@@ -12,7 +12,7 @@ import {
 } from '@redux/user/channelDealer/channelDealer';
 import {listWrapper} from 'common/js/build-list';
 import {dateTimeFormat, showWarnMsg, showSucMsg} from 'common/js/util';
-import {activateUser} from 'api/user';
+import {activateUser, setQ} from 'api/user';
 
 @listWrapper(
     state => ({
@@ -27,12 +27,19 @@ import {activateUser} from 'api/user';
 class ChannelDealer extends React.Component {
     render() {
         const fields = [{
+            field: 'nickname',
+            title: '昵称'
+        }, {
             field: 'realName',
             title: '姓名',
             search: true
         }, {
             field: 'mobile',
             title: '手机号',
+            search: true
+        }, {
+            field: 'email',
+            title: '邮箱',
             search: true
         }, {
             field: 'respArea',
@@ -153,6 +160,31 @@ class ChannelDealer extends React.Component {
                         showWarnMsg('请选择一条记录');
                     } else {
                         this.props.history.push(`/user/channelDealer/divideAccount?userId=${selectedRowKeys[0]}`);
+                    }
+                },
+                // 发展为渠道商
+                setC: (selectedRowKeys, selectedRows) => {
+                    if (!selectedRowKeys.length) {
+                        showWarnMsg('请选择记录');
+                    } else if (selectedRowKeys.length > 1) {
+                        showWarnMsg('请选择一条记录');
+                    } else if (selectedRows[0].kind === 'C') {
+                        showWarnMsg('该用户已经是渠道商');
+                    } else {
+                        Modal.confirm({
+                            okText: '确认',
+                            cancelText: '取消',
+                            content: `确定设置为普通用户？`,
+                            onOk: () => {
+                                this.props.doFetching();
+                                return setQ(selectedRows[0].userId).then(() => {
+                                    this.props.getPageData();
+                                    showSucMsg('操作成功');
+                                }).catch(() => {
+                                    this.props.cancelFetching();
+                                });
+                            }
+                        });
                     }
                 }
             }

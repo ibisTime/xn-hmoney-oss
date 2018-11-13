@@ -761,6 +761,23 @@ const ROUTES = [
         path: '/TOKEN-finance/GJManually',
         component: asyncComponent(() => import('container/TOKEN-finance/GJManually/GJManually-addedit'))
     },
+    // 游戏管理
+    {
+        path: '/TOKEN-finance/gameInQuery',
+        component: asyncComponent(() => import('container/TOKEN-finance/gameInQuery/gameInQuery'))
+    },
+    {
+        path: '/TOKEN-finance/gameInQuery/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/gameInQuery/gameInQuery-addedit'))
+    },
+    {
+        path: '/TOKEN-finance/gameOutQuery',
+        component: asyncComponent(() => import('container/TOKEN-finance/gameOutQuery/gameOutQuery'))
+    },
+    {
+        path: '/TOKEN-finance/gameOutQuery/addedit',
+        component: asyncComponent(() => import('container/TOKEN-finance/gameOutQuery/gameOutQuery-addedit'))
+    },
     // 业务管理 -- 评论管理 -- 关键字管理
     {
         path: '/comment/keywords',

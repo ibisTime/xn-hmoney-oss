@@ -33,7 +33,7 @@ class Account extends React.Component {
             <div>
                 <Row >
                     <Col style={{marginBottom: '20px', width: '500px'}}>
-                        <Card title="X币余额" extra={
+                        <Card title="FMVP币余额" extra={
                             moneyFormat(unsettledLoan['accountData'] ? unsettledLoan['accountData'].amount : '0', '', symbol)
                         }>{<div style={{width: '100%', paddingTop: '10px', paddingBottom: '10px', overflow: 'hidden'}}>
                             <div style={{width: '210px', float: 'left', textAlign: 'left'}}>

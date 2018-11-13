@@ -294,6 +294,12 @@ import {TOKENFinanceGJAddressQuery} from './redux/TOKEN-finance/GJAddressQuery/G
 import {TOKENFinanceGJAddressQueryAddEdit} from './redux/TOKEN-finance/GJAddressQuery/GJAddressQuery-addedit';
 import {TOKENFinanceGJManuallyAddEdit} from './redux/TOKEN-finance/GJManually/GJManually-addedit';
 
+// 游戏管理
+import {TOKENFinanceGameInQuery} from './redux/TOKEN-finance/gameInQuery/gameInQuery';
+import {TOKENFinanceGameInQueryAddEdit} from './redux/TOKEN-finance/gameInQuery/gameInQuery-addedit';
+import {TOKENFinanceGameOutQuery} from './redux/TOKEN-finance/gameOutQuery/gameOutQuery';
+import {TOKENFinanceGameOutQueryAddEdit} from './redux/TOKEN-finance/gameOutQuery/gameOutQuery-addedit';
+
 // 业务管理--评论管理
 import { commentKeywords } from './redux/biz/comment/keywords';
 import { commentKeywordsAddEdit } from './redux/biz/comment/keywords-addedit';
@@ -513,6 +519,11 @@ export default combineReducers({
     TOKENFinanceGJAddressQuery,
     TOKENFinanceGJAddressQueryAddEdit,
     TOKENFinanceGJManuallyAddEdit,
+    // 游戏管理
+    TOKENFinanceGameInQuery,
+    TOKENFinanceGameInQueryAddEdit,
+    TOKENFinanceGameOutQuery,
+    TOKENFinanceGameOutQueryAddEdit,
     // 业务管理 评论管理
     commentKeywords,
     commentKeywordsAddEdit,

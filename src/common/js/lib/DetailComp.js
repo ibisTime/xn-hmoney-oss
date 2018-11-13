@@ -1810,9 +1810,15 @@ export default class DetailComponent extends React.Component {
 
         if (item.maxlength) {
             rules.push({
-                min: 1,
                 max: item.maxlength,
                 message: `请输入一个长度最多是${item.maxlength}的字符串`
+            });
+        }
+
+        if (item.minlength) {
+            rules.push({
+                min: item.minlength,
+                message: `请输入一个长度至少是${item.minlength}的字符串`
             });
         }
 

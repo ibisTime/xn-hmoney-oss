@@ -160,7 +160,6 @@ class CustomerAccount extends React.Component {
                 pageCode: '802300',
                 searchParams: {
                     kind: '0',
-                    type: 'C',
                     userId: this.userId
                 },
                 buttons: this.buttons

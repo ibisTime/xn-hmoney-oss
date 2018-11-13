@@ -23,10 +23,23 @@ class ChannelDealerAddedit extends React.Component {
 
     render() {
         const fields = [{
+            field: 'nickname',
+            title: '昵称',
+            required: true,
+            readonly: !!this.code,
+            minlength: 2,
+            maxlength: 10
+        }, {
             field: 'mobile',
             title: '手机号',
             required: true,
             readonly: !!this.code
+        }, {
+            field: 'email',
+            title: '邮箱',
+            required: true,
+            readonly: !!this.code,
+            hidden: !this.view
         }, {
             field: 'realName',
             title: '真实姓名',

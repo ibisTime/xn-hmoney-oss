@@ -64,6 +64,12 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
                 return data.user ? data.user.mobile : '-';
             }
         }, {
+            field: 'emial',
+            title: '邮箱',
+            render: (v, data) => {
+                return data.user ? data.user.email : '-';
+            }
+        }, {
             field: 'count',
             title: '佣金',
             coin: CION_FMVP,
