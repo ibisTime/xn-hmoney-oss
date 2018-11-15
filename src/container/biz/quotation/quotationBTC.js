@@ -26,41 +26,16 @@ class quotationBTC extends React.Component {
     render() {
         const fields = [{
             title: '币种',
-            field: 'coin'
+            field: 'symbol'
         }, {
-            title: '最新成交价',
+            title: '计价币种',
+            field: 'referCurrency'
+        }, {
+            title: '最新价',
             field: 'lastPrice'
-        }, {
-            title: '卖家期望价格',
-            field: 'ask'
-        }, {
-            title: '买家期望价格',
-            field: 'bid'
-        }, {
-            title: '最高价',
-            field: 'high'
-        }, {
-            title: '最低价',
-            field: 'low'
-        }, {
-            title: '中间价',
-            field: 'mid'
         }, {
             title: '来源',
             field: 'origin'
-        }, {
-            title: '参照货币',
-            field: 'referCurrency',
-            type: 'select',
-            data: [{
-                key: 'CNY',
-                value: '人民币'
-            }],
-            keyName: 'key',
-            valueName: 'value'
-        }, {
-            title: '过去24小时成交量',
-            field: 'volume'
         }, {
             title: '更新时间',
             field: 'updateDatetime',

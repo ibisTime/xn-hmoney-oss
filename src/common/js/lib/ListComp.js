@@ -458,6 +458,10 @@ export default class ListComponent extends React.Component {
             ...searchParam
         }).then(data => {
             this.props.cancelFetching();
+            if(!data.list && data.length > 0) {
+                data.list = data;
+                data.totalCount = data.length;
+            }
             this.props.setTableData(data.list);
             this.props.setPagination({
                 ...pagination,
