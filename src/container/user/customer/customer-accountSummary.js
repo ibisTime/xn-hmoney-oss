@@ -46,9 +46,6 @@ class Account extends React.Component {
                                 <p>
                                     <span>币币交易奖励：{moneyFormat(unsettledLoan['statisticsData'] ? unsettledLoan['statisticsData'].bbTradeCount : '0', '', symbol)}</span>
                                 </p>
-                                <p>
-                                    <span>场外交易奖励：{moneyFormat(unsettledLoan['statisticsData'] ? unsettledLoan['statisticsData'].ccTradeCount : '0', '', symbol)}</span>
-                                </p>
                             </div>
                             <div style={{width: '240px', float: 'right', textAlign: 'left'}}>
                                 <p>

@@ -36,7 +36,7 @@ class InvitingFriends extends React.Component {
             rowKey: 'id',
             pageCode: '630045',
             searchParams: {
-                type: 'reg_award'
+                type: 'award'
             }
         });
     }

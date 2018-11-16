@@ -36,8 +36,7 @@ class InvitingFriendsAddedit extends React.Component {
         }, {
             title: '数值',
             field: 'cvalue',
-            required: true,
-            number: true
+            required: true
         }];
         return this.props.buildDetail({
             fields,
@@ -47,7 +46,7 @@ class InvitingFriendsAddedit extends React.Component {
             editCode: '630042',
             detailCode: '630046',
             beforeSubmit: function(data) {
-                data.type = 'reg_award';
+                data.type = 'award';
                 return data;
             }
         });
