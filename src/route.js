@@ -74,18 +74,34 @@ const ROUTES = [
     },
     {
         path: '/public/aboutus',
+        component: asyncComponent(() => import('container/public/aboutus/aboutus'))
+    },
+    {
+        path: '/public/aboutus/addedit',
         component: asyncComponent(() => import('container/public/aboutus-addedit/aboutus-addedit'))
     },
     {
         path: '/public/contact',
+        component: asyncComponent(() => import('container/public/contact/contact'))
+    },
+    {
+        path: '/public/contact/addedit',
         component: asyncComponent(() => import('container/public/contact-addeidt/contact-addeidt'))
     },
     {
         path: '/public/privacy',
+        component: asyncComponent(() => import('container/public/privacy/privacy'))
+    },
+    {
+        path: '/public/privacy/addedit',
         component: asyncComponent(() => import('container/public/privacy-addeidt/privacy-addeidt'))
     },
     {
         path: '/public/register',
+        component: asyncComponent(() => import('container/public/register/register'))
+    },
+    {
+        path: '/public/register/addedit',
         component: asyncComponent(() => import('container/public/register-addeidt/register-addeidt'))
     },
     {
@@ -106,6 +122,10 @@ const ROUTES = [
     },
     {
         path: '/public/TransactionRemind',
+        component: asyncComponent(() => import('container/public/TransactionRemind/TransactionRemind'))
+    },
+    {
+        path: '/public/TransactionRemind/addedit',
         component: asyncComponent(() => import('container/public/TransactionRemind/TransactionRemind-addedit'))
     },
     {
@@ -134,14 +154,26 @@ const ROUTES = [
     },
     {
         path: '/public/warmReminding',
-        component: asyncComponent(() => import('container/public/warmReminding-addedit/warmReminding-addedit'))
+        component: asyncComponent(() => import('container/public/warmReminding/warmReminding'))
+    },
+    {
+        path: '/public/warmReminding/addedit',
+        component: asyncComponent(() => import('container/public/warmReminding/warmReminding-addedit'))
     },
     {
         path: '/public/legalDeclaration',
+        component: asyncComponent(() => import('container/public/legalDeclaration/legalDeclaration'))
+    },
+    {
+        path: '/public/legalDeclaration/addedit',
         component: asyncComponent(() => import('container/public/legalDeclaration/legalDeclaration-addedit'))
     },
     {
         path: '/public/rateExplain',
+        component: asyncComponent(() => import('container/public/rateExplain/rateExplain'))
+    },
+    {
+        path: '/public/rateExplain/addedit',
         component: asyncComponent(() => import('container/public/rateExplain/rateExplain-addedit'))
     },
 

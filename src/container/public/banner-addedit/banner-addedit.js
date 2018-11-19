@@ -50,8 +50,14 @@ class BannerAddEdit extends React.Component {
             help: '数字越小，排序越靠前',
             required: true
         }, {
-            title: 'banner图片',
+            title: '中文图片',
             field: 'pic',
+            type: 'img',
+            required: true,
+            single: true
+        }, {
+            title: '英文图片',
+            field: 'enPic',
             type: 'img',
             required: true,
             single: true

@@ -20,21 +20,29 @@ import {systemNodeAddEdit} from './redux/system/node-addedit';
 import {systemNodeSetMateriallist} from './redux/system/node-setMateriallist';
 import {publicBanner} from './redux/public/banner';
 import {publicBannerAddEdit} from './redux/public/banner-addedit';
+import {publicAboutus} from './redux/public/aboutus';
 import {publicAboutusAddEdit} from './redux/public/aboutus-addedit';
+import {publicContact} from './redux/public/contact';
 import {publicContactAddEdit} from './redux/public/contact-addedit';
+import {publicPrivacy} from './redux/public/privacy';
 import {publicPrivacyAddEdit} from './redux/public/privacy-addedit';
+import {publicRegister} from './redux/public/register';
 import {publicRegisterAddEdit} from './redux/public/register-addedit';
 import {publicBuyADS} from './redux/public/buyADS';
 import {publicBuyADSAddEdit} from './redux/public/buyADS-addedit';
 import {publicSellETH} from './redux/public/sellETH';
 import {publicSellETHAddEdit} from './redux/public/sellETH-addedit';
+import {publicTransactionRemind} from './redux/public/TransactionRemind';
 import {publicTransactionRemindAddEdit} from './redux/public/TransactionRemind-addedit';
 import {publicNotice} from './redux/public/notice';
 import {publicNoticeAddEdit} from './redux/public/notice-addedit';
 import {publicCommunity} from './redux/public/community';
 import {publicCommunityAddEdit} from './redux/public/community-addedit';
+import {publicWarmReminding} from './redux/public/warmReminding';
 import {publicWarmRemindingAddedit} from './redux/public/warmReminding-addedit';
+import {publicLegalDeclaration} from './redux/public/legalDeclaration';
 import {publicLegalDeclarationAddEdit} from './redux/public/legalDeclaration-addedit';
+import {publicRateExplain} from './redux/public/rateExplain';
 import {publicRateExplainAddEdit} from './redux/public/rateExplain-addedit';
 
 /* 业务管理 */
@@ -330,21 +338,29 @@ export default combineReducers({
     // public
     publicBanner,
     publicBannerAddEdit,
+    publicAboutus,
     publicAboutusAddEdit,
+    publicContact,
     publicContactAddEdit,
+    publicPrivacy,
     publicPrivacyAddEdit,
+    publicRegister,
     publicRegisterAddEdit,
     publicBuyADS,
     publicBuyADSAddEdit,
     publicSellETH,
     publicSellETHAddEdit,
+    publicTransactionRemind,
     publicTransactionRemindAddEdit,
     publicNotice,
     publicNoticeAddEdit,
     publicCommunity,
     publicCommunityAddEdit,
+    publicWarmReminding,
     publicWarmRemindingAddedit,
+    publicLegalDeclaration,
     publicLegalDeclarationAddEdit,
+    publicRateExplain,
     publicRateExplainAddEdit,
     // 会员查询
     userCustomer,
