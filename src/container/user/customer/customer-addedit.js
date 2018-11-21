@@ -73,10 +73,14 @@ class CustomerAddedit extends React.Component {
             title: '推荐人',
             formatter: function(v, data) {
                 if (data.refereeUser) {
-                    return data.refereeUser.mobile;
-                } else {
-                    return '-';
+                    let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
+                    if (data.refereeUser.kind === 'Q') {
+                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
+                        return name + '(' + tmpl + ')';
+                    }
+                    return data.refereeUser.nickname + '(' + tmpl + ')';
                 }
+                return '';
             },
             required: true
         }, {

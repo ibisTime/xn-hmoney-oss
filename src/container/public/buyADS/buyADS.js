@@ -28,7 +28,7 @@ class BuyADS extends React.Component {
             title: '说明'
         }, {
             field: 'cvalue',
-            title: '数值'
+            title: '内容'
         }];
         return this.props.buildList({
             fields,

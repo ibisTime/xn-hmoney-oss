@@ -129,8 +129,9 @@ class ChannelDealerCommissionsChecklist extends React.Component {
         }, {
             field: 'count',
             title: '佣金',
-            coin: CION_FMVP,
-            coinAmount: true
+            render: (v, data) => {
+                return moneyFormat(v, '', data.currency);
+            }
         }, {
             field: 'currency',
             title: '币种'

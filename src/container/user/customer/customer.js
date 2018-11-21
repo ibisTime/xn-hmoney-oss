@@ -59,7 +59,8 @@ class Customer extends React.Component {
                 if (data.refereeUser) {
                     let tmpl = data.refereeUser.mobile ? data.refereeUser.mobile : data.refereeUser.email;
                     if (data.refereeUser.kind === 'Q') {
-                        return data.refereeUser.realName + '(' + tmpl + ')';
+                        let name = data.refereeUser.realName ? data.refereeUser.realName : data.refereeUser.nickname;
+                        return name + '(' + tmpl + ')';
                     }
                     return data.refereeUser.nickname + '(' + tmpl + ')';
                 }

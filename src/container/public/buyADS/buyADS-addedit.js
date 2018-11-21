@@ -34,10 +34,11 @@ class BuyADSAddedit extends React.Component {
             field: 'remark',
             hidden: true
         }, {
-            title: '数值',
+            title: '内容',
             field: 'cvalue',
             required: true,
-            number: true
+            type: 'textarea',
+            normalArea: true
         }];
         return this.props.buildDetail({
             fields,
