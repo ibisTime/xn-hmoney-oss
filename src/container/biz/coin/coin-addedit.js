@@ -94,8 +94,13 @@ class CoinAddedit extends React.Component {
             type: 'textarea',
             normalArea: true
         }, {
-            title: '简介',
+            title: '中文简介',
             field: 'introduction',
+            type: 'textarea',
+            required: true
+        }, {
+            title: '英文简介',
+            field: 'enIntroduction',
             type: 'textarea',
             required: true
         }, {
