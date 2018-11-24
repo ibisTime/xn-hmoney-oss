@@ -30,7 +30,7 @@ class MenuAddEdit extends React.Component {
             listCode: '630017',
             params: {type: 1},
             keyName: 'code',
-            valueName: '{{code.DATA}} {{name.DATA}}'
+            valueName: '{{code.DATA}} {{name.DATA}} {{url.DATA}}'
         }, {
             title: '菜单名称',
             field: 'name',

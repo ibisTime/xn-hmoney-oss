@@ -37,9 +37,6 @@ class ArbitrationOrder extends React.Component {
             field: 'beigao',
             type: 'select',
             pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
@@ -66,9 +63,6 @@ class ArbitrationOrder extends React.Component {
             field: 'yuangao',
             type: 'select',
             pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',

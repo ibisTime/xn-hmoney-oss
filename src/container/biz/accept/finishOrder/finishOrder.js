@@ -39,9 +39,6 @@ class FinishOrder extends React.Component {
             },
             type: 'select',
             pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',

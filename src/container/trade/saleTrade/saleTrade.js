@@ -32,9 +32,6 @@ class SaleTrade extends React.Component {
             field: 'userId',
             type: 'select',
             pageCode: '805120',
-            params: {
-                kind: 'C'
-            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
