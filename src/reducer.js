@@ -315,6 +315,10 @@ import { commentCheck } from './redux/biz/comment/check';
 import { commentCheckAddEdit } from './redux/biz/comment/check-addedit';
 import { commentList } from './redux/biz/comment/list';
 
+// 统计分析
+// 用户持币情况
+import { statisticsUserHoldingCurrency } from './redux/statistics/userHoldingCurrency/userHoldingCurrency';
+
 export default combineReducers({
     user,
     menu,
@@ -545,5 +549,7 @@ export default combineReducers({
     commentKeywordsAddEdit,
     commentCheck,
     commentCheckAddEdit,
-    commentList
+    commentList,
+    // 统计分析
+    statisticsUserHoldingCurrency
 });

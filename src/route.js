@@ -839,6 +839,11 @@ const ROUTES = [
     {
         path: '/comment/list/addedit',
         component: asyncComponent(() => import('container/biz/comment/check/check-addedit'))
+    },
+    // 统计分析 -- 个人统计 -- 用户持币情况统计
+    {
+        path: '/statistics/userHoldingCurrency',
+        component: asyncComponent(() => import('container/statistics/userHoldingCurrency/userHoldingCurrency'))
     }
 ];
 
