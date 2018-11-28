@@ -1,5 +1,4 @@
 import {getListUserAccount, getCommissionStatistics} from 'api/account';
-import {CION_FMVP} from 'common/js/config';
 
 const PREFIX = 'USER_CUSTOMER_ACCOUNTSUMMARY_';
 const SET_UNSEETTLEDLOAN = PREFIX + 'SET_UNSEETTLEDLOAN';
@@ -40,15 +39,15 @@ function setUnsettledLoan(data) {
 }
 
 // 初始化页面数据
-export function initData(userId) {
+export function initData(userId, coin) {
     return dispatch => {
         dispatch(doFetching());
         Promise.all([
             getListUserAccount({
                 userId: userId,
-                currency: CION_FMVP
+                currency: coin
             }),
-            getCommissionStatistics(userId)
+            getCommissionStatistics(userId, coin)
         ]).then(([accData, statData]) => {
             let param = {
                 'accountData': accData[0],

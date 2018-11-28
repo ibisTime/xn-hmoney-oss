@@ -125,8 +125,7 @@ class ChannelDealerSettleHistoryCommissions extends React.Component {
                 userId: this.userId,
                 userKind: 'Q',
                 status: '1'
-            },
-            buttons: this.buttons
+            }
         });
     }
 }

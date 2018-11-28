@@ -280,26 +280,26 @@ const ROUTES = [
         path: '/user/channelDealer/divideAccount',
         component: asyncComponent(() => import('container/user/customer/customer-accountSummary'))
     },
-    // 待结算佣金名单
+    // 待结算佣金名单 (11/28 列表修改为展示佣金明细)
     {
-        path: '/user/channelDealerCommissions',
+        path: '/user/channelDealerCommissions/channelDealerCommissions',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions'))
     },
     {
-        path: '/user/channelDealerCommissions/checklist',
+        path: '/user/channelDealerCommissions',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions-checklist'))
     },
     {
         path: '/user/channelDealerCommissions/settlement',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerCommissions-settlement'))
     },
-    // 佣金结算历史
+    // 佣金结算历史  (11/28 列表修改为展示佣金明细)
     {
-        path: '/user/channelDealerSettleHistory',
+        path: '/user/channelDealerSettleHistory/channelDealerSettleHistory',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory'))
     },
     {
-        path: '/user/channelDealerSettleHistory/commissions',
+        path: '/user/channelDealerSettleHistory',
         component: asyncComponent(() => import('container/user/channelDealerCommissions/channelDealerSettleHistory-commissions'))
     },
 

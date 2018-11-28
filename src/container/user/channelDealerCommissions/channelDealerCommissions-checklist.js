@@ -35,40 +35,6 @@ class ChannelDealerCommissionsChecklist extends React.Component {
             idList: []
         };
         this.userId = getQueryString('userId', this.props.location.search);
-        this.buttons = [];
-        this.buttons = [{
-            code: 'settlement',
-            name: '结算',
-            handler: (selectedRowKeys, selectedRows) => {
-                if (!selectedRowKeys.length) {
-                    showWarnMsg('请选择记录');
-                } else {
-                    let idList = [];
-                    for (let i = 0, len = selectedRows.length; i < len; i++) {
-                        if (selectedRows[i].status !== '0') {
-                            showWarnMsg('id: ' + selectedRows[i].id + ' 不是待结算的状态！');
-                            idList = [];
-                            return;
-                        }
-                        idList.push(selectedRows[i].id);
-                    }
-                    if (idList.length > 0) {
-                        this.setState({isVisible: true, idList});
-                    }
-                }
-            }
-        }, {
-            code: 'export',
-            name: '导出',
-            check: false
-        }, {
-            code: 'goBack',
-            name: '返回',
-            check: false,
-            handler: () => {
-                this.props.history.push(`/user/channelDealerCommissions`);
-            }
-        }];
     }
 
     setModalVisible = (flag, param) => {
@@ -180,10 +146,31 @@ class ChannelDealerCommissionsChecklist extends React.Component {
                 fields,
                 rowKey: 'id',
                 pageCode: '802395',
-                buttons: this.buttons,
                 searchParams: {
                     status: '0',
                     userId: this.userId
+                },
+                btnEvent: {
+                    settlement: (selectedRowKeys, selectedRows) => {
+                        if (!selectedRowKeys.length) {
+                            showWarnMsg('请选择记录');
+                        } else if (selectedRowKeys.length > 1) {
+                            showWarnMsg('请选择一条记录');
+                        } else {
+                            let idList = [];
+                            for (let i = 0, len = selectedRows.length; i < len; i++) {
+                                if (selectedRows[i].status !== '0') {
+                                    showWarnMsg('id: ' + selectedRows[i].id + ' 不是待结算的状态！');
+                                    idList = [];
+                                    return;
+                                }
+                                idList.push(selectedRows[i].id);
+                            }
+                            if (idList.length > 0) {
+                                this.setState({isVisible: true, idList});
+                            }
+                        }
+                    }
                 }
             })}
             <CommissionsSettlement

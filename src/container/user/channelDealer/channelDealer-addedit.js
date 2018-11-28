@@ -28,7 +28,7 @@ class ChannelDealerAddedit extends React.Component {
             required: true,
             readonly: !!this.code,
             minlength: 2,
-            maxlength: 10
+            maxlength: 20
         }, {
             field: 'mobile',
             title: '手机号',
