@@ -213,6 +213,10 @@ export default class ListComponent extends React.Component {
             ...this.getRealSearchParams(this.props.searchParam),
             ...this.options.searchParams
         }).then(data => {
+            if(!data.list && data.length > 0) {
+                data.list = data;
+                data.totalCount = data.length;
+            }
             if (!data.list.length) {
                 this.props.cancelFetching();
                 showWarnMsg('暂无数据');
@@ -459,6 +463,10 @@ export default class ListComponent extends React.Component {
         }).then(data => {
             this.props.cancelFetching();
             if(!data.list && data.length > 0) {
+                data = data.map((d, i) => ({
+                    ...d,
+                    code: i
+                }));
                 data.list = data;
                 data.totalCount = data.length;
             }
@@ -487,6 +495,7 @@ export default class ListComponent extends React.Component {
         if (this.options.userDataAfter) {
             useData = this.options.userDataAfter(useData);
         }
+
         return (
             <div>
                 {searchFields.length ? (

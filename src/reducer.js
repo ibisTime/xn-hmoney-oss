@@ -318,6 +318,28 @@ import { commentList } from './redux/biz/comment/list';
 // 统计分析
 // 用户持币情况
 import { statisticsUserHoldingCurrency } from './redux/statistics/userHoldingCurrency/userHoldingCurrency';
+// 承兑商FMVP统计
+import { statisticsAcceptFMVP } from './redux/statistics/acceptFMVP/acceptFMVP';
+// 渠道商返佣统计
+import { statisticsChannelReturnCommission } from './redux/statistics/channelReturnCommission/channelReturnCommission';
+// 币币交易情况统计
+import { statisticsCurrencyTransaction } from './redux/statistics/currencyTransaction/currencyTransaction';
+// FMVP消耗比例
+import { statisticsFMVPConsumptionRatio } from './redux/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio';
+// FMVP变现统计
+import { statisticsFMVPRecharge } from './redux/statistics/FMVPRecharge/FMVPRecharge';
+// 游戏FMVP统计
+import { statisticsGameFMVP } from './redux/statistics/gameFMVP/gameFMVP';
+// 获取FMVP途径
+import { statisticsGetFMVPChannel } from './redux/statistics/getFMVPChannel/getFMVPChannel';
+// CC交易OTC成交时间统计
+import { statisticsOTCClosingTime } from './redux/statistics/OTCClosingTime/OTCClosingTime';
+// OTC交易情况统计
+import { statisticsOTCTransactions } from './redux/statistics/OTCTransactions/OTCTransactions';
+// 用户币币盈亏统计
+import { statisticsUserBBProfitLoss } from './redux/statistics/userBBProfitLoss/userBBProfitLoss';
+// 用户返佣统计
+import { statisticsUserReturnCommission } from './redux/statistics/userReturnCommission/userReturnCommission';
 
 export default combineReducers({
     user,
@@ -551,5 +573,16 @@ export default combineReducers({
     commentCheckAddEdit,
     commentList,
     // 统计分析
-    statisticsUserHoldingCurrency
+    statisticsUserHoldingCurrency,
+    statisticsAcceptFMVP,
+    statisticsChannelReturnCommission,
+    statisticsCurrencyTransaction,
+    statisticsFMVPConsumptionRatio,
+    statisticsFMVPRecharge,
+    statisticsGameFMVP,
+    statisticsGetFMVPChannel,
+    statisticsOTCClosingTime,
+    statisticsOTCTransactions,
+    statisticsUserBBProfitLoss,
+    statisticsUserReturnCommission
 });

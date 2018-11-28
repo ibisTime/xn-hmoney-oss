@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/statistics/userHoldingCurrency/userHoldingCurrency';
+} from '@redux/statistics/FMVPConsumptionRatio/FMVPConsumptionRatio';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.statisticsUserHoldingCurrency,
+        ...state.statisticsFMVPConsumptionRatio,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class UserHoldingCurrency extends React.Component {
+class FMVPConsumptionRatio extends React.Component {
     render() {
         const fields = [{
             title: '用户',
@@ -43,27 +43,24 @@ class UserHoldingCurrency extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
-            field: 'currency',
-            title: '持有币种'
+            field: 'totalAcceptBuy',
+            title: '承兑购买MVP个数'
         }, {
-            field: 'amount',
-            title: '持有币的数量'
+            field: 'totalAcceptSell',
+            title: '承兑出售MVP个数'
         }, {
-            field: 'cnyPrice',
-            title: '单价(CNY)'
+            field: 'totalGameIn',
+            title: '游戏转入MVP个数'
         }, {
-            field: 'cnyAssets',
-            title: '总价值（CNY）'
-        }, {
-            field: 'usdAssets',
-            title: '折合USD'
+            field: 'totalGameOut',
+            title: '游戏转出MVP个数'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'accountNumber',
-            pageCode: '805900'
+            rowKey: 'userId',
+            pageCode: '805903'
         });
     }
 }
 
-export default UserHoldingCurrency;
+export default FMVPConsumptionRatio;

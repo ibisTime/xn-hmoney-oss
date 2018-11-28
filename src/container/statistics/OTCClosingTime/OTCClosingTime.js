@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/statistics/userHoldingCurrency/userHoldingCurrency';
+} from '@redux/statistics/OTCClosingTime/OTCClosingTime';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.statisticsUserHoldingCurrency,
+        ...state.statisticsOTCClosingTime,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class UserHoldingCurrency extends React.Component {
+class OTCClosingTime extends React.Component {
     render() {
         const fields = [{
             title: '用户',
@@ -43,27 +43,27 @@ class UserHoldingCurrency extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
-            field: 'currency',
-            title: '持有币种'
+            field: 'ccorderMin15Count',
+            title: '15分钟内成交量'
         }, {
-            field: 'amount',
-            title: '持有币的数量'
+            field: 'ccorderMin60Count',
+            title: '1小时内成交量'
         }, {
-            field: 'cnyPrice',
-            title: '单价(CNY)'
+            field: 'ccorderMin120Count',
+            title: '2小时内成交量'
         }, {
-            field: 'cnyAssets',
-            title: '总价值（CNY）'
+            field: 'ccorderMin1440Count',
+            title: '24小时内成交量'
         }, {
-            field: 'usdAssets',
-            title: '折合USD'
+            field: 'ccorderMax1440Count',
+            title: '24小时以上成交量'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'accountNumber',
-            pageCode: '805900'
+            rowKey: 'userId',
+            pageCode: '805904'
         });
     }
 }
 
-export default UserHoldingCurrency;
+export default OTCClosingTime;

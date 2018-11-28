@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/statistics/userHoldingCurrency/userHoldingCurrency';
+} from '@redux/statistics/userBBProfitLoss/userBBProfitLoss';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.statisticsUserHoldingCurrency,
+        ...state.statisticsUserBBProfitLoss,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,7 +22,7 @@ import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class UserHoldingCurrency extends React.Component {
+class UserBBProfitLoss extends React.Component {
     render() {
         const fields = [{
             title: '用户',
@@ -43,27 +43,24 @@ class UserHoldingCurrency extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
-            field: 'currency',
-            title: '持有币种'
+            field: 'fmvpBtcBtc',
+            title: 'BTC'
         }, {
-            field: 'amount',
-            title: '持有币的数量'
+            field: 'fmvpBtcFmvp',
+            title: 'FMVP'
         }, {
-            field: 'cnyPrice',
-            title: '单价(CNY)'
+            field: 'fmvpEthEth',
+            title: 'ETH'
         }, {
-            field: 'cnyAssets',
-            title: '总价值（CNY）'
-        }, {
-            field: 'usdAssets',
-            title: '折合USD'
+            field: 'fmvpEthFmvp',
+            title: 'FMVP'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'accountNumber',
-            pageCode: '805900'
+            rowKey: 'userId',
+            pageCode: '805901'
         });
     }
 }
 
-export default UserHoldingCurrency;
+export default UserBBProfitLoss;

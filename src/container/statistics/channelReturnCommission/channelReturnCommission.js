@@ -8,13 +8,13 @@ import {
     doFetching,
     cancelFetching,
     setSearchData
-} from '@redux/statistics/userHoldingCurrency/userHoldingCurrency';
+} from '@redux/statistics/channelReturnCommission/channelReturnCommission';
 import {listWrapper} from 'common/js/build-list';
 import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
 
 @listWrapper(
     state => ({
-        ...state.statisticsUserHoldingCurrency,
+        ...state.statisticsChannelReturnCommission,
         parentCode: state.menu.subMenuCode
     }),
     {
@@ -22,13 +22,16 @@ import {showWarnMsg, moneyFormat, getCoinList} from 'common/js/util';
         cancelFetching, setPagination, setSearchParam, setSearchData
     }
 )
-class UserHoldingCurrency extends React.Component {
+class ChannelReturnCommission extends React.Component {
     render() {
         const fields = [{
             title: '用户',
             field: 'userId',
             type: 'select',
             pageCode: '805120',
+            params: {
+                kind: 'Q'
+            },
             keyName: 'userId',
             valueName: '{{nickname.DATA}}-{{mobile.DATA}}-{{email.DATA}}',
             searchName: 'keyword',
@@ -43,27 +46,21 @@ class UserHoldingCurrency extends React.Component {
             field: 'email',
             title: '邮箱'
         }, {
-            field: 'currency',
-            title: '持有币种'
+            field: 'totalBtc',
+            title: '推荐返币币交易手续费BTC'
         }, {
-            field: 'amount',
-            title: '持有币的数量'
+            field: 'totalEth',
+            title: '推荐返币币交易手续费ETH'
         }, {
-            field: 'cnyPrice',
-            title: '单价(CNY)'
-        }, {
-            field: 'cnyAssets',
-            title: '总价值（CNY）'
-        }, {
-            field: 'usdAssets',
-            title: '折合USD'
+            field: 'totalFmvp',
+            title: '推荐返币币交易手续费MVP'
         }];
         return this.props.buildList({
             fields,
-            rowKey: 'accountNumber',
-            pageCode: '805900'
+            rowKey: 'userId',
+            pageCode: '805902'
         });
     }
 }
 
-export default UserHoldingCurrency;
+export default ChannelReturnCommission;
