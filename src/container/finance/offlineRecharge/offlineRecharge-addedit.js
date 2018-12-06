@@ -91,6 +91,8 @@ class OfflineRechargeAddedit extends React.Component {
         if (this.isCheck) {
             buttons = [{
                 title: '通过',
+                type: 'primary',
+                check: true,
                 handler: (param) => {
                     param.payResult = '1';
                     param.codeList = [this.code];
@@ -103,9 +105,7 @@ class OfflineRechargeAddedit extends React.Component {
                             this.props.history.go(-1);
                         }, 1000);
                     }).catch(this.props.cancelFetching);
-                },
-                check: true,
-                type: 'primary'
+                }
             }, {
                 title: '不通过',
                 handler: (param) => {
