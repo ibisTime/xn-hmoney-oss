@@ -35,6 +35,20 @@ class Notice extends React.Component {
             field: 'title',
             title: '标题'
         }, {
+            title: '语言',
+            field: 'lang',
+            type: 'select',
+            data: [{
+                key: 'cn',
+                value: '中文版'
+            }, {
+                key: 'en',
+                value: '英文版'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            search: true
+        }, {
             field: 'status',
             title: '状态',
             type: 'select',

@@ -87,6 +87,20 @@ class NoticeAddEdit extends React.Component {
 
     render() {
         const fields = [{
+            title: '语言',
+            field: 'lang',
+            type: 'select',
+            data: [{
+                key: 'cn',
+                value: '中文版'
+            }, {
+                key: 'en',
+                value: '英文版'
+            }],
+            keyName: 'key',
+            valueName: 'value',
+            required: true
+        }, {
             title: '标题',
             field: 'title',
             required: true,
