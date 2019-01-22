@@ -152,8 +152,8 @@ export function dateTimeFormat(date) {
 
 /**
  * 金额格式转化 根据币种格式化金额
- * @param money
- * @param format
+ * @param money 金额
+ * @param format 小数点后几位
  * @param coin 币种
  * @param isRe 是否去零
  */
@@ -169,12 +169,11 @@ export function moneyFormat(money, format, coin, isRe = false) {
         money = -1 * money;
         flag = true;
     }
-    // 默认格式为2位小数
-    if (isUndefined(format) || typeof format === 'object') {
-        format = 2;
-    }
-    if (coin) {
+    // 如果有币种coin 则默认为8位  如果没有则默认格式为2位小数
+    if (coin && isUndefined(format)) {
         format = 8;
+    } else if (isUndefined(format) || typeof format === 'object') {
+        format = 2;
     }
     // 金额格式化 金额除以unit并保留format位小数
     money = new BigDecimal(money.toString());
